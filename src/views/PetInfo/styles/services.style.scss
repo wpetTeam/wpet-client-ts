@@ -1,0 +1,43 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+.register-container {
+    @include common.size(100%, 100%);
+    padding: 1.5% 0 0 2.5%;
+    background: white;
+    .register-header {
+        margin-left: 2.5%;
+        font-size: 0.85em;
+    }
+    .register-main {
+        @include common.size(100%, 100%);
+        display: flex;
+        flex-direction: row;
+        .step-container {
+            @include common.size(18%, 90%);
+            margin-left: 3%;
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+.checkup-container {
+    @include common.size(100%, 94%);
+    padding: 1.5% 0 0 2.5%;
+    font-family: theme.$description-font;
+    .empty-container {
+        @include common.size(100%, 60%);
+        @include common.flex-column();
+        text-align: center;
+        font-size: 0.9em;
+        line-height: 1.4em;
+    }
+    .pet-container {
+        @include common.size(100%, 90%);
+        @include common.flex-row();
+        flex-wrap: wrap;
+        background: theme.$dashboard-color;
+        //overflow: auto;
+    }
+}

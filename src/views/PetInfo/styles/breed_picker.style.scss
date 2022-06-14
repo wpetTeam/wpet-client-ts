@@ -1,0 +1,121 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.breed-picker-container {
+    @include common.size(90%, 89%);
+    @include flex-row();
+    margin-left: 2%;
+    flex-wrap: wrap;
+    .btn-select {
+        @include common.size(10%, 30%);
+        @include common.flex-column();
+        @include common.font(
+            theme.$main-color,
+            theme.$description-font,
+            0.65em,
+            500
+        );
+        @include common.shape(transparent, 0.8px solid theme.$main-color, 0);
+        margin-right: 1%;
+        &:hover,
+        &.selected {
+            @include common.hover-event();
+            @include common.shape(transparent, 3px solid black, 0);
+            @include common.shadow(4px, black, 0.2);
+            font-weight: 700;
+            color: black;
+        }
+        .img-container {
+            @include common.size(90%, 55%);
+        }
+        .text-container {
+            @include common.size(90%, 20%);
+            margin-top: 10%;
+        }
+    }
+}
+
+.modal-breed {
+    @include common.position-fixed(13%, 30%);
+    @include common.size(25%, 75%);
+    @include flex-column();
+    @include common.shape(white, 5px solid #686868, 0);
+    .modal-header {
+        @include common.flex-row(center, space-between);
+        height: 10%;
+        padding: 4%;
+        .row_text_01 {
+            font-size: 1.12em;
+        }
+        .row_icon_02.close {
+            color: #c4c4c4;
+            &:hover {
+                @include common.hover-event();
+                color: theme.$dark-gray-color;
+            }
+        }
+    }
+    .modal-main {
+        @include flex-column();
+        height: 65%;
+        padding-left: 5%;
+        border: 3px solid transparent;
+        .col_input_01.search {
+            @include common.size(85%, 12%);
+            @include common.shape(transparent, 1.5px solid #00000080, 4px);
+            margin: -4% 0 8% 0;
+            padding-left: 2%;
+            &:focus {
+                border: 2px solid #686868;
+                outline: none;
+            }
+        }
+        .col_div_02.search-result {
+            @include flex-row();
+            height: 75%;
+            flex-wrap: wrap;
+            overflow: auto;
+            .div-result {
+                @include common.size(fit-content, 5%);
+                @include common.shape(#c4c4c420, none, 10px);
+                margin: 0 5px 5px 0;
+                padding: 3.5%;
+                font-size: 0.83em;
+                color: #00000080;
+                &:hover {
+                    cursor: pointer;
+                    color: black;
+                    background: #f3c5b640;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .modal-footer {
+        @include flex-column();
+        margin-top: -6%;
+        padding-left: 5%;
+        .col_text_01 {
+            font-size: 0.7em;
+        }
+        .col_div_02.selected {
+            @include flex-row();
+            margin-top: -2%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            .icon-delete {
+                &:hover {
+                    @include common.hover-event();
+                }
+            }
+        }
+    }
+}

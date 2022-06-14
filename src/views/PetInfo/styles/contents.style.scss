@@ -1,0 +1,253 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+@mixin gender-select {
+    @include common.hover-event();
+    @include common.shape(transparent, 2px solid black, 4px);
+    @include common.shadow(2px, gray, 0.2);
+    outline: none;
+    color: black;
+    font-weight: 800;
+}
+@mixin icon-shadow($color: theme.$main-color, $opacity: 0.5) {
+    @include common.shadow(3px, theme.$main-color, $opacity);
+    color: $color;
+}
+@mixin icon-border-shadow($border: 1px solid theme.$sub-color, $opacity) {
+    @include common.shadow(3px, theme.$main-color, $opacity);
+    border: $border;
+}
+
+.content-container {
+    @include common.size(80%, 90%);
+    margin: 1% 0 0 5%;
+    font-family: Pretendard Medium;
+}
+.step1-container {
+    @include common.size(100%, 100%);
+    .step1-header {
+        color: black;
+        span {
+            font-size: 0.8em;
+            color: #68686890;
+        }
+    }
+    .step1-main {
+        @include common.size(100%, 70%);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .row_picture_01 {
+            @include common.size(50%, 100%);
+            .text-picture {
+                font-size: 0.9em;
+                margin-bottom: 4%;
+                color: #686868;
+                span {
+                    font-size: 0.8em;
+                    color: #68686890;
+                }
+            }
+            .input-picture {
+                @include common.size(95%, 95%);
+            }
+        }
+        .row_input-container_02 {
+            @include common.size(50%, 80%);
+            margin-top: 10%;
+            display: flex;
+            flex-direction: column;
+            .label {
+                @include common.font(#686868, Pretendard, 0.75em, 500);
+                margin: 10px 0 5px 0;
+            }
+            .btn-gender {
+                @include common.size(35px, 35px);
+                @include common.shape(
+                    theme.$dashboard-color,
+                    1.5px solid #bdbdbd,
+                    4px
+                );
+                margin-right: 4px;
+                color: #686868;
+                &:hover,
+                &:focus {
+                    @include gender-select();
+                }
+            }
+            .btn-gender.select {
+                @include gender-select();
+            }
+        }
+    }
+    .step1-footer {
+        @include common.size(80%, 5%);
+        @include common.flex-row(space-between, center);
+        margin-left: 1%;
+    }
+}
+
+.step2-container {
+    @include common.size(100%, 100%);
+    margin-left: -2%;
+    .step2-header {
+        @include common.size(100%, 5%);
+        @include common.flex-row(space-around, center);
+        margin-bottom: 2%;
+        .row_text_01 {
+            @include common.size(fit-content, 33px);
+            color: black;
+        }
+        .row_btn_02 {
+            @include common.flex-row();
+            .icon-modal {
+                @include common.shape(theme.$sub-color, transparent, 4px);
+                @include icon-shadow(theme.$dashboard-color, 0.5);
+                padding: 10px;
+                &:hover,
+                &.open {
+                    @include common.hover-event();
+                    @include icon-shadow(theme.$main-color, 0.3);
+                }
+            }
+            .btn-modal {
+                @include common.size(fit-content, 33px);
+                @include icon-border-shadow(1px solid theme.$sub-color, 0.5);
+                &:hover,
+                &.open {
+                    @include common.hover-event();
+                    @include icon-border-shadow(
+                        1px solid theme.$main-color,
+                        0.2
+                    );
+                    font-weight: 700;
+                }
+            }
+            .btn-modal:hover + .icon-modal {
+                @include icon-shadow(theme.$main-color, 0.2);
+            }
+        }
+    }
+    .step2-main {
+        @include common.size(100%, 70%);
+        @include common.flex-row();
+    }
+    .step2-footer {
+        @include common.size(90%, 5%);
+        @include common.flex-row(space-between, center);
+        margin-left: 5%;
+        .row_check-breeds_01 {
+            @include common.flex-row($justify-content: flex-start);
+            width: 70%;
+            .icon-delete {
+                &:hover {
+                    @include common.hover-event();
+                }
+            }
+        }
+    }
+}
+
+@mixin span-style {
+    @include common.font(black, theme.$description-font, 1.5em, 600);
+    @include common.shape(transparent, 2px solid black, 0);
+    @include common.shadow(3px, black, 0.2);
+
+    padding: 5px;
+    margin-top: 0.5%;
+    letter-spacing: 0.1em;
+}
+
+@mixin span-style-2 {
+    @include common.font(black, theme.$description-font, 1.5em, 600);
+
+    padding: 5px;
+    margin-top: 0.5%;
+    letter-spacing: 0.1em;
+}
+
+.step3-container {
+    @include common.size(100%, 100%);
+    .step3-header {
+        color: black;
+    }
+    .step3-main {
+        @include common.size(100%, 70%);
+        @include common.flex-row();
+        .row_picture_01 {
+            @include common.size(50%, 100%);
+            margin-top: 5%;
+            .img-pet {
+                @include common.size(80%, 80%);
+            }
+            .img-pet.empty {
+                @include common.size(60%, 60%);
+                opacity: 0.2;
+                padding: 5%;
+                border: 2px solid black;
+            }
+        }
+        .row_div_02.info {
+            @include common.size(50%, 80%);
+            margin-top: 2%;
+            display: flex;
+            flex-direction: column;
+            .col_div_01 {
+                @include common.flex-row(center, flex-start);
+                img {
+                    @include common.shape(
+                        transparent,
+                        4px solid theme.$main-color,
+                        0
+                    );
+                    @include common.shadow(7px, black, 0.2);
+                    padding: 5px;
+                    margin: 7.5% 0 0 -8%;
+                }
+            }
+            .info__item {
+                p {
+                    @include common.shadow(2px, theme.$main-color, 0.6);
+                    padding: 2px;
+                    margin-bottom: -0.5%;
+                    color: theme.$dashboard-color;
+                    background: transparentize(theme.$main-color, 0.1);
+                }
+                @include common.size(100%, 25%);
+                @include common.flex-column(center, flex-start);
+                font-size: 0.75em;
+                .info__item-breeds {
+                    @include common.size(100%, 100%);
+                    margin-top: 1.6%;
+                    padding-top: 0.5%;
+                    .breed__item {
+                        @include span-style-2();
+                        margin-right: 2%;
+                    }
+                }
+            }
+            .gender {
+                span {
+                    @include common.size(24px, 35px);
+                    text-align: center;
+                }
+            }
+            .birth {
+                margin-top: -3.2%;
+                margin-bottom: 5%;
+            }
+            .name,
+            .birth,
+            .gender {
+                span {
+                    @include span-style-2();
+                }
+            }
+        }
+    }
+    .step3-footer {
+        @include common.size(97%, 5%);
+        @include common.flex-row(flex-end, center);
+        margin-top: -3%;
+    }
+}

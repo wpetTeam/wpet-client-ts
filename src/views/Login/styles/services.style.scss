@@ -1,0 +1,147 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+.login-container {
+    @include common.size(25%, 70%);
+    @include common.position-fixed(10%, 40%);
+    @include common.flex-column(flex-start, center);
+    z-index: 1000;
+    font-family: theme.$description-font;
+    .col_frame_02 {
+        @include common.size(100%, 90%);
+        @include common.flex-column(flex-start, center);
+        .login-header {
+            @include common.size(100%, 10%);
+            @include common.font(
+                rgba(#000000, 0.9),
+                theme.$english-font,
+                1.5em,
+                500
+            );
+            @include common.flex();
+            span {
+                color: theme.$main-color;
+            }
+        }
+        .login-main {
+            @include common.size(100%, 75%);
+            @include common.flex-column();
+            .text-error {
+                font-size: 0.7em;
+                margin: -5% 0 3% 40%;
+                color: firebrick;
+                font-weight: 600;
+            }
+            .text-find,
+            .text-or {
+                font-size: 0.75em;
+            }
+            .text-find {
+                margin: 4% 0 0 0;
+                color: theme.$dark-gray-color;
+                &:hover {
+                    @include common.hover-event();
+                    text-decoration: 1px solid underline;
+                    color: black;
+                }
+            }
+            .btn_login_01,
+            .btn_kakao_02 {
+                @include common.size(74%, 12%);
+                font-size: 0.8em;
+                &:hover {
+                    @include common.hover-event();
+                    font-weight: 600;
+                }
+            }
+            .btn_login_01 {
+                @include common.shape(
+                    transparentize(theme.$main-color, 0.6),
+                    transparent,
+                    3px
+                );
+                @include common.shadow(3px, theme.$main-color, 0.5);
+                font-family: theme.$english-font;
+                letter-spacing: 0.1em;
+
+                &:hover {
+                    @include common.shadow(1.5px, theme.$main-color, 0.4);
+                    background: transparentize(theme.$main-color, 0.2);
+                    color: theme.$login-color;
+                }
+            }
+            .btn_kakao_02 {
+                @include common.shape(theme.$kakao-color, transparent, 3px);
+                @include common.shadow(3px, black, 0.8);
+                &:hover {
+                    @include common.shadow(1.5px, black, 0.6);
+                }
+            }
+        }
+        .login-footer {
+            @include common.size(100%, 10%);
+            @include common.flex();
+            @include common.font(
+                theme.$description-font,
+                rgba(0, 0, 0, 0.7),
+                0.8em,
+                500
+            );
+            button {
+                margin: 4px;
+                padding: 4px 5px;
+                font-family: theme.$english-font;
+                @include common.shape(
+                    transparentize(theme.$main-color, 0.6),
+                    transparent,
+                    5px
+                );
+                @include common.shadow(2px, theme.$main-color, 0.2);
+                &:hover {
+                    @include common.hover-event();
+                    @include common.shadow(1px, theme.$main-color, 0);
+                    background: transparentize(theme.$main-color, 0.2);
+                    color: wheat;
+                }
+            }
+        }
+    }
+}
+.findpw-modal {
+    @include common.size(25%, 70%);
+    @include common.position-fixed(-1.5%, 40%);
+    @include common.flex-column();
+    z-index: 2;
+    font-family: theme.$description-font;
+    text-align: center;
+    font-size: 1em;
+
+    .col_frame_02 {
+        @include common.size(95%, 50%);
+        .header {
+            font-size: 1.1em;
+        }
+        .main {
+            @include common.flex-column();
+            .text-description {
+                font-size: 0.8em;
+            }
+        }
+        .footer {
+            button {
+                @include common.size(75%, 33px);
+                @include common.shape(
+                    transparentize(theme.$main-color, 0.8),
+                    transparent,
+                    4px
+                );
+                @include common.shadow(3px, theme.$main-color, 0.5);
+                &:hover {
+                    @include common.hover-event();
+                    @include common.shadow(1.5px, theme.$main-color, 0.2);
+                    background: transparentize(theme.$main-color, 0.4);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@use 'assets/styles/_theme.scss' as theme;
+@use 'assets/styles/_common.scss' as common;
+
+@mixin nav-icon-select {
+    background: theme.$main-color;
+    color: theme.$dashboard-color;
+    border: 1.5px solid theme.$main-color;
+    box-shadow: 3px 3px 0 0 transparentize(theme.$main-color, 0.6);
+}
+
+@mixin nav-icon {
+    @include common.size(20px, 20px);
+    @include common.shape(transparent, 1.5px solid theme.$sub-color, 10%);
+    transition: 0.4s ease-in-out;
+
+    padding: 10px;
+    margin-bottom: 4px;
+    color: theme.$main-color;
+
+    &.select {
+        @include nav-icon-select();
+    }
+
+    &:hover {
+        cursor: pointer;
+        @include nav-icon-select();
+    }
+}

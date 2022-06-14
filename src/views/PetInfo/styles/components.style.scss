@@ -1,0 +1,283 @@
+@use 'assets/styles/_theme.scss' as theme;
+@use 'assets/styles/_common.scss' as common;
+@mixin glassmorphism {
+    @include common.shape(
+        rgba(255, 255, 255, 0.25),
+        1px solid rgba(255, 255, 255, 0.37),
+        4px
+    );
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.petInfo-btn-next {
+    @include common.size(120px, 35px);
+    @include common.shape(
+        transparent,
+        2.5px solid transparentize(theme.$sub-color, 0.2),
+        0
+    );
+    @include common.shadow(4px, theme.$sub-color, 0.5);
+    margin-left: 10px;
+    color: theme.$dark-gray-color;
+    &:hover {
+        @include common.hover-event();
+        @include common.shadow(3px, theme.$main-color, 0.2);
+        border: 2px solid theme.$main-color;
+        transform: scale(1.01);
+        color: theme.$main-color;
+        font-weight: 900;
+    }
+}
+.card-container {
+    @include common.size(22%, 65%);
+    @include common.shape(
+        transparentize(theme.$dashboard-color, 0.5),
+        1.5px solid rgba(177, 177, 177, 0.1),
+        20px
+    );
+    @include common.flex-column();
+    margin: 2%;
+    box-shadow: 6px 12px 16px 0 rgba(0, 0, 0, 0.164),
+        -8px -8px 12px 0 rgba(255, 255, 255, 0.103);
+    opacity: 0.65;
+    &:hover {
+        @include common.hover-event();
+        transform: scale(1.05);
+        border: 2px solid rgba(240, 240, 240, 0.2);
+        box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.164),
+            -5px -5px 10px 0 rgba(255, 255, 255, 0.103);
+        opacity: 1;
+    }
+    img {
+        @include common.size(100%, 90%);
+        border-radius: 4px;
+        transform: scale(0.9);
+    }
+    p {
+        @include common.size(100%, 20%);
+        @include common.flex();
+        margin-bottom: 10%;
+        font-size: 1.2em;
+        letter-spacing: 0.2em;
+    }
+}
+.detail-container {
+    @include common.size(80%, 85%);
+    @include common.flex-column();
+    position: fixed;
+    transition: 150ms ease-in-out;
+    z-index: 500;
+    margin-top: -1%;
+    .detail-eclipse {
+        @include common.size(40px, 40px);
+        @include common.shape(rgba(128, 128, 128, 0.165), none, 50%);
+        @include common.flex();
+        margin-bottom: 1%;
+        &:hover {
+            @include common.hover-event();
+            transform: scale(1.02);
+            background: theme.$gray-color;
+            color: black;
+        }
+    }
+    .detail-frame {
+        @include common.size(100%, 90%);
+        @include common.flex-row();
+        @include common.shape(theme.$step-color, none, 6px);
+        .row_div_01.info {
+            @include common.size(28%, 78%);
+            @include common.flex-column(space-around, flex-start);
+            @include glassmorphism();
+            margin-left: 5%;
+            .main__item {
+                @include common.size(100%, 17%);
+                @include common.flex-column(flex-start, flex-start);
+                padding-left: 5%;
+                padding-top: 3%;
+                label {
+                    color: theme.$dark-gray-color;
+                    font-size: 0.7em;
+                }
+            }
+            .main__item.name {
+                .input-name {
+                    @include common.size(fit-content, 60%);
+                    @include common.shape();
+                    @include common.font(
+                        black,
+                        theme.$description-font,
+                        1.1em,
+                        500
+                    );
+                }
+                .input-name.update {
+                    @include common.size(70%, 25px);
+                    @include common.shape(
+                        rgba(255, 255, 255, 0.25),
+                        1px solid rgba(255, 255, 255, 0.37),
+                        4px
+                    );
+                    margin-top: 2%;
+                    padding: 4px;
+                    font-size: 0.85em;
+                    font-weight: 700;
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 2px 5px rgba(135, 135, 135, 0.1);
+                        backdrop-filter: blur(15px);
+                        -webkit-backdrop-filter: blur(15px);
+                    }
+                }
+            }
+            .main__item.gender {
+                .gender-container {
+                    @include common.size(100%, 60%);
+                    @include common.flex-row(flex-start, center);
+                    font-size: 1.1em;
+                    .text-gender {
+                        @include common.shape(
+                            transparent,
+                            1px solid theme.$gray-color,
+                            4px
+                        );
+                        padding: 7px;
+                        text-align: center;
+                        font-size: 0.8em;
+                        font-weight: 700;
+                    }
+                    .text-gender.update {
+                        @include common.shape(
+                            rgba(255, 255, 255, 0.2),
+                            1px solid rgba(255, 255, 255, 0.3),
+                            4px
+                        );
+                    }
+                    .icon-gender {
+                        @include common.size(15px, 15px);
+                        @include common.shape(
+                            transparentize(theme.$step-color, 0.7),
+                            transparent,
+                            50px
+                        );
+                        padding: 2px;
+                        margin-left: 2%;
+                        font-size: 0.8em;
+                        color: gray;
+                        &:hover {
+                            @include common.hover-event();
+                            @include glassmorphism();
+                        }
+                    }
+                }
+            }
+            .main__item.date {
+                .date-container {
+                    @include common.size(fit-content, 60%);
+                    @include common.flex-row(flex-start, center);
+                    margin-top: 1.5%;
+                    border-right: none;
+                }
+            }
+            .main__item.breeds {
+                .breed-container {
+                    @include common.size(90%, 100%);
+                    @include common.flex-row(flex-start, center);
+                    margin-top: 1.2%;
+                    .breed-list {
+                        @include common.size(100%, 100%);
+                        @include common.flex-row(flex-start, flex-start);
+                        flex-wrap: wrap;
+                        .item__breed {
+                            @include glassmorphism();
+                            padding: 6px;
+                            margin: 0 2% 2% 0;
+                            font-size: 0.8em;
+                        }
+                        .item__breed.update {
+                            @include common.shape(
+                                rgba(255, 255, 255, 0.25),
+                                1px solid rgba(255, 255, 255, 0.37),
+                                4px
+                            );
+                            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                            backdrop-filter: blur(5px);
+                            -webkit-backdrop-filter: blur(5px);
+                        }
+                    }
+                    .breed-btn {
+                        @include common.shape(
+                            transparentize(theme.$dark-gray-color, 0.8),
+                            transparent,
+                            4px
+                        );
+                        width: 17%;
+                        padding: 6px;
+                        margin-left: 0;
+                        &:hover {
+                            @include common.hover-event();
+                            background-color: lightgray;
+                        }
+                    }
+                }
+            }
+            .delete-container {
+                @include common.size(90%, fit-content);
+                @include common.flex-row(space-between, flex-end);
+                font-size: 0.7em;
+                padding: 2% 5%;
+                color: gray;
+                margin-bottom: 0.5%;
+                &:hover {
+                    @include common.hover-event();
+                    text-decoration: 1.5px underline black;
+                    color: black;
+                }
+            }
+        }
+        .row_img_02 {
+            @include common.size(40%, 100%);
+            @include common.flex-column();
+            .img-picture {
+                @include common.size(70%, fit-content);
+                @include common.shape(
+                    theme.$dashboard-color,
+                    5px solid theme.$dashboard-color,
+                    40%
+                );
+                padding: 5px;
+            }
+            .btn-container {
+                @include common.size(100%, 5%);
+                @include common.flex-row();
+                margin-top: 2%;
+                button {
+                    @include common.shape(
+                        rgba(255, 255, 255, 0.25),
+                        1px solid rgba(255, 255, 255, 0.37),
+                        4px
+                    );
+                    padding: 4px 10px;
+                    margin-right: 1%;
+                    &:hover {
+                        @include common.hover-event();
+                        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                        backdrop-filter: blur(15px);
+                        -webkit-backdrop-filter: blur(15px);
+                    }
+                }
+            }
+            .btn-update {
+                @include common.shape();
+                padding: 4px 10px;
+                &:hover {
+                    @include common.hover-event();
+                    background: theme.$sub-color;
+                }
+            }
+        }
+        .row_div_03 {
+            @include common.size(30%, 100%);
+        }
+    }
+}

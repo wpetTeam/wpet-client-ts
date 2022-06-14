@@ -1,0 +1,414 @@
+@use 'assets/styles/_theme.scss' as theme;
+@use 'assets/styles/_common.scss' as common;
+
+@mixin box-shape {
+    @include common.shape(
+        transparentize(theme.$gray-color, 0.9),
+        transparent,
+        5px
+    );
+}
+@mixin update-btn {
+    @include common.shape(theme.$gray-color, transparent, 4px);
+    padding: 2px;
+    &:hover {
+        @include common.hover-event();
+        background: rgba(128, 128, 128, 0.574);
+        font-weight: 600;
+    }
+}
+@mixin close-icon {
+    @include common.size(7%, 7%);
+    margin: -3% 0 0 95%;
+    color: theme.$dark-gray-color;
+    &:hover {
+        @include common.hover-event();
+        transform: scale(1.05);
+        color: black;
+    }
+}
+.email-box {
+    @include box-shape();
+    @include common.flex-column(space-between, flex-start);
+    .icon-close {
+        @include close-icon();
+    }
+    .col_icon_01 {
+        @include common.size(100%, 15%);
+        svg {
+            @include common.size(8%, fit-content);
+            padding: 8px;
+            margin-bottom: 4%;
+            border-radius: 50%;
+            color: white;
+        }
+        .success {
+            background: green;
+        }
+        .div-update.row {
+            @include common.flex-row(flex-start, center);
+            color: theme.$dark-gray-color;
+            font-weight: 600;
+            .update {
+                margin-right: 2%;
+                background: theme.$gray-color;
+            }
+        }
+    }
+    .col_input_02 {
+        @include common.size(100%, 60px);
+        @include common.flex-row(space-between, center);
+        .row_input_01 {
+            @include common.size(100%, fit-content);
+            @include common.flex-column(center, flex-start);
+            label {
+                font-size: 0.7em;
+                margin-bottom: 3px;
+            }
+            .input-email {
+                @include common.size(90%, 33px);
+                @include common.shape(transparent, transparent, 0);
+                font-size: 1.5em;
+                letter-spacing: 0.02em;
+                color: black;
+            }
+            .input-email.update {
+                @include common.shape(transparent, 0.8px solid gray, 4px);
+                font-size: 1.05em;
+                padding-left: 2%;
+                margin-right: 2%;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .row_btn_02 {
+            @include update-btn();
+            @include common.size(35px, 33px);
+        }
+    }
+    .col_auth_03.auth-check {
+        .text {
+            font-size: 0.8em;
+            color: gray;
+        }
+        .input-code {
+            @include common.size(140px, 33px);
+            @include common.shape(transparent, 0.3px dotted gray, 4px);
+            padding-left: 3%;
+            &:focus {
+                outline: none;
+            }
+        }
+        .btn-compare {
+            @include update-btn();
+            @include common.size(35px, 33px);
+            margin-left: 5%;
+        }
+    }
+    .col_auth_03.auth-success {
+        @include common.font(green, theme.$description-font, 0.8em, 600);
+        margin-top: -9%;
+    }
+}
+.pw-box {
+    @include box-shape();
+    font-size: 1.1em;
+    .icon-close {
+        @include close-icon();
+    }
+    .col_icon_01 {
+        @include common.size(8%, fit-content);
+        @include common.shape(theme.$sub-color, transparent, 50%);
+        padding: 8px;
+        margin-bottom: -2%;
+    }
+    .div-update {
+        .col_div_01.title {
+            @include common.flex-row(flex-start, flex-start);
+            margin-top: -5%;
+            .col_icon_01 {
+                background: theme.$dark-gray-color;
+                color: theme.$sub-color;
+                margin-right: 3%;
+            }
+        }
+        .col_input_02,
+        .col_input_03,
+        .col_input_04 {
+            @include common.size(100%, fit-content);
+            @include common.flex-column(center, flex-start);
+            margin: 4% 0 0 12%;
+            label {
+                font-size: 0.7em;
+                margin-bottom: 3px;
+            }
+            input {
+                @include common.size(70%, 33px);
+                @include common.shape(transparent, 0.8px solid gray, 4px);
+                font-size: 0.8em;
+                padding-left: 2%;
+                margin-right: 2%;
+                &:focus {
+                    outline: none;
+                    border: 2px solid theme.$sub-color;
+                }
+            }
+        }
+        .col_btn_05 {
+            @include common.size(73%, 35px);
+            @include common.shape(lightgray, none, 4px);
+            margin: 8% 0 4% 12%;
+            &:hover {
+                @include common.hover-event();
+                transform: scale(1.01);
+                background: theme.$gray-color;
+            }
+        }
+    }
+    .div-not-update {
+        @include common.flex-column(center, flex-end);
+        .col_icon_01 {
+            color: theme.$dashboard-color;
+        }
+        .col_btn_03 {
+            @include common.size(150px, 35px);
+            @include update-btn();
+            background: transparentize(theme.$sub-color, 0.4);
+            &:hover {
+                background: theme.$sub-color;
+            }
+        }
+    }
+}
+.date-box.col {
+    @include common.flex-column(center, flex-start);
+    @include box-shape();
+    font-size: 1.2em;
+    .col_icon_01 {
+        @include common.size(7%, fit-content);
+        @include common.shape(lightblue, transparent, 50%);
+        padding: 8px;
+        color: white;
+    }
+    .col_text_02 {
+        margin-top: 3%;
+        font-size: 0.9em;
+    }
+    .col_text_03.delete {
+        margin-top: -3%;
+        font-size: 0.65em;
+        color: theme.$dark-gray-color;
+        &:hover {
+            cursor: pointer;
+            text-decoration: 1px rgb(26, 100, 129) underline;
+            color: rgb(33, 117, 150);
+        }
+    }
+}
+
+.profile-box {
+    @include common.flex-column(space-between, center);
+    @include box-shape();
+    margin-top: -3%;
+    .icon-close {
+        @include close-icon();
+        margin-top: -5%;
+    }
+    .col_picture_01 {
+        @include common.flex-column();
+        .pic {
+            @include common.size(80%, 80%);
+            @include common.shape(transparent, transparent, 50%);
+        }
+        .pic.update {
+            transform: scale(0.85);
+            padding: 5px;
+            border: 8px double theme.$gray-color;
+        }
+        .btn-container {
+            @include common.flex-row(center, center);
+            margin-top: -4%;
+            button {
+                @include update-btn();
+                @include common.size(50px, 33px);
+                background: transparentize(theme.$gray-color, 0.5);
+                margin-right: 2%;
+            }
+        }
+    }
+    .col_name_02 {
+        @include common.flex-column(center, flex-start);
+        margin-top: 4%;
+        .input {
+            @include common.size(240px, 40px);
+            @include common.shape(transparent, transparent, 0);
+
+            text-align: center;
+            font-size: 1.3em;
+            color: black;
+        }
+        .input.update {
+            @include common.shape(transparent, 0.8px solid gray, 4px);
+            font-size: 1.1em;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .col_btn_03 {
+        margin-top: 4%;
+        button {
+            @include update-btn();
+            background: transparentize(theme.$gray-color, 0.5);
+            padding: 8px;
+        }
+    }
+}
+
+.pet-box {
+    @include common.flex-column();
+    @include box-shape();
+    .col_text_01 {
+        @include common.size(100%, 15%);
+        @include common.flex-row(flex-end, flex-end);
+        font-size: 1em;
+        svg {
+            @include common.size(8%, fit-content);
+            @include common.shape(orange, transparent, 50%);
+            padding: 8px;
+            margin-left: 3%;
+            color: white;
+        }
+    }
+    .col_text_02 {
+        color: theme.$dark-gray-color;
+    }
+    .col_list_02.pets {
+        @include common.size(100%, 80%);
+        @include common.flex-row(space-around, center);
+        flex-wrap: wrap;
+        margin-bottom: 4%;
+        .pet__item {
+            @include common.size(50%, fit-content);
+            @include common.flex-column();
+            .img-picture {
+                margin-bottom: 5%;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+.community-box {
+    @include common.size(90%, fit-content);
+    @include common.flex-column(center, flex-start);
+    @include box-shape();
+    padding: 5%;
+    .icon {
+        @include common.size(8%, fit-content);
+        margin-bottom: 5%;
+        color: rgb(255, 209, 5);
+    }
+    &:hover {
+        transform: scale(1.02);
+        transition: 0.4s ease-in-out;
+        background: transparentize(theme.$gray-color, 0.5);
+    }
+}
+
+.update-pw-modal {
+    @include common.size(30%, 50%);
+    @include common.flex-column();
+    top: 15%;
+    left: 36.6%;
+    position: fixed;
+    z-index: 100;
+
+    .eclipse {
+        @include common.flex-row();
+        @include common.shape(
+            theme.$dashboard-color,
+            5px solid theme.$dark-step-color,
+            50%
+        );
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        transform: rotate(-42deg);
+        box-sizing: border-box;
+        svg {
+            @include common.size(23px, fit-content);
+            @include common.hover-event();
+            color: theme.$dark-gray-color;
+            transform: rotate(42.5deg);
+        }
+        svg:nth-child(2) {
+            display: none;
+        }
+    }
+    .eclipse:hover svg:nth-child(1) {
+        display: none;
+    }
+    .eclipse:hover svg:nth-child(2) {
+        display: block;
+        color: black;
+    }
+
+    .frame {
+        @include common.size(90%, 100%);
+        @include common.shape(
+            theme.$dashboard-color,
+            5px solid theme.$dark-step-color,
+            10px
+        );
+        @include common.flex-column();
+        margin-top: -6.6%;
+        .text {
+            margin-top: -3%;
+            margin-bottom: 3%;
+            font-size: 1.1em;
+            z-index: 10;
+        }
+        .pw-container {
+            @include common.size(65%, 20%);
+            @include common.flex-column(center, flex-start);
+            margin-top: -2%;
+            label {
+                font-size: 0.75em;
+                color: theme.$dark-gray-color;
+            }
+            input {
+                @include common.size(100%, 48%);
+                @include common.shape(
+                    transparent,
+                    1px solid theme.$gray-color,
+                    3px
+                );
+                text-align: center;
+                letter-spacing: 0.25em;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .error-text {
+            margin: -1.8% 0 4% 29%;
+            font-size: 0.75em;
+            color: firebrick;
+        }
+        .error-text.no-text {
+            color: transparent;
+        }
+        .btn {
+            @include common.size(66%, 11%);
+            @include common.shape(theme.$gray-color, transparent, 3px);
+            @include common.shadow(3px, transparent, 0);
+            &:hover {
+                @include common.hover-event();
+                @include common.shadow(1.5px, theme.$dark-gray-color, 0.2);
+                transform: scale(1.01);
+                background: transparentize(theme.$dark-gray-color, 0.5);
+                font-weight: 600;
+            }
+        }
+    }
+}

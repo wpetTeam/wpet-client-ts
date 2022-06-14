@@ -1,0 +1,231 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+@mixin text($top: 0, $bottom: 0, $font-size: 0) {
+    margin-top: $top;
+    margin-bottom: $bottom;
+    font-size: $font-size;
+}
+@mixin authButton() {
+    @include common.shape(transparent, 1.5px solid theme.$dark-step-color, 4px);
+    @include common.shadow(2.5px, theme.$dark-step-color, 0.2);
+    padding: 6px;
+    &:hover {
+        @include common.hover-event();
+        @include common.shadow(1px, theme.$dark-step-color, 0);
+        border: 2px solid theme.$main-color;
+        font-weight: 600;
+    }
+}
+.signup-container {
+    @include common.size(100%, 100%);
+    @include common.position-fixed(10%, 5%);
+    @include common.flex();
+    z-index: 1000;
+}
+.modal-signup {
+    @include common.size(45%, 70%);
+    @include common.position-fixed(10%, 30%);
+    @include common.flex-column(flex-start, center);
+    z-index: 1000;
+    .col_frame_02 {
+        @include common.size(100%, 90%);
+        @include common.flex-column(space-around, center);
+        .header {
+            @include common.size(100%, 8%);
+            text-align: center;
+            margin-bottom: 2%;
+            .text_title {
+                @include text($top: 0, $font-size: 1.7em);
+                font-family: theme.$english-font;
+                color: rgba(#000000, 0.9);
+                span {
+                    color: theme.$main-color;
+                }
+            }
+            .text_description {
+                @include text($top: 1%, $font-size: 0.75em);
+                font-family: theme.$description-font;
+                color: rgba(#000000, 0.7);
+                span {
+                    color: theme.$main-color;
+                }
+            }
+        }
+        .main {
+            @include common.size(100%, 100%);
+            @include common.flex-row(center, center);
+            font-family: theme.$description-font;
+            .row_picture_01 {
+                @include common.size(50%, 90%);
+                display: flex;
+                justify-content: center;
+            }
+            .row_input_02.col {
+                @include common.size(48%, 90%);
+                @include common.flex-column(flex-start, flex-start);
+                margin-top: 5%;
+                .input-container_01 {
+                    @include common.size(100%, 80%);
+                    .input__item {
+                        @include common.flex-column(center, flex-start);
+                        margin-bottom: 5%;
+                    }
+                    .input__item.pw {
+                        margin-top: 3%;
+                        .check-list.row {
+                            @include common.size(60%, fit-content);
+                            @include common.flex-row(space-between, center);
+                            margin: -30px 0 -4% 0;
+                            .check__item {
+                                @include common.flex-row();
+                                color: theme.$dark-gray-color;
+                                .text {
+                                    font-size: 0.66em;
+                                    font-family: theme.$description-font;
+                                }
+                            }
+                            .checked {
+                                transform: scale(1.1);
+                                color: darkgreen;
+                                font-family: theme.$description-font-bold;
+                            }
+                        }
+                    }
+                }
+                .btn-container_02 {
+                    @include common.size(100%, 10%);
+                    display: flex;
+                    align-items: center;
+                    margin-top: -4.5%;
+                    .btn_auth {
+                        @include common.size(85%, 100%);
+                        @include common.shape(
+                            transparentize(theme.$main-color, 0.7),
+                            transparent,
+                            3px
+                        );
+                        @include common.shadow(3px, theme.$main-color, 0.4);
+                        letter-spacing: 0.05em;
+                        &:hover {
+                            @include common.hover-event();
+                            @include common.shadow(2px, theme.$main-color, 0.1);
+                            background: transparentize(theme.$main-color, 0.3);
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal-conflict {
+    @include common.size(30%, 60%);
+    @include common.flex-column();
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    .frame {
+        @include common.size(70%, 40%);
+        @include common.shape(rgb(222, 222, 222), transparent, 10px);
+        @include common.shadow(4px, gray, 0.5);
+        text-align: center;
+        padding: 20px;
+        .text-conflict {
+            font-family: theme.$description-font;
+            margin-top: 1%;
+            font-size: 0.85em;
+            line-height: 1.5em;
+            span {
+                font-size: 1.2em;
+                font-weight: 600;
+                color: firebrick;
+            }
+        }
+        .btn-ok {
+            @include common.size(90px, 28px);
+            @include common.shape(rgb(229, 227, 227), transparent, 4px);
+            @include common.shadow(4px, gray, 0.5);
+            &:hover {
+                @include common.hover-event();
+                @include common.shape(gray, transparent, 4px);
+                @include common.shadow(2px, gray, 0.2);
+                font-weight: 600;
+            }
+        }
+    }
+}
+.modal-auth {
+    @include common.size(45%, 70%);
+    @include common.position-fixed(10%, 30%);
+    @include common.flex-column(flex-start, center);
+    font-family: theme.$description-font;
+    .col_frame_02 {
+        @include common.size(70%, 40%);
+        @include common.flex-column(flex-start, center);
+        text-align: center;
+        .header {
+            @include common.size(100%, 20%);
+            margin-top: -2%;
+            .text-already {
+                font-size: 1em;
+                color: firebrick;
+                font-weight: 600;
+            }
+            .text-title {
+                font-size: 1.1em;
+            }
+        }
+        .main {
+            @include common.size(100%, 55%);
+            .text-description {
+                margin: 1.5% 0 7% 0;
+                font-size: 0.85em;
+            }
+            .auth-container {
+                @include common.size(100%, 40%);
+                @include common.flex-row(center, baseline);
+                .row_input_01.container {
+                    @include common.size(60%, 100%);
+                    @include common.flex-column();
+                    .col_input_01 {
+                        @include common.shape();
+                        width: 75%;
+                        padding-bottom: 5px;
+                        text-align: center;
+                        font-weight: 700;
+                        border-bottom: 2.5px solid theme.$main-color;
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                    .col_text_02 {
+                        margin-top: 5px;
+                        color: firebrick;
+                        font-size: 0.7em;
+                        font-weight: 600;
+                    }
+                }
+                .row_btn_02.compare {
+                    @include authButton();
+                }
+            }
+        }
+        .footer {
+            @include common.size(100%, 25%);
+            @include common.flex-row(center, baseline);
+            .row_text_01.time {
+                margin: 1% 1%;
+                font-size: 0.85em;
+                margin-right: 10px;
+                span {
+                    font-size: 1.2em;
+                }
+            }
+            .row_btn_02.resend {
+                @include authButton();
+            }
+        }
+    }
+}

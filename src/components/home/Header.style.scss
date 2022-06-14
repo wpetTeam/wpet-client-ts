@@ -1,0 +1,67 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+@mixin profile-dropdown() {
+    @include common.hover-event();
+    @include common.shadow(1px, theme.$sub-color, 0);
+    color: theme.$main-color;
+    background-color: transparent;
+}
+
+.home-header-container {
+    @include common.size(100%, 10%);
+    @include common.flex-row();
+    .row_logo_01 {
+        @include common.size(100%, 100%);
+        @include common.flex-row();
+        @include common.font(
+            theme.$main-color,
+            theme.$english-font,
+            1.3em,
+            500
+        );
+    }
+    .row_nav_02 {
+        @include common.size(75%, 100%);
+        @include common.flex-row();
+        nav {
+            @include common.size(10%, fit-content);
+            font-family: theme.$description-font;
+            font-size: 0.85em;
+            text-decoration: none;
+            &:hover {
+                @include common.hover-event();
+            }
+        }
+    }
+    .row_profile_03 {
+        @include common.size(15%, 100%);
+        @include common.flex-row();
+        .img_profile {
+            @include common.shape(theme.$sub-color, transparent, 50%);
+            margin-right: 2.5%;
+        }
+        .text_name {
+            font-family: theme.$description-font;
+            font-size: 0.9em;
+            span {
+                color: theme.$main-color;
+                font-weight: 600;
+            }
+        }
+        .btn_dropdown {
+            @include common.shape();
+            .icon_dropdown {
+                @include common.shape(theme.$main-color, transparent, 50%);
+                margin-left: 5px;
+                color: theme.$dashboard-color;
+                &:hover {
+                    @include profile-dropdown();
+                }
+            }
+            .icon_dropdown.show {
+                @include profile-dropdown();
+            }
+        }
+    }
+}

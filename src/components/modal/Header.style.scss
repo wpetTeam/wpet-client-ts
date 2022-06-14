@@ -1,0 +1,25 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+.col_eclipse_01 {
+    @include common.flex-row();
+    .img_logo {
+        @include common.size(98%, fit-content);
+        @include common.hover-event();
+        color: theme.$dark-gray-color;
+    }
+    .icon_close {
+        @include common.size(100%, fit-content);
+        @include common.hover-event();
+    }
+    div:nth-child(2) {
+        display: none;
+    }
+}
+.col_eclipse_01:hover div:nth-child(1) {
+    display: none;
+}
+.col_eclipse_01:hover div:nth-child(2) {
+    display: block;
+    color: black;
+}

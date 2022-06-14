@@ -1,0 +1,34 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+.date-picker-container {
+    @include common.size(fit-content, 30px);
+    @include common.flex-row();
+    position: relative;
+    margin: 0 10px 10px 0;
+    .div-select {
+        @include common.size(180px, 45px);
+        @include common.flex-row(flex-start, center);
+        position: absolute;
+        top: 120%;
+        left: -140%;
+        flex-wrap: wrap;
+
+        background: white;
+        .btn__item {
+            @include common.size(25px, 25px);
+            @include common.shape(rgb(252, 244, 245), transparent, 2px);
+            margin: 0 2px 2px 0;
+            font-size: 0.8em;
+            &:hover {
+                cursor: pointer;
+                background: theme.$main-color;
+            }
+        }
+    }
+    .row_text_02 {
+        font-family: Pretendard;
+        font-size: 1em;
+        color: #00000095;
+    }
+}

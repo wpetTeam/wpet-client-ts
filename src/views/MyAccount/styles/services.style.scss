@@ -1,0 +1,21 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+.account-container {
+    @include common.size(100%, 93%);
+    @include common.flex-row(center, space-between);
+    font-family: theme.$description-font;
+    .col_01 {
+        @include common.size(33%, 100%);
+        @include common.flex-column(space-around, flex-start);
+    }
+    .col_02 {
+        @include common.size(33%, fit-content);
+        @include common.flex-column(space-between, center);
+        padding: 5%;
+    }
+    .col_03 {
+        @include common.size(33%, 100%);
+        @include common.flex-column(space-around, flex-start);
+    }
+}

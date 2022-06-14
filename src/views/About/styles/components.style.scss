@@ -1,0 +1,137 @@
+@use 'assets/styles/_theme.scss' as theme;
+@use 'assets/styles/_common.scss' as common;
+
+@mixin text-concept {
+    @include common.size(100%, fit-content);
+    @include common.font(
+        theme.$main-color,
+        theme.$description-font,
+        1.1em,
+        700
+    );
+    display: flex;
+    align-items: center;
+}
+@mixin text-title {
+    margin: 0 0 5% 0;
+    font-family: theme.$english-font;
+    font-size: 4em;
+}
+@mixin text-description {
+    @include common.size(100%, fit-content);
+    @include common.font(
+        rgba(0, 0, 0, 0.65),
+        theme.$description-font,
+        1.05em,
+        500
+    );
+    line-height: 1.5em;
+}
+@mixin text-function {
+    @include common.font(
+        rgba(0, 0, 0, 0.6),
+        theme.$description-font,
+        0.9em,
+        500
+    );
+    span {
+        @include common.font(rgba(0, 0, 0, 0.5), Pretendard Light, 0.88em, 500);
+    }
+}
+.page_container_01.row {
+    @include common.size(100%, 100%);
+    @include common.flex-row();
+    .row_text_01 {
+        @include common.size(40%, 100%);
+        @include common.flex-column(center, flex-start);
+        .text-concept {
+            @include text-concept();
+        }
+        .text-title {
+            @include text-title();
+            margin-bottom: 10%;
+        }
+        .text-description {
+            @include text-description();
+        }
+    }
+    .row_img_02 {
+        @include common.size(50%, 100%);
+    }
+}
+.page_container_02.row {
+    @include common.size(100%, 100%);
+    @include common.flex-row();
+    .row_img_01 {
+        @include common.size(50%, 100%);
+    }
+    .row_text_02 {
+        @include common.size(50%, 100%);
+        @include common.flex-column(center, flex-start);
+        margin: 0 0 0 5%;
+        .text-concept {
+            @include text-concept();
+        }
+        .text-title {
+            @include text-title();
+        }
+        .text-description {
+            @include text-description();
+        }
+        .function-container {
+            @include common.size(100%, fit-content);
+            @include common.flex-row(flex-start, center);
+            .icon {
+                @include common.size(4%, fit-content);
+                color: transparentize(theme.$main-color, 0.4);
+            }
+            .text-function {
+                @include text-function();
+                margin-left: 3%;
+            }
+        }
+    }
+}
+.page_container_03.row {
+    @include common.size(100%, 100%);
+    @include common.flex-row();
+    .row_text_01 {
+        @include common.size(40%, 100%);
+        @include common.flex-column(center, flex-start);
+        .text-concept {
+            @include text-concept();
+        }
+        .text-title {
+            @include text-title();
+        }
+        .text-description {
+            @include text-description();
+        }
+        .function-container {
+            .icon {
+                @include common.size(15%, fit-content);
+                @include common.shape(theme.$step-color, transparent, 50%);
+                padding: 5px;
+                color: theme.$main-color;
+                margin: 3% 0 -3% 0;
+            }
+            .text-function {
+                @include text-function();
+            }
+        }
+    }
+    .row_img_02 {
+        @include common.size(50%, 100%);
+    }
+}
+.pagination {
+    @include common.shape();
+    .icon {
+        color: theme.$main-color;
+        opacity: 0.5;
+        &:hover {
+            @include common.hover-event();
+            opacity: 1;
+        }
+    }
+}

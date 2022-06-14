@@ -1,0 +1,59 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+.row_text_01 {
+    @include common.size(70%, 100%);
+    @include common.flex-column();
+    .text-container {
+        @include common.size(70%, 30%);
+        .text-step {
+            font-size: 0.75em;
+            color: theme.$step-color;
+        }
+        .text-title {
+            margin: -5% 0 0 0.3%;
+
+            font-size: 0.95em;
+            color: transparentize(theme.$main-color, 0.1);
+        }
+        .finish {
+            color: theme.$main-color;
+            font-weight: 700;
+        }
+    }
+}
+.row_bar_02 {
+    @include common.size(25%, 100%);
+    .bar-container {
+        @include common.flex-column(space-between, center);
+        height: 63%;
+        margin: 110% 0 0 8%;
+        .step-bar {
+            @include common.size(2px, 42%);
+            background: theme.$step-color;
+            transform: rotate(180deg);
+        }
+        .step-bar.checked {
+            background: theme.$main-color;
+        }
+        .step-icon {
+            @include common.size(13px, 13px);
+            @include common.shape(
+                theme.$sub-color,
+                1.5px solid theme.$sub-color,
+                50%
+            );
+            color: theme.$sub-color;
+        }
+        .step-icon.pre-checked {
+            @include common.shape(white, 2px solid theme.$main-color, 50%);
+            transition: 0.4s ease-in-out;
+            color: white;
+        }
+        .step-icon.checked {
+            @include common.shape(white, 1.5px solid theme.$main-color, 50%);
+            transition: 0.4s ease-in-out;
+            color: theme.$main-color;
+        }
+    }
+}

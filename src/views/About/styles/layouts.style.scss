@@ -1,0 +1,117 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+.header-container {
+    @include common.size(94%, 14%);
+    @include common.flex-row(space-between, center);
+    .col_logo_01 {
+        @include common.size(fit-content, 80%);
+        @include common.flex-row();
+        margin-top: -2%;
+        p {
+            @include common.font(
+                theme.$main-color,
+                theme.$description-font,
+                0.75em,
+                500
+            );
+            margin: 12% 0 0 -1%;
+        }
+    }
+    .col_btn-container_02 {
+        @include common.size(30%, 80%);
+        @include common.flex-row(center, center);
+        padding-right: 3%;
+        margin-top: -2%;
+    }
+}
+
+.main-container.row {
+    @include common.size(94%, 77%);
+    @include common.flex-row(space-between, center);
+    margin: -3% 0 1% 0;
+    .row_pagination_01,
+    .row_pagination_03 {
+        width: 4%;
+    }
+    .row_slider_02 {
+        @include common.size(90%, 100%);
+        @include common.flex-column();
+        .col_page_01 {
+            @include common.size(100%, 95%);
+            .page {
+                @include common.size(84%, 70%);
+                opacity: 0;
+                position: absolute;
+                transition: opacity ease-in-out 0.5s;
+            }
+            .page.active-anim {
+                opacity: 1;
+            }
+        }
+        .col_nav_02 {
+            @include common.size(100%, 5%);
+            display: flex;
+            justify-content: center;
+            .paw {
+                opacity: 0.5;
+                margin: 0.3%;
+                color: theme.$main-color;
+                &:hover {
+                    @include common.hover-event();
+                    transform: scale(1.1);
+                    opacity: 1;
+                }
+            }
+            .paw.active {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+    }
+}
+.footer-container {
+    @include common.size(94%, 5%);
+    display: flex;
+    justify-content: center;
+    .btn_contacts {
+        @include common.size(8%, 100%);
+        @include common.font(theme.$main-color, theme.$english-font, 1em, 500);
+        @include common.shape(transparent, 1.5px solid transparent, 20%);
+        &:hover {
+            @include common.hover-event();
+            font-size: 1.1em;
+            border: 1.5px solid transparentize(theme.$main-color, 0.2);
+        }
+    }
+    .btn_contacts.clicked {
+        @include common.flex-row();
+        border: 1.5px solid theme.$main-color;
+        .icon__item {
+            @include common.size(20%, fit-content);
+            opacity: 0.5;
+            margin: 0 2px;
+            color: black;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            &:hover {
+                @include common.hover-event();
+                @include common.size(22%, fit-content);
+                opacity: 1;
+            }
+        }
+        .kakao {
+            color: theme.$kakao-color;
+            background: black;
+        }
+        .facebook {
+            color: theme.$facebook-color;
+        }
+        .insta {
+            color: white;
+            background: theme.$insta-color;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@use 'assets/styles/_common.scss' as common;
+@use 'assets/styles/_theme.scss' as theme;
+
+.dropdown-list {
+    position: absolute;
+    top: 7%;
+    right: 2.3%;
+    padding: 0.5%;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+
+    .dropdown__item {
+        @include common.font(black, theme.$description-font, 0.7em, 500);
+        @include common.shape(
+            theme.$dashboard-color,
+            2px solid theme.$sub-color,
+            0
+        );
+        @include common.shadow(3px, theme.$sub-color, 0.5);
+        padding: 5px;
+        margin-bottom: 9%;
+        text-align: center;
+        &:hover {
+            @include common.hover-event();
+            @include common.shadow(1.5px, theme.$main-color, 0.3);
+            font-weight: 600;
+            border: 2px solid theme.$main-color;
+            color: theme.$main-color;
+        }
+    }
+}

@@ -1,0 +1,261 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+// DiaryPicture
+.picture-frame {
+    @include common.size(95%, 80%);
+    .picture-container {
+        @include common.size(100%, 100%);
+        @include common.flex-column();
+        @include common.shape(theme.$dashboard-color, transparent, 0px);
+        .icon-upload {
+            @include common.size(45px, 45px);
+            color: theme.$gray-color;
+            &:hover {
+                @include common.hover-event();
+                transform: scale(1.02);
+                color: black;
+                color: theme.$dark-gray-color;
+            }
+        }
+        .text-upload {
+            @include common.font(gray, theme.$description-font, 0.8em, 500);
+            margin-top: -0.5%;
+            text-align: center;
+        }
+        .icon-upload:hover + .text-upload {
+            @include common.hover-event();
+            transform: scale(1.02);
+            color: theme.$dark-gray-color;
+        }
+    }
+}
+.picture-container.selected {
+    @include common.size(100%, 100%);
+    @include common.flex-column();
+    .div-frame {
+        height: 80%;
+        .img-picture {
+            @include common.size(100%, 100%);
+        }
+    }
+
+    .btn-conatiner {
+        @include common.flex-row();
+        @include common.size(100%, 20%);
+        .btn {
+            @include common.size(100px, 30px);
+            @include common.shape(
+                transparentize(theme.$gray-color, 0.7),
+                transparent,
+                3px
+            );
+            margin-right: 2%;
+            color: theme.$dark-gray-color;
+            &:hover {
+                @include common.hover-event();
+                background: theme.$gray-color;
+                color: black;
+                font-weight: 700;
+            }
+        }
+    }
+}
+// Custom Nav
+.custom-nav-container {
+    @include common.size(100%, fit-content);
+    padding: 0.8% 0.1%;
+    border: 1px dotted gray;
+    border-radius: 5px;
+
+    button {
+        @include common.size(100%, 6%);
+        @include common.shape(transparent, none, 4px);
+        margin-bottom: 3px;
+        color: theme.$main-color;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .color-picker {
+        position: fixed;
+        margin: -5% 0 0 3%;
+        z-index: 1000;
+    }
+}
+// Content
+.textarea-content {
+    @include common.size(98%, 100%);
+    @include common.shape();
+    @include common.font(black, theme.$description-font, 1.1em, 500);
+    overflow: auto;
+    padding-left: 2%;
+    line-height: 2.2em;
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        font-size: 0.8em;
+    }
+}
+// Date
+.date-container {
+    @include common.size(47%, 100%);
+    text-align: center;
+    border-right: 0.7px solid black;
+    p {
+        font-size: 1em;
+        & span {
+            margin: 0 1.5px 0 3px;
+            font-size: 1.3em;
+        }
+    }
+}
+// Weather
+@mixin weather-select($color, $background) {
+    padding: 5px;
+    color: $color;
+    background: $background;
+}
+.weather-container {
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+
+    .weather-icon {
+        @include common.size(8%, fit-content);
+        margin: 0 3px 0 3px;
+        color: rgb(187, 187, 187);
+        border-radius: 50%;
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        &.sunny {
+            @include weather-select($color: yellow, $background: orange);
+        }
+        &.cloudy {
+            @include weather-select(
+                $color: rgb(198, 198, 198),
+                $background: black
+            );
+        }
+        &.sunny-cloudy {
+            @include weather-select(
+                $color: rgb(72, 95, 104),
+                $background: rgb(199, 199, 199)
+            );
+        }
+        &.thunder {
+            @include weather-select(
+                $color: yellow,
+                $background: rgb(0, 0, 105)
+            );
+        }
+        &.snow {
+            @include weather-select($color: white, $background: firebrick);
+        }
+        &.rainy {
+            @include weather-select(
+                $color: rgb(46, 144, 180),
+                $background: rgb(184, 193, 196)
+            );
+        }
+        &.rainbow {
+            @include weather-select($color: red, $background: orange);
+        }
+    }
+}
+
+// Calender
+.calendar {
+    @include common.size(60%, 90%);
+    .header {
+        @include common.size(100%, 7%);
+        @include common.flex-row(space-between, baseline);
+        .col.col-first {
+            @include common.size(80%, 100%);
+            @include common.flex-column(center, flex-start);
+            margin-left: 1%;
+            .text {
+                font-size: 0.8em;
+            }
+            .text.month {
+                margin-right: 5px;
+                font-size: 1.6em;
+                font-weight: 600;
+            }
+        }
+        .col.col-end {
+            @include common.size(20%, 100%);
+            @include common.flex-row(flex-end, baseline);
+            svg {
+                @include common.size(11%, fit-content);
+                margin-left: 5%;
+                color: transparentize(gray, 0.2);
+                &:hover {
+                    @include common.hover-event();
+                    transform: scale(1.15);
+                    color: theme.$dark-gray-color;
+                }
+            }
+        }
+    }
+    .days {
+        @include common.size(100%, fit-content);
+        @include common.flex-row(space-between, center);
+        font-weight: 600;
+        font-size: 0.65em;
+        padding: 2px;
+        color: theme.$dark-gray-color;
+        .col {
+            @include common.size(12.9%, 100%);
+            @include common.flex-column(flex-end, flex-start);
+            padding-left: 1%;
+            background: transparentize(theme.$step-color, 0.6);
+            border-radius: 10px;
+        }
+    }
+    .body {
+        @include common.size(100%, 89%);
+        @include common.flex-column();
+        .row {
+            @include common.size(100%, 100%);
+            @include common.flex-row(space-between, center);
+            .col {
+                @include common.size(13.5%, 93%);
+                @include common.flex-row(flex-start, flex-start);
+
+                border: 0.4px solid transparentize(gray, 0.4);
+                border-radius: 3px;
+                font-size: 0.8em;
+                span {
+                    margin: 4px 0 0 4px;
+                }
+                .not-valid {
+                    color: theme.$gray-color;
+                }
+                img {
+                    opacity: 0.1;
+                }
+            }
+            .col.cell.valid {
+                &:hover {
+                    @include common.hover-event();
+                    @include common.shadow(1.5px, theme.$dark-gray-color, 0.1);
+                    transform: scale(1.01);
+                    border: none;
+                    background: transparentize(theme.$gray-color, 0.5);
+                }
+            }
+            .col.cell.selected {
+                @include common.shadow(1.5px, theme.$main-color, 0.1);
+                transform: scale(1.02);
+                border: none;
+                background: theme.$sub-color;
+                color: theme.$main-color;
+                font-weight: 600;
+            }
+        }
+    }
+}

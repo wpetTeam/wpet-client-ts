@@ -1,0 +1,137 @@
+@use 'assets/styles/_theme.scss';
+@use 'assets/styles/_common.scss' as common;
+
+.read-container {
+    @include common.size(100%, 100%);
+}
+
+.write-container {
+    @include common.size(100%, 100%);
+    display: flex;
+    flex-direction: column;
+    .write-main {
+        @include common.size(90%, 84%);
+        @include common.flex-row(center, flex-start);
+        padding-left: 5%;
+        padding-top: 2%;
+        .row_picture_01 {
+            @include common.size(46%, 105%);
+        }
+        .row_nav_02 {
+            @include common.size(3%, 100%);
+            margin: 0 1.5% 0 1.5%;
+        }
+        .row_journal_03 {
+            @include common.size(48%, 85%);
+            @include common.shape(
+                transparentize(whitesmoke, 0.7),
+                0.7px solid gray,
+                0
+            );
+            display: flex;
+            flex-direction: column;
+            .col_dateweather_01 {
+                @include common.size(100%, 12%);
+                @include common.flex-row(flex-start, center);
+                border-bottom: 0.6px solid black;
+            }
+            .col_title_02 {
+                @include common.size(100%, 12%);
+                @include common.flex-row(flex-start, center);
+                border-bottom: 0.6px solid black;
+                .text-title {
+                    width: 10%;
+                    margin-left: 1%;
+                    text-align: center;
+                }
+                .input-title {
+                    @include common.size(85%, 90%);
+                    @include common.shape();
+                    font-size: 1.1em;
+                    &:focus {
+                        outline: none;
+                    }
+                    &::placeholder {
+                        font-size: 0.85em;
+                        color: gray;
+                    }
+                }
+            }
+            .col_content_03 {
+                @include common.size(100%, 76%);
+                padding-top: 0.5%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+            }
+        }
+    }
+    //footer
+    .write-footer {
+        @include common.size(93%, 8%);
+        @include common.flex-row(flex-end, center);
+        margin-top: -4%;
+        .row_pets_01 {
+            @include common.flex-column(center, flex-end);
+            width: 80%;
+            margin: 0 3% 0 0;
+            .label-title {
+                margin-bottom: 0.5%;
+                color: theme.$dark-gray-color;
+                font-size: 0.75em;
+            }
+            .pet-list {
+                @include common.flex-row(flex-end, center);
+                @include common.font(
+                    theme.$dark-step-color,
+                    theme.$description-font,
+                    0.9em,
+                    500
+                );
+                width: 100%;
+                label {
+                    display: flex;
+                    justify-content: center;
+                    margin-left: 1.5%;
+                    .input-checkbox {
+                        display: none;
+                    }
+                    .custom-checkbox {
+                        @include common.size(16px, 16px);
+                        display: inline-block;
+                        margin-right: 4px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                    .input-checkbox:checked ~ .custom-checkbox {
+                        color: theme.$main-color;
+                    }
+                    .input-checkbox:checked ~ .custom-label {
+                        @include common.font(
+                            theme.$main-color,
+                            theme.$description-font,
+                            1.1em,
+                            600
+                        );
+                    }
+                }
+            }
+        }
+        .row_btn_02 {
+            @include common.size(100px, 35px);
+            @include common.shape(
+                transparent,
+                2px solid transparentize(theme.$main-color, 0.7),
+                0
+            );
+            @include common.shadow(4px, theme.$main-color, 0.7);
+            &:hover {
+                @include common.hover-event();
+                @include common.shadow(2px, theme.$main-color, 0.2);
+                border: 2.5px solid theme.$main-color;
+                font-weight: 600;
+            }
+        }
+    }
+}
