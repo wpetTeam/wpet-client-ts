@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { uploadPicture, removePicture } from 'utils';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
-import '../styles/components.style.scss';
 
 export const Picture = (props: {
     picture: string;

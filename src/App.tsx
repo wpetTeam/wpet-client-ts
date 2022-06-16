@@ -5,7 +5,7 @@ import { Schedule } from 'views/MyAccount/services';
 import { Registeration } from 'views/PetInfo/services';
 import { About, Home, PetInfo, Community, MyAccount, Diary } from './views';
 
-function App() {
+const App = () => {
     return (
         <React.Fragment>
             <Routes>
@@ -26,6 +26,6 @@ function App() {
             </Routes>
         </React.Fragment>
     );
-}
+};
 
 export default App;

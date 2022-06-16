@@ -2,9 +2,28 @@
 @use 'assets/styles/_common.scss' as common;
 
 .read-container {
-    @include common.size(100%, 100%);
+    @include common.size(100%, 95%);
+    @include common.flex-row();
+    //@include common.shape(rgba(255, 224, 215, 0.24), none, 4px);
+    .row_calender_01 {
+        @include common.size(55%, 100%);
+        @include common.flex-column(center, flex-start);
+        .text-description {
+            @include common.font(
+                theme.$dark-gray-color,
+                theme.$description-font,
+                0.8em,
+                500
+            );
+            margin-top: -0.5%;
+        }
+    }
+    .row_diarys_02 {
+        @include common.size(40%, 85%);
+        @include common.flex-row(space-around, center);
+        flex-wrap: wrap;
+    }
 }
-
 .write-container {
     @include common.size(100%, 100%);
     display: flex;

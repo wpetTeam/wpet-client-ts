@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import uuid from 'react-uuid';
 import { Icon } from '@iconify/react';
 import { format, addMonths, subMonths, startOfWeek, addDays } from 'date-fns';
 import { endOfWeek, isSameDay, isSameMonth } from 'date-fns';
 import { startOfMonth, endOfMonth } from 'date-fns';
-import '../styles/components.style.scss';
+import { Diary } from 'models';
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -39,7 +40,7 @@ const RenderDays = () => {
     return <div className="days row">{days}</div>;
 };
 
-const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
+const RenderCells = ({ currentMonth, selectedDate, diary }) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
@@ -50,10 +51,12 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     let day = startDate;
     let formattedDate = '';
 
+    console.log(diary);
+
     while (day <= endDate) {
+        //console.log(typeof format(day, 'yyyy-MM-dd'));
         for (let i = 0; i < 7; i++) {
             formattedDate = format(day, 'd');
-            console.log(format(currentMonth, 'M'), format(day, 'M'));
             days.push(
                 <div
                     className={`col cell ${
@@ -65,7 +68,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
                             ? 'not-valid'
                             : 'valid'
                     }`}
-                    // onClick={() => onDateClick(parse(cloneDay))}
+                    key={uuid()}
                 >
                     <span
                         className={
@@ -81,12 +84,16 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
             );
             day = addDays(day, 1);
         }
-        rows.push(<div className="row">{days}</div>);
+        rows.push(
+            <div className="row" key={uuid()}>
+                {days}
+            </div>,
+        );
         days = [];
     }
     return <div className="body">{rows}</div>;
 };
-export const Calender = () => {
+export const Calender = (props: { diary: Array<Diary> }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -95,10 +102,6 @@ export const Calender = () => {
     };
     const prevMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1));
-    };
-
-    const onDateClick = (day) => {
-        setSelectedDate(day);
     };
 
     return (
@@ -112,7 +115,7 @@ export const Calender = () => {
             <RenderCells
                 currentMonth={currentMonth}
                 selectedDate={selectedDate}
-                onDateClick={onDateClick}
+                diary={props.diary}
             />
         </div>
     );

@@ -1,7 +1,7 @@
-import { Diary } from 'models';
+import { newDiary } from 'models';
 import { API } from 'services';
 
-export const createDiary = async (diaryData: Diary) => {
+export const createDiary = async (diaryData: newDiary) => {
     await API.post('/diarys', diaryData, {
         withCredentials: true,
     })

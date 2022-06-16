@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import { Icon } from '@iconify/react';
 import { Weather, Today, Content, Picture, CustomNav } from '../components';
-import { Diary, petID } from 'models';
+import { newDiary, petID } from 'models';
 import { getUserPets } from 'adapters';
 import { createDiary } from '../adapters';
 import '../styles/services.style.scss';
+import '../styles/write.style.scss';
 
 export const WriteDiary = () => {
     const [selectColor, setSelectColor] = useState(false);
@@ -25,7 +26,7 @@ export const WriteDiary = () => {
         if (userPets.length === 1) {
             setPetIDs([...petIDs, userPets[0].petID]);
         }
-        const diaryData: Diary = {
+        const diaryData: newDiary = {
             petIDs: petIDs,
             title: title,
             photo: picture,
