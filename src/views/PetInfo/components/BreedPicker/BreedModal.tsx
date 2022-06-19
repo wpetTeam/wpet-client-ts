@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { IoCloseSharp } from 'react-icons/io5';
-import uuid from 'react-uuid';
-import { handleBreedPicker, handleDeleteBreed } from './handlePicker';
-import styled from 'styled-components';
+import { useState } from "react";
+import { IoCloseSharp } from "react-icons/io5";
+import uuid from "react-uuid";
+import { handleBreedPicker, handleDeleteBreed } from "./handlePicker";
+import styled from "styled-components";
 
 export const BreedModal = (props) => {
-    const [search, setSearch] = useState('');
-    console.log(props.selectBreed);
+    const [search, setSearch] = useState("");
 
     const filteredBreed = props.breeds.filter((item) => {
         return item.includes(search);

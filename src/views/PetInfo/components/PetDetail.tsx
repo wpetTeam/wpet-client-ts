@@ -1,13 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import uuid from 'react-uuid';
-import { Icon } from '@iconify/react';
-import EMPTY_IMAGE from 'assets/images/Character/common-character.png';
-import { Pet } from 'models';
-import { DatePicker } from './DatePicker';
-import { Input } from './Input';
-import { updatePet, deletePet, getPet } from '../adapters';
-import { removePicture, uploadPicture } from 'utils';
-import '../styles/components.style.scss';
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import uuid from "react-uuid";
+import { Icon } from "@iconify/react";
+import EMPTY_IMAGE from "assets/images/Character/common-character.png";
+import { Pet } from "models";
+import { DatePicker } from "./DatePicker";
+import { Input } from "./Input";
+import { updatePet, deletePet, getPet } from "../adapters";
+import { removePicture, uploadPicture } from "utils";
+import { handleDeleteBreed } from "./BreedPicker/handlePicker";
+import { PetBreedModal } from "./PetBreedModal";
+import "../styles/components.style.scss";
 
 export const PetDetail = (props: {
     petID: number;
@@ -17,12 +19,13 @@ export const PetDetail = (props: {
     const [updateInfo, setUpdateInfo] = useState<any>([]);
     const [isUpdate, setIsUpdate] = useState(false);
     const [isGenderUpdate, setIsGenderUpdate] = useState(false);
-    const [month, setMonth] = useState<string>(''); // birthDate - month
-    const [date, setDate] = useState<string>(''); // birthDate - date
-    const [gender, setGender] = useState<string>(); // 반려견 성별
-    const [picture, setPicture] = useState<string>('');
-    const [selectBreed, setSelectBreed] = useState<Array<string>>(); // 반려견 종 선택
-    var inputRef;
+    const [month, setMonth] = useState<string>("");
+    const [date, setDate] = useState<string>("");
+    const [gender, setGender] = useState<string>();
+    const [picture, setPicture] = useState<string>("");
+    const [selectBreed, setSelectBreed] = useState<Array<string>>([]);
+    const [showsBreeds, setShowsBreeds] = useState(false);
+    var inputRef: any;
 
     useEffect(() => {
         getPet(props.petID, setInfo);
@@ -31,7 +34,7 @@ export const PetDetail = (props: {
 
     useEffect(() => {
         if (info !== undefined && info.birthDate !== undefined) {
-            var birth = info.birthDate.split('-');
+            var birth = info.birthDate.split("-");
             setUpdateInfo({
                 name: info.name,
                 breeds: info.breeds,
@@ -57,10 +60,10 @@ export const PetDetail = (props: {
         });
     };
     const handleUpdateGender = () => {
-        if (gender === '남') {
-            setGender('여');
+        if (gender === "남") {
+            setGender("여");
         } else {
-            setGender('남');
+            setGender("남");
         }
         setIsGenderUpdate(true);
     };
@@ -77,10 +80,10 @@ export const PetDetail = (props: {
     const handleUpdateBtn = async () => {
         const birthDate =
             updateInfo.year +
-            '-' +
-            ('00' + updateInfo.month).slice(-2) +
-            '-' +
-            ('00' + updateInfo.date).slice(-2);
+            "-" +
+            ("00" + updateInfo.month).slice(-2) +
+            "-" +
+            ("00" + updateInfo.date).slice(-2);
         const updateData = {
             name: updateInfo.name,
             birthDate: birthDate,
@@ -106,7 +109,7 @@ export const PetDetail = (props: {
                         <label>반려견 이름</label>
                         <input
                             className={
-                                isUpdate ? 'input-name update' : 'input-name'
+                                isUpdate ? "input-name update" : "input-name"
                             }
                             name="name"
                             value={updateInfo?.name}
@@ -121,9 +124,9 @@ export const PetDetail = (props: {
                                 className={
                                     isUpdate
                                         ? isGenderUpdate
-                                            ? 'text-gender update'
-                                            : 'text-gender'
-                                        : ''
+                                            ? "text-gender update"
+                                            : "text-gender"
+                                        : ""
                                 }
                             >
                                 {gender}
@@ -170,20 +173,38 @@ export const PetDetail = (props: {
                         <label>견종</label>
                         <div className="breed-container">
                             <div className="breed-list">
-                                {info?.breeds.map((item, idx) => (
+                                {selectBreed.map((item, idx) => (
                                     <div
                                         key={uuid()}
                                         className={
                                             isUpdate
-                                                ? 'item__breed update'
-                                                : 'item__breed'
+                                                ? "item__breed update"
+                                                : "item__breed"
                                         }
                                     >
                                         {item}
+                                        {isUpdate && (
+                                            <button
+                                                onClick={() =>
+                                                    handleDeleteBreed(
+                                                        item,
+                                                        selectBreed,
+                                                        setSelectBreed,
+                                                    )
+                                                }
+                                            >
+                                                <Icon icon="ep:close-bold" />
+                                            </button>
+                                        )}
                                     </div>
                                 ))}
                                 {isUpdate && (
-                                    <button className="breed-btn">수정</button>
+                                    <button
+                                        className="breed-btn"
+                                        onClick={() => setShowsBreeds(true)}
+                                    >
+                                        추가
+                                    </button>
                                 )}
                             </div>
                         </div>
@@ -258,6 +279,13 @@ export const PetDetail = (props: {
                 </div>
                 <div className="row_div_03">그 외 정보</div>
             </div>
+            {showsBreeds && (
+                <PetBreedModal
+                    selectBreed={selectBreed}
+                    setSelectBreed={setSelectBreed}
+                    setShowsBreeds={setShowsBreeds}
+                />
+            )}
         </div>
     );
 };

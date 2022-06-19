@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import uuid from 'react-uuid';
-import { Icon } from '@iconify/react';
-import { Weather, Today, Content, Picture, CustomNav } from '../components';
-import { newDiary, petID } from 'models';
-import { createDiary, getWritablePets } from '../adapters';
-import '../styles/services.style.scss';
-import '../styles/write.style.scss';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import uuid from "react-uuid";
+import { Icon } from "@iconify/react";
+import { Weather, Today, Content, Picture, CustomNav } from "../components";
+import { newDiary, petID } from "models";
+import { createDiary, getWritablePets } from "../adapters";
+import "../styles/services.style.scss";
+import "../styles/write.style.scss";
 
 export const WriteDiary = () => {
     let navigate = useNavigate();
@@ -17,26 +17,25 @@ export const WriteDiary = () => {
         getWritablePets(setUserPets);
     }, []);
 
-    const [weather, setWeather] = useState('');
-    const [title, setTitle] = useState('');
-    const [picture, setPicture] = useState('');
-    const [content, setContent] = useState('');
-    const [color, setColor] = useState('#ebcfc6');
+    const [weather, setWeather] = useState("");
+    const [title, setTitle] = useState("");
+    const [picture, setPicture] = useState("");
+    const [content, setContent] = useState("");
+    const [color, setColor] = useState("#ebcfc6");
     const [petIDs, setPetIDs] = useState<Array<number>>([]);
 
     const handlePostBtn = async () => {
-        console.log(userPets[0].petID);
         const diaryData: newDiary = {
             petIDs: userPets.length === 1 ? [userPets[0].petID] : petIDs,
             title: title,
             photo: picture,
             texts: content,
             isShare: 0,
-            petState: 'happy',
+            petState: "happy",
             weather: weather,
             color: color,
-            font: 'Pretendard',
-            hashTags: ['pet'],
+            font: "Pretendard",
+            hashTags: ["pet"],
         };
         createDiary(diaryData, navigate);
     };
@@ -97,7 +96,7 @@ export const WriteDiary = () => {
 function Title({ title, setTitle, color }) {
     return (
         <>
-            <div className="text-title">제목 {'  '}: </div>
+            <div className="text-title">제목 {"  "}: </div>
             <input
                 className="input-title"
                 value={title}

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { format, addMonths, subMonths, startOfWeek, addDays } from 'date-fns';
-import { endOfWeek, isSameDay, isSameMonth } from 'date-fns';
-import { startOfMonth, endOfMonth } from 'date-fns';
-import uuid from 'react-uuid';
-import { Icon } from '@iconify/react';
-import EMPTY_IMAGE from 'assets/images/Character/stamp.png';
-import { getDiarys } from 'views/Diary/adapters';
+import { useEffect, useState } from "react";
+import { format, addMonths, subMonths, startOfWeek, addDays } from "date-fns";
+import { endOfWeek, isSameDay, isSameMonth } from "date-fns";
+import { startOfMonth, endOfMonth } from "date-fns";
+import uuid from "react-uuid";
+import { Icon } from "@iconify/react";
+import EMPTY_IMAGE from "assets/images/Character/stamp.png";
+import { getDiarys } from "views/Diary/adapters";
 
 const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
     return (
@@ -13,9 +13,9 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
             <div className="col col-first">
                 <span className="text">
                     <span className="text month">
-                        {format(currentMonth, 'M')}월
+                        {format(currentMonth, "M")}월
                     </span>
-                    {format(currentMonth, 'yyyy')}
+                    {format(currentMonth, "yyyy")}
                 </span>
             </div>
             <div className="col col-end">
@@ -25,10 +25,9 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
         </div>
     );
 };
-
 const RenderDays = () => {
     const days: any[] = [];
-    const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thrs', 'Fri', 'Sat'];
+    const date = ["Sun", "Mon", "Thu", "Wed", "Thrs", "Fri", "Sat"];
     for (let i = 0; i < 7; i++) {
         days.push(
             <div className="col" key={i}>
@@ -38,7 +37,6 @@ const RenderDays = () => {
     }
     return <div className="days row">{days}</div>;
 };
-
 const RenderCells = ({ currentMonth, selectedDate, diarys }) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
@@ -48,44 +46,44 @@ const RenderCells = ({ currentMonth, selectedDate, diarys }) => {
     const rows: any[] = [];
     let days: any[] = [];
     let day = startDate;
-    let formattedDate = '';
+    let formattedDate = "";
 
     const getRandomPhoto = (today: string) => {
         let diary_list = diarys[today];
         if (diary_list !== undefined) {
             if (diary_list.length === 1) {
-                return diary_list[0]['photo'];
+                return diary_list[0]["photo"];
             } else {
                 let random_petID = Math.floor(
                     Math.random() * diary_list.length,
                 );
-                return diary_list[random_petID]['photo'];
+                return diary_list[random_petID]["photo"];
             }
         } else return;
     };
 
     while (day <= endDate) {
         for (let i = 0; i < 7; i++) {
-            const IMAGE = getRandomPhoto(format(day, 'yyyy-MM-dd'));
-            formattedDate = format(day, 'd');
+            const IMAGE = getRandomPhoto(format(day, "yyyy-MM-dd"));
+            formattedDate = format(day, "d");
             days.push(
                 <div
                     className={`col cell ${
                         !isSameMonth(day, monthStart)
-                            ? 'disabled'
+                            ? "disabled"
                             : isSameDay(day, selectedDate)
-                            ? 'selected'
+                            ? "selected"
                             : IMAGE === undefined
-                            ? 'not-valid'
-                            : 'valid'
+                            ? "not-valid"
+                            : "valid"
                     }`}
                     key={uuid()}
                 >
                     <span
                         className={
-                            format(currentMonth, 'M') !== format(day, 'M')
-                                ? 'text not-valid'
-                                : ''
+                            format(currentMonth, "M") !== format(day, "M")
+                                ? "text not-valid"
+                                : ""
                         }
                     >
                         {formattedDate}
@@ -95,7 +93,7 @@ const RenderCells = ({ currentMonth, selectedDate, diarys }) => {
                             src={IMAGE === undefined ? EMPTY_IMAGE : IMAGE}
                             alt="Diary"
                             className={
-                                IMAGE === undefined ? 'img-undefined' : 'img'
+                                IMAGE === undefined ? "img-undefined" : "img"
                             }
                         />
                     )}
@@ -117,8 +115,8 @@ export const Calender = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const selectedDate = new Date();
 
-    const year = format(currentMonth, 'yyyy');
-    const month = format(currentMonth, 'MM');
+    const year = format(currentMonth, "yyyy");
+    const month = format(currentMonth, "MM");
 
     useEffect(() => {
         getDiarys(year, month, setDiarys);

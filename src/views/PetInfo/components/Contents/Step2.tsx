@@ -1,12 +1,14 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import uuid from 'react-uuid';
-import { Link } from 'react-router-dom';
-import { IoPawSharp, IoCloseSharp } from 'react-icons/io5';
-import { Button } from '../Button';
-import { BreedPicker, BreedModal } from '../BreedPicker';
-import { handleDeleteBreed } from '../BreedPicker/handlePicker';
-import { PetInfo } from 'views/PetInfo/models';
-import { SelectItem } from '../BreedPicker/BreedModal';
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import uuid from "react-uuid";
+import { Link } from "react-router-dom";
+import { IoPawSharp, IoCloseSharp } from "react-icons/io5";
+import { Button } from "../Button";
+import { BreedPicker } from "../BreedPicker";
+import { handleDeleteBreed } from "../BreedPicker/handlePicker";
+import { PetInfo } from "views/PetInfo/models";
+import { SelectItem } from "../BreedPicker/BreedModal";
+import { PetBreedModal } from "../PetBreedModal";
+import "views/PetInfo/styles/components.style.scss";
 
 export const Step2 = (props: {
     step: number;
@@ -17,7 +19,7 @@ export const Step2 = (props: {
 }) => {
     const [breeds, setBreeds] = useState<Array<string>>([]);
     const [selectBreed, setSelectBreed] = useState<Array<string>>([]);
-    const [showsModal, setShowsModal] = useState(false);
+    const [showsBreeds, setShowsBreeds] = useState(false);
 
     useEffect(() => {
         setBreeds(props.breeds);
@@ -29,7 +31,7 @@ export const Step2 = (props: {
             breed: selectBreed,
         });
         if (selectBreed.length >= 1) props.setStep(props.step + 1);
-        else alert('1개 이상 선택하세요');
+        else alert("1개 이상 선택하세요");
     };
 
     return (
@@ -38,8 +40,11 @@ export const Step2 = (props: {
                 <p className="row_text_01">
                     반려견 종을 선택해주세요. 최대 3개까지 선택 가능합니다.
                 </p>
-                <div className="row_btn_02" onClick={() => setShowsModal(true)}>
-                    <ModalBtn showsModal={showsModal} />
+                <div
+                    className="row_btn_02"
+                    onClick={() => setShowsBreeds(true)}
+                >
+                    <ModalBtn showsModal={showsBreeds} />
                 </div>
             </div>
             <div className="step2-main row">
@@ -63,12 +68,11 @@ export const Step2 = (props: {
                     </Link>
                 )}
             </div>
-            {showsModal && (
-                <BreedModal
-                    breeds={breeds}
+            {showsBreeds && (
+                <PetBreedModal
                     selectBreed={selectBreed}
                     setSelectBreed={setSelectBreed}
-                    setShowModal={setShowsModal}
+                    setShowsBreeds={setShowsBreeds}
                 />
             )}
         </div>
@@ -78,12 +82,12 @@ export const Step2 = (props: {
 function ModalBtn({ showsModal }) {
     return (
         <>
-            <button className={showsModal ? 'btn-modal open' : 'btn-modal'}>
+            <button className={showsModal ? "btn-modal open" : "btn-modal"}>
                 찾는 반려견 종이 없어요!
             </button>
             <IoPawSharp
                 size={15}
-                className={showsModal ? 'icon-modal open' : 'icon-modal'}
+                className={showsModal ? "icon-modal open" : "icon-modal"}
             />
         </>
     );

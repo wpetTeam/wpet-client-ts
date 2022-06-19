@@ -1,9 +1,9 @@
-@use 'assets/styles/_theme.scss' as theme;
-@use 'assets/styles/_common.scss' as common;
+@use "assets/styles/_theme.scss" as theme;
+@use "assets/styles/_common.scss" as common;
 
-@mixin glassmorphism {
+@mixin glassmorphism($opacity: 0.5) {
     @include common.shape(
-        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, $opacity),
         1px solid rgba(255, 255, 255, 0.37),
         4px
     );
@@ -31,7 +31,7 @@
     }
 }
 .card-container {
-    @include common.size(22%, 65%);
+    @include common.size(22%, 70%);
     @include common.shape(
         transparentize(theme.$dashboard-color, 0.5),
         1.5px solid rgba(177, 177, 177, 0.1),
@@ -53,12 +53,12 @@
     img {
         @include common.size(100%, 90%);
         border-radius: 4px;
-        transform: scale(0.9);
+        transform: scale(0.85);
     }
     p {
         @include common.size(100%, 20%);
         @include common.flex();
-        margin-bottom: 10%;
+        margin-top: -10%;
         font-size: 1.2em;
         letter-spacing: 0.2em;
     }
@@ -89,7 +89,7 @@
         .row_div_01.info {
             @include common.size(28%, 78%);
             @include common.flex-column(space-around, flex-start);
-            @include glassmorphism();
+            @include glassmorphism(0.26);
             margin-left: 5%;
             .main__item {
                 @include common.size(100%, 17%);
@@ -167,7 +167,7 @@
                         color: gray;
                         &:hover {
                             @include common.hover-event();
-                            @include glassmorphism();
+                            @include glassmorphism(0.26);
                         }
                     }
                 }
@@ -190,12 +190,13 @@
                         @include common.flex-row(flex-start, flex-start);
                         flex-wrap: wrap;
                         .item__breed {
-                            @include glassmorphism();
+                            @include glassmorphism(0.26);
                             padding: 6px;
                             margin: 0 2% 2% 0;
                             font-size: 0.8em;
                         }
                         .item__breed.update {
+                            @include common.flex-row();
                             @include common.shape(
                                 rgba(255, 255, 255, 0.25),
                                 1px solid rgba(255, 255, 255, 0.37),
@@ -204,6 +205,15 @@
                             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
                             backdrop-filter: blur(5px);
                             -webkit-backdrop-filter: blur(5px);
+                            button {
+                                @include common.size(fit-content, 100%);
+                                @include common.shape();
+                                @include common.flex();
+                                &:hover {
+                                    @include common.hover-event();
+                                    color: firebrick;
+                                }
+                            }
                         }
                     }
                     .breed-btn {
@@ -279,6 +289,84 @@
         }
         .row_div_03 {
             @include common.size(30%, 100%);
+        }
+    }
+}
+.breeds-modal-container {
+    @include common.position-fixed(20%, 40%);
+    @include common.size(400px, 280px);
+    @include common.flex-column();
+    .breed-modal-eclipse {
+        @include common.size(100%, 17%);
+        @include glassmorphism();
+        @include common.flex-row(space-between, center);
+        p {
+            margin-left: 5%;
+            font-size: 0.9em;
+        }
+        .icon-close {
+            margin-right: 5%;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.2);
+            }
+        }
+    }
+    .breed-modal-frame {
+        @include common.size(100%, 85%);
+        @include common.flex-column();
+        @include glassmorphism();
+        .col_search-bar_01 {
+            @include common.size(100%, 30%);
+            @include common.flex-row();
+            .input-search {
+                @include common.size(75%, 55%);
+                @include glassmorphism();
+                border-radius: 20px;
+                padding-left: 4%;
+                &:focus {
+                    outline: none;
+                    border: 2px solid black;
+                }
+                &::placeholder {
+                    color: black;
+                }
+            }
+            svg {
+                @include common.size(fit-content, 40%);
+                margin-left: 1.5%;
+                color: rgb(241, 241, 241);
+            }
+            .input-search:focus + svg {
+                @include common.hover-event();
+                color: black;
+            }
+        }
+        .col_result_02 {
+            @include common.size(88%, 60%);
+            @include common.flex-column(flex-start, flex-start);
+            .text-result {
+                font-size: 0.7em;
+                margin-bottom: 1%;
+            }
+            .breeds-list {
+                @include common.size(100%, fit-content);
+                @include common.flex-row(flex-start, flex-start);
+                flex-wrap: wrap;
+                overflow: auto;
+                opacity: 0.7;
+                .breed__item {
+                    @include glassmorphism();
+                    padding: 6px;
+                    margin: 1%;
+                    font-size: 0.9em;
+                    &:hover {
+                        cursor: pointer;
+                        background: rgba(128, 128, 128, 0.431);
+                        transform: scale(1.05);
+                    }
+                }
+            }
         }
     }
 }

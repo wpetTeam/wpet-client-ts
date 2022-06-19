@@ -25,14 +25,14 @@ export const handleDeleteBreed = (
     setBreed(breed.filter((item, idx) => idx !== breed.indexOf(name)));
 };
 
-/* 종 디스플레이 설정 */
-export const breedNameHandler = (name: string) => {
-    var blank_index = name.indexOf(' ');
-    if (blank_index !== -1 && name.length >= 7) {
-        return ` <>
-                {name.slice(0, blank_index)}
-                <br />
-                {name.slice(blank_index + 1)}
-            </>`;
-    } else return name;
-};
+// /* 종 디스플레이 설정 */
+// export const breedNameHandler = (name: string) => {
+//     var blank_index = name.indexOf(' ');
+//     if (blank_index !== -1 && name.length >= 7) {
+//         return ` <>
+//                 {name.slice(0, blank_index)}
+//                 <br />
+//                 {name.slice(blank_index + 1)}
+//             </>`;
+//     } else return name;
+// };
