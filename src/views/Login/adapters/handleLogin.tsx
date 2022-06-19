@@ -11,14 +11,15 @@ export const handleLogin = async (
     setErrorMsg: Dispatch<SetStateAction<errMsg>>,
     setShowsLogin: Dispatch<SetStateAction<boolean>>,
     setShowsAuth: Dispatch<SetStateAction<boolean>>,
+    navigate: Function,
 ) => {
     setAuthEmail(userData.email);
-
     await API.post('/login', userData, {
         withCredentials: true,
     })
         .then(async (res) => {
             console.log('>>> [LOGIN] ✅ SUCCESS', res.data);
+            navigate('/home');
         })
         .catch((err) => {
             console.error('>>> [LOGIN] ❌ ERROR', err);

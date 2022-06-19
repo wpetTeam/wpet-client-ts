@@ -6,7 +6,7 @@
     @include common.flex-row();
     //@include common.shape(rgba(255, 224, 215, 0.24), none, 4px);
     .row_calender_01 {
-        @include common.size(55%, 100%);
+        @include common.size(53%, 100%);
         @include common.flex-column(center, flex-start);
         .text-description {
             @include common.font(
@@ -18,10 +18,20 @@
             margin-top: -0.5%;
         }
     }
-    .row_diarys_02 {
+    .row_diary-card_02 {
         @include common.size(40%, 85%);
-        @include common.flex-row(space-around, center);
-        flex-wrap: wrap;
+        @include common.flex-column(flex-start, flex-start);
+        .row_text_01 {
+            @include common.size(fit-content, fit-content);
+            margin-left: 5%;
+            font-family: theme.$description-font;
+        }
+        .row_diarys_02 {
+            @include common.size(100%, 90%);
+            @include common.flex-row(center, flex-start);
+            margin-top: -5%;
+            flex-wrap: wrap;
+        }
     }
 }
 .write-container {

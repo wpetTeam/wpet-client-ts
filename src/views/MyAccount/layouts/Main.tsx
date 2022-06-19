@@ -12,8 +12,8 @@ export const Main = () => {
                 <Tab tab={tab} setTab={setTab} />
             </Nav>
             <Article>
-                {tab === 1 && <Account />}
-                {tab === 0 && <Schedule />}
+                {tab === 0 && <Account />}
+                {tab === 1 && <Schedule />}
             </Article>
         </Container>
     );

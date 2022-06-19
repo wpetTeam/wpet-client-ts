@@ -32,7 +32,6 @@ export const Account = () => {
     }, []);
 
     useEffect(() => {
-        console.log(userPets);
         if (user !== undefined) {
             setProfilePic(user.photo);
         }

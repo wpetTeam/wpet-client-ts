@@ -1,2 +1,4 @@
 export { createDiary } from './createDiary';
-export { getDiary } from './getDiary';
+export { getDiarys } from './getDiarys';
+export { getPetDiary } from './getPetDiary';
+export { getWritablePets } from './getWritablePets';

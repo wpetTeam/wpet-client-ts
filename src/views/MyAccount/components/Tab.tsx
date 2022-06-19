@@ -13,7 +13,7 @@ export const Tab = (props: {
                 <Icon
                     icon="material-symbols:account-circle"
                     className={
-                        props.tab === 1
+                        props.tab === 0
                             ? 'myaccount-nav select'
                             : 'myaccount-nav'
                     }
@@ -24,7 +24,7 @@ export const Tab = (props: {
                 <Icon
                     icon="ri:calendar-todo-fill"
                     className={
-                        props.tab === 0
+                        props.tab === 1
                             ? 'myaccount-nav select'
                             : 'myaccount-nav'
                     }

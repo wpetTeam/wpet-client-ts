@@ -13,8 +13,7 @@
         top: 120%;
         left: -140%;
         flex-wrap: wrap;
-
-        background: white;
+        z-index: 100000;
         .btn__item {
             @include common.size(25px, 25px);
             @include common.shape(rgb(252, 244, 245), transparent, 2px);
@@ -22,7 +21,8 @@
             font-size: 0.8em;
             &:hover {
                 cursor: pointer;
-                background: theme.$main-color;
+                background: theme.$dark-gray-color;
+                color: whitesmoke;
             }
         }
     }

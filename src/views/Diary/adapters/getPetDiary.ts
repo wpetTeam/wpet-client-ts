@@ -1,8 +1,8 @@
-import { API } from 'services';
 import { Dispatch, SetStateAction } from 'react';
+import { API } from 'services';
 import { Diary } from 'models';
 
-export const getDiary = async (
+export const getPetDiary = async (
     petID: number,
     setDiary: Dispatch<SetStateAction<Array<Diary>>>,
 ) => {
@@ -10,8 +10,8 @@ export const getDiary = async (
         withCredentials: true,
     })
         .then((res) => {
-            console.log('>>> [DIARY CREATE] ✅ SUCCESS');
+            console.log('>>> [DIARY GET] ✅ SUCCESS');
             setDiary((old) => [...old, res.data.result]);
         })
-        .catch((err) => console.log('>>> [DIARY CREATE] ❌ ERROR', err));
+        .catch((err) => console.log('>>> [DIARY GET] ❌ ERROR', err));
 };

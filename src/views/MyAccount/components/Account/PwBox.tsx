@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Box } from '.';
+import { updatePw as handleUpdatePw } from 'views/MyAccount/adapters';
 import 'views/MyAccount/styles/boxs.style.scss';
 
 export const PwBox = ({ updatePw, setUpdatePw }) => {
@@ -38,6 +39,7 @@ export const PwBox = ({ updatePw, setUpdatePw }) => {
                     <div className="col_input_02 origin-pw">
                         <label>기존 비밀번호</label>
                         <input
+                            type="password"
                             name="origin"
                             value={pwData.origin}
                             onChange={handleChange}
@@ -46,6 +48,7 @@ export const PwBox = ({ updatePw, setUpdatePw }) => {
                     <div className="col_input_03 new-pw">
                         <label>새로운 비밀번호</label>
                         <input
+                            type="password"
                             name="new"
                             value={pwData.new}
                             onChange={handleChange}
@@ -54,6 +57,7 @@ export const PwBox = ({ updatePw, setUpdatePw }) => {
                     <div className="col_input_04 new-pw-confirm">
                         <label>새로운 비밀번호 확인</label>
                         <input
+                            type="password"
                             name="newConfirm"
                             value={pwData.newConfirm}
                             onChange={handleChange}
@@ -65,7 +69,7 @@ export const PwBox = ({ updatePw, setUpdatePw }) => {
                             <button
                                 className="col_btn_05"
                                 onClick={() =>
-                                    updatePw(
+                                    handleUpdatePw(
                                         pwData.origin,
                                         pwData.new,
                                         setUpdatePw,

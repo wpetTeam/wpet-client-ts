@@ -1,23 +1,7 @@
 @use 'assets/styles/_theme.scss';
 @use 'assets/styles/_common.scss' as common;
 @import url('https://fonts.googleapis.com/css?family=Titan+One');
-@mixin glassmorphism {
-    @include common.shape(
-        rgba(255, 255, 255, 0.25),
-        1px solid rgba(255, 255, 255, 0.37),
-        4px
-    );
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-@mixin animation($width, $height, $color, $top, $left) {
-    @include common.size($width, $height);
-    background: transparentize($color, 0.5);
-    top: $top;
-    left: $left;
-}
-// Calender
+
 .calendar {
     @include common.size(100%, 90%);
     .header {
@@ -75,26 +59,33 @@
             .col {
                 @include common.size(13.5%, 93%);
                 @include common.flex-row(flex-start, flex-start);
-
                 border: 0.4px solid transparentize(gray, 0.4);
                 border-radius: 3px;
                 font-size: 0.8em;
                 span {
                     margin: 4px 0 0 4px;
+                    z-index: 10000;
+                    font-weight: 700;
                 }
                 .not-valid {
                     color: theme.$gray-color;
                 }
-                img {
-                    opacity: 0.1;
+                .img {
+                    @include common.size(100%, 100%);
+                    margin: 0% 0 0 -17%;
+                    border-radius: 2px;
+                }
+                .img-undefined {
+                    @include common.size(80%, 80%);
+                    margin: 10% 0 0 -4%;
+                    opacity: 0.2;
                 }
             }
             .col.cell.valid {
                 &:hover {
                     @include common.hover-event();
-                    @include common.shadow(1.5px, theme.$dark-gray-color, 0.1);
-                    transform: scale(1.01);
-                    border: none;
+                    @include common.shadow(2px, theme.$dark-gray-color, 0.1);
+                    transform: scale(1.02);
                     background: transparentize(theme.$gray-color, 0.5);
                 }
             }
@@ -110,27 +101,29 @@
     }
 }
 .diary-card {
-    @include common.size(50%, 50%);
+    @include common.size(40%, 50%);
     @include common.flex-row();
     margin: 2%;
     div {
         @include common.size(100%, 90%);
         @include common.flex();
-
         svg {
             @include common.size(100%, fit-content);
         }
     }
     div:nth-child(1) {
+        h1 {
+            @include common.font(#6d3a2ad2, 'Titan One', 1em, 300);
+            position: absolute;
+            text-align: center;
+            margin: -3% 0 0 -1%;
+            span {
+                font-size: 1.6em;
+                color: #783e2d;
+            }
+        }
         svg {
             color: theme.$step-color;
-        }
-        img {
-            @include common.shape(none, 1px dashed theme.$dark-step-color, 20%);
-            position: absolute;
-            width: 8.5%;
-            margin-top: -3%;
-            opacity: 0.8;
         }
     }
     div:nth-child(2) {
@@ -138,47 +131,24 @@
         svg {
             color: theme.$dark-step-color;
         }
-        div {
+        .img-container {
+            @include common.flex();
             position: absolute;
-            display: block;
-        }
-        .container {
-            @include common.size(19%, 23%);
-            position: absolute;
-            transform: translate(-50%, -50%);
-            margin: -8% 0 0 9.2%;
-            font-size: 0.65em;
-            h1 {
-                text-align: center;
-                margin-top: 15%;
-                font-family: 'Titan One', cursive;
-                span {
-                    font-size: 1.8em;
-                    font-family: 'Cafe24Ssurround', cursive;
-                }
-            }
-            .blobs_1 {
-                @include animation(30%, 50%, #ff1493, 40%, 50%);
-            }
-            .blobs_3 {
-                @include animation(45%, 60%, #00ff00, 20%, 30%);
-            }
-            .blobs_4 {
-                @include animation(20%, 40%, #ff0000, 20%, 20%);
-            }
-            .blobs_5 {
-                @include animation(30%, 40%, #ffff00, 20%, 50%);
-            }
-            .blobs_6 {
-                @include animation(30%, 40%, #00ffff, 50%, 25%);
-            }
-            .blobs_7 {
-                @include animation(25%, 40%, #ffffff, 10%, 35%);
+            width: 9%;
+            margin-top: -10.5%;
+
+            img {
+                width: 95%;
+                border-radius: 50%;
+                box-shadow: 0 4px 50px rgba(239, 239, 239, 0.911);
+                animation: blobs 7s ease-in-out infinite alternate;
             }
         }
-        [class*='blobs'] {
-            mix-blend-mode: color;
-            animation: blobs 15s ease-in-out infinite alternate;
+        .text-more {
+            margin-top: -5%;
+            text-align: center;
+            font-family: theme.$description-font;
+            color: theme.$dark-step-color;
         }
         &:hover {
             @include common.hover-event();

@@ -1,6 +1,7 @@
 export type petID = {
     petID: number;
     name: string;
+    photo?: string;
 };
 
 export type newPet = {

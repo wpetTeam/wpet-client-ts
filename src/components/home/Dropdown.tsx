@@ -4,20 +4,19 @@ import './Dropdown.style.scss';
 
 export const Dropdown = () => {
     const navigate = useNavigate();
-
     const logoutHandler = async () => {
-        await API.get('/user/logout', {
+        await API.post('/logout', {
             withCredentials: true,
         })
-            .then((res) => console.log('>>> [LOGOUT] ✅ SUCCESS', res.data))
-            .catch((err) => console.log('>>> [LOGOUT] ❌ ERROR', err.message));
-        navigate('/');
+            .then((res) => {
+                console.log('>>> [LOGOUT] ✅ SUCCESS', res);
+                navigate('/');
+            })
+            .catch((err) => console.log('>>> [LOGOUT] ❌ ERROR', err));
     };
-
     const myAccountHandler = () => {
-        navigate('/mypage');
+        navigate('/my-account');
     };
-
     return (
         <div className="dropdown-list">
             <button className="dropdown__item" onClick={myAccountHandler}>

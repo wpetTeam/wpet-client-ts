@@ -1,4 +1,5 @@
 import { useState, useEffect, FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'assets/styles/theme';
 import { Header } from 'components/modal/Header';
@@ -10,8 +11,11 @@ import { User } from 'models';
 import './styles/services.style.scss';
 
 export const Login: FC<LProps> = (props: LProps) => {
+    let navigate = useNavigate();
     const [user, setUser] = useState<User>({ email: '', pw: '' });
     const [errorMsg, setErrorMsg] = useState<errMsg>({ email: '', pw: '' });
+
+    console.log(typeof navigate);
 
     function handleChange(e) {
         const value = e.target.value;
@@ -26,7 +30,6 @@ export const Login: FC<LProps> = (props: LProps) => {
             pw: '',
         });
     }, [user.email, user.pw]);
-
     const handleLoginBtn = () => {
         const userData: User = {
             email: user.email,
@@ -39,6 +42,7 @@ export const Login: FC<LProps> = (props: LProps) => {
             setErrorMsg,
             props.setShowsLogin,
             props.setShowsAuth,
+            navigate,
         );
     };
     const handleSignupBtn = () => {

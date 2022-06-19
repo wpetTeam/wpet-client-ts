@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
 import { Icon } from '@iconify/react';
 import { Weather, Today, Content, Picture, CustomNav } from '../components';
 import { newDiary, petID } from 'models';
-import { getUserPets } from 'adapters';
-import { createDiary } from '../adapters';
+import { createDiary, getWritablePets } from '../adapters';
 import '../styles/services.style.scss';
 import '../styles/write.style.scss';
 
 export const WriteDiary = () => {
+    let navigate = useNavigate();
     const [selectColor, setSelectColor] = useState(false);
     const [userPets, setUserPets] = useState<Array<petID>>([]);
+
     useEffect(() => {
-        getUserPets(setUserPets);
+        getWritablePets(setUserPets);
     }, []);
 
     const [weather, setWeather] = useState('');
@@ -23,11 +25,9 @@ export const WriteDiary = () => {
     const [petIDs, setPetIDs] = useState<Array<number>>([]);
 
     const handlePostBtn = async () => {
-        if (userPets.length === 1) {
-            setPetIDs([...petIDs, userPets[0].petID]);
-        }
+        console.log(userPets[0].petID);
         const diaryData: newDiary = {
-            petIDs: petIDs,
+            petIDs: userPets.length === 1 ? [userPets[0].petID] : petIDs,
             title: title,
             photo: picture,
             texts: content,
@@ -38,8 +38,7 @@ export const WriteDiary = () => {
             font: 'Pretendard',
             hashTags: ['pet'],
         };
-        console.log(diaryData);
-        createDiary(diaryData);
+        createDiary(diaryData, navigate);
     };
 
     return (
