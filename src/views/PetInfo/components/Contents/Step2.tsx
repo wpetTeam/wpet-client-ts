@@ -1,13 +1,11 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import uuid from "react-uuid";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IoPawSharp, IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Button";
-import { BreedPicker } from "../BreedPicker";
-import { handleDeleteBreed } from "../BreedPicker/handlePicker";
 import { PetInfo } from "views/PetInfo/models";
-import { SelectItem } from "../BreedPicker/BreedModal";
-import { PetBreedModal } from "../PetBreedModal";
+import { BreedsModal, handleDeleteBreed, BreedPicker } from "../BreedPicker";
 import "views/PetInfo/styles/components.style.scss";
 
 export const Step2 = (props: {
@@ -69,7 +67,7 @@ export const Step2 = (props: {
                 )}
             </div>
             {showsBreeds && (
-                <PetBreedModal
+                <BreedsModal
                     selectBreed={selectBreed}
                     setSelectBreed={setSelectBreed}
                     setShowsBreeds={setShowsBreeds}
@@ -111,3 +109,24 @@ function SelectBreedList({ handleDeleteBreed, selectBreed, setSelectBreed }) {
         </>
     );
 }
+
+export const SelectItem = styled.div`
+    display:flex;
+    flex-direction: row;
+    
+    width: fit-content:
+    height: fit-content;
+
+    padding: 1.5%;
+    margin-right: 1.5%;
+    margin-bottom: 1%;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background: #f3c5b680;
+    border-radius: 4px;
+
+    font-size: 0.8em;
+    font-weight: 600;
+`;

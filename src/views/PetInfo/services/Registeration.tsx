@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getBreeds } from '../adapters/getBreeds';
-import { Content } from '../components/Contents';
-import { Step } from '../components/Steps';
-import '../styles/services.style.scss';
+import { Header } from "components/home/Header";
+import React, { useEffect, useState } from "react";
+import { getBreeds } from "../adapters/getBreeds";
+import { Content } from "../components/Contents";
+import { Step } from "../components/Steps";
+import "../styles/layouts.style.scss";
+import "../styles/services.style.scss";
 
 export const Registeration = () => {
     const [step, setStep] = useState(1);

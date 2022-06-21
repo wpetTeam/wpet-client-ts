@@ -1,9 +1,10 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { WriteDiary } from 'views/Diary/services';
-import { Schedule } from 'views/MyAccount/services';
-import { Registeration } from 'views/PetInfo/services';
-import { About, Home, PetInfo, Community, MyAccount, Diary } from './views';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { ReadDiary, WriteDiary } from "views/Diary/services";
+import { DiaryFeed } from "views/Diary/services/DiaryFeed";
+import { Schedule } from "views/MyAccount/services";
+import { Checkup, Registeration } from "views/PetInfo/services";
+import { About, Home, PetInfo, Community, MyAccount, Diary } from "./views";
 
 const App = () => {
     return (
@@ -11,16 +12,20 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<About />} />
                 <Route path="home" element={<Home />} />
-                <Route path="diary" element={<Diary />}>
+                <Route path="diarys" element={<Diary />}>
+                    <Route path="read" element={<ReadDiary />}></Route>
                     <Route path="write" element={<WriteDiary />} />
                 </Route>
-                <Route path="pet-info/*" element={<PetInfo />}></Route>
-                <Route
-                    path="registeration/step-1"
-                    element={<Registeration />}
-                />
+                <Route path="diary/:petId" element={<DiaryFeed />} />
+                <Route path="/pet" element={<PetInfo />}>
+                    <Route path="info" element={<Checkup />} />
+                    <Route
+                        path="registeration/step-1"
+                        element={<Registeration />}
+                    />
+                </Route>
                 <Route path="community" element={<Community />} />
-                <Route path="my-account" element={<MyAccount />}>
+                <Route path="user" element={<MyAccount />}>
                     <Route path="schedule" element={<Schedule />} />
                 </Route>
             </Routes>

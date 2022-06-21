@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import uuid from 'react-uuid';
-import IMAGE from 'assets/images/Character/yello-img.png';
-import { getUserPets } from 'adapters';
-import { petID } from 'models';
-import { PetCard } from '../components/PetCard';
-import '../styles/services.style.scss';
+import { useEffect, useState } from "react";
+import uuid from "react-uuid";
+import IMAGE from "assets/images/Character/yello-img.png";
+import { getUserPets } from "adapters";
+import { petID } from "models";
+import { PetCard } from "../components/PetCard";
+import "../styles/services.style.scss";
 
 export const Checkup = () => {
     const [pets, setPets] = useState<Array<petID>>([]);

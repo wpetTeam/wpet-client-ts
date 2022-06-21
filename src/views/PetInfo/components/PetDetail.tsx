@@ -3,12 +3,11 @@ import uuid from "react-uuid";
 import { Icon } from "@iconify/react";
 import EMPTY_IMAGE from "assets/images/Character/common-character.png";
 import { Pet } from "models";
+import { removePicture, uploadPicture } from "utils";
 import { DatePicker } from "./DatePicker";
 import { Input } from "./Input";
 import { updatePet, deletePet, getPet } from "../adapters";
-import { removePicture, uploadPicture } from "utils";
-import { handleDeleteBreed } from "./BreedPicker/handlePicker";
-import { PetBreedModal } from "./PetBreedModal";
+import { BreedsModal, handleDeleteBreed } from "./BreedPicker";
 import "../styles/components.style.scss";
 
 export const PetDetail = (props: {
@@ -280,7 +279,7 @@ export const PetDetail = (props: {
                 <div className="row_div_03">그 외 정보</div>
             </div>
             {showsBreeds && (
-                <PetBreedModal
+                <BreedsModal
                     selectBreed={selectBreed}
                     setSelectBreed={setSelectBreed}
                     setShowsBreeds={setShowsBreeds}

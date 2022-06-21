@@ -1,5 +1,5 @@
-@use 'assets/styles/_theme.scss';
-@use 'assets/styles/_common.scss' as common;
+@use "assets/styles/_theme.scss";
+@use "assets/styles/_common.scss" as common;
 
 .read-container {
     @include common.size(100%, 95%);
@@ -160,6 +160,164 @@
                 @include common.shadow(2px, theme.$main-color, 0.2);
                 border: 2.5px solid theme.$main-color;
                 font-weight: 600;
+            }
+        }
+    }
+}
+.feed-container {
+    @include common.size(100%, 100%);
+    .feed-main {
+        @include common.size(100%, 90%);
+        @include common.flex-row();
+        .row_profile_01 {
+            @include common.size(30%, 100%);
+            @include common.flex();
+            .div-frame {
+                @include common.size(70%, 75%);
+                @include common.flex-column(flex-start, center);
+                border-radius: 10px;
+                margin-top: -10%;
+                border: 1px solid lightgray;
+                img {
+                    @include common.size(100%, fit-content);
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    z-index: -100;
+                }
+                .div-info {
+                    @include common.size(70%, 18%);
+                    @include common.flex-column(flex-start, center);
+                    @include common.shape(whitesmoke, none, 20px);
+                    z-index: 10000;
+                    margin-top: -15%;
+                    box-shadow: 5px 5px 10px -4px #b2b2b2;
+                    font-family: theme.$english-font;
+                    .text-name {
+                        font-size: 1.5em;
+                        font-weight: 800;
+                        margin-top: 5%;
+                    }
+                    .div-details {
+                        @include common.size(100%, 100%);
+                        @include common.flex-row();
+                        margin-top: -12%;
+                        div {
+                            width: 1px;
+                            height: 25%;
+                            background: black;
+                            margin-right: 4%;
+                        }
+                        p {
+                            font-size: 0.85em;
+                            margin-right: 2%;
+                            padding-right: 2%;
+                        }
+                    }
+                }
+                .diary-info {
+                    @include common.size(80%, 100%);
+                    @include common.flex-row();
+                    .diary__item {
+                        @include common.flex-column();
+                        @include common.size(50%, 70%);
+                        font-size: 0.85em;
+                        font-family: theme.$english-font;
+                        color: rgba(0, 0, 0, 0.59);
+                        p {
+                            color: theme.$dark-step-color;
+                            margin-top: -1%;
+                            font-size: 1.1em;
+                            margin-bottom: 15%;
+                            text-shadow: 2px 2px 1px #ffe1e1;
+                            font-family: Impact, Haettenschweiler,
+                                "Arial Narrow Bold", sans-serif;
+                        }
+                        svg {
+                            @include common.size(30%, fit-content);
+                            margin-bottom: 10%;
+                        }
+                    }
+                }
+            }
+        }
+        .row_diarys_02 {
+            @include common.size(70%, 100%);
+            @include common.flex-column(flex-start, center);
+            .tab-container {
+                @include common.size(100%, 8%);
+                @include common.flex-row();
+                .btn-tab {
+                    @include common.size(fit-content, 50%);
+                    @include common.shape(none, none, 5px);
+                    @include common.flex-row();
+                    margin-left: 1%;
+                    padding: 12px;
+                    color: transparentize(theme.$main-color, 0.5);
+                    font-family: theme.$description-font;
+                    svg {
+                        @include common.size(25px, 20 px);
+                        margin-right: 8%;
+                    }
+                    &:hover {
+                        @include common.hover-event();
+                    }
+                }
+                .btn-tab:hover,
+                .btn-tab.selected {
+                    background: rgba(230, 230, 230, 0.61);
+                    font-weight: 800;
+                    color: theme.$main-color;
+                }
+            }
+            .diarys-list {
+                @include common.size(90%, 85%);
+                @include common.flex-row(flex-start, flex-start);
+                flex-wrap: wrap;
+                overflow: auto;
+                .figure-img {
+                    @include common.size(31%, 48%);
+                    margin: 0.5%;
+                    .img-origin {
+                        @include common.size(100%, 100%);
+                    }
+                    .text-title {
+                        @include common.size(96%, 96%);
+                        @include common.flex();
+                        padding: 2%;
+                        background: whitesmoke;
+                    }
+                    &:hover {
+                        @include common.hover-event();
+                        transform: scale(1.02);
+                    }
+                }
+            }
+            .texts-list {
+                @include common.size(80%, 85%);
+                @include common.flex-column(flex-start, center);
+                .texts__item {
+                    @include common.size(86%, fit-content);
+                    margin-bottom: 0.6%;
+                    padding: 0 0 1% 2%;
+                    border: 1px solid transparentize(theme.$main-color, 0.8);
+                    border-radius: 4px;
+                    .text-title {
+                        font-weight: 800;
+                        font-size: 1.1em;
+                    }
+                    .text-date {
+                        @include common.flex-row(flex-start, center);
+                        font-size: 0.75em;
+                        margin-top: -1.5%;
+                        svg {
+                            margin-right: 0.5%;
+                        }
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        background: transparentize(theme.$main-color, 0.8);
+                    }
+                }
             }
         }
     }

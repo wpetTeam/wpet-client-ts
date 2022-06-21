@@ -1,23 +1,23 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Step1 } from './Step1';
-import { Step2 } from './Step2';
-import { Step3 } from './Step3';
-import { PetInfo } from 'views/PetInfo/models';
-import 'views/PetInfo/styles/contents.style.scss';
+import { Dispatch, SetStateAction, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Step1 } from "./Step1";
+import { Step2 } from "./Step2";
+import { Step3 } from "./Step3";
+import { PetInfo } from "views/PetInfo/models";
+import "views/PetInfo/styles/contents.style.scss";
 
 export const Content = (props: {
     step: number;
     setStep: Dispatch<SetStateAction<number>>;
     breeds: Array<string>;
 }) => {
-    const [picture, setPicture] = useState('');
+    const [picture, setPicture] = useState("");
     const [petInfo, setPetInfo] = useState<PetInfo>({
-        name: '',
-        gender: '',
-        year: '',
-        month: '',
-        date: '',
+        name: "",
+        gender: "",
+        year: "",
+        month: "",
+        date: "",
         breed: [],
     });
 

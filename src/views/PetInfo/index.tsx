@@ -1,6 +1,6 @@
-import { Header } from 'components/home/Header';
-import { Main } from './layouts/Main';
-import './styles/layouts.style.scss';
+import { Header } from "components/home/Header";
+import { Main } from "./layouts/Main";
+import "./styles/layouts.style.scss";
 
 const PetInfo = () => {
     return (

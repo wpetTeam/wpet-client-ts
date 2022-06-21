@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
-import uuid from 'react-uuid';
-import { handleBreedPicker } from './handlePicker';
-import 'views/PetInfo/styles/breed_picker.style.scss';
+import { Dispatch, SetStateAction } from "react";
+import uuid from "react-uuid";
+import { handleBreedPicker } from "./handlePicker";
+import "views/PetInfo/styles/breed_picker.style.scss";
 
 export const BreedPicker = (props: {
     breeds: Array<string>;
@@ -16,8 +16,8 @@ export const BreedPicker = (props: {
                         <button
                             className={
                                 props.selectBreed.includes(item)
-                                    ? 'btn-select selected'
-                                    : 'btn-select'
+                                    ? "btn-select selected"
+                                    : "btn-select"
                             }
                             key={uuid()}
                             onClick={() =>
@@ -50,4 +50,5 @@ export const BreedPicker = (props: {
     );
 };
 
-export { BreedModal } from './BreedModal';
+export { BreedsModal } from "./BreedsModal";
+export { handleBreedPicker, handleDeleteBreed } from "./handlePicker";

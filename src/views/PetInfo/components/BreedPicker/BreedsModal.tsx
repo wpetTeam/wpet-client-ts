@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { getBreeds } from "../adapters";
-import { handleBreedPicker } from "./BreedPicker/handlePicker";
-import "../styles/components.style.scss";
+import { getBreeds } from "../../adapters";
+import { handleBreedPicker } from "./handlePicker";
+import "views/PetInfo/styles/components.style.scss";
 
-export const PetBreedModal = (props: {
+export const BreedsModal = (props: {
     selectBreed: Array<string>;
     setSelectBreed: Dispatch<SetStateAction<Array<string>>>;
     setShowsBreeds: Dispatch<SetStateAction<boolean>>;
