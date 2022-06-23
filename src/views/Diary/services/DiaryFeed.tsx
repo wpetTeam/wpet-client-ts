@@ -5,12 +5,16 @@ import styled from "styled-components";
 import { Diary, Pet } from "models";
 import { Header } from "components/home/Header";
 import { API } from "services";
+import { DiaryModal } from "../components/Read/DiaryModal";
 
 export const DiaryFeed = () => {
     let params = useParams();
     const [tab, setTab] = useState(0);
     const [diarys, setDiarys] = useState<Array<Diary>>([]);
     const [pet, setPet] = useState<Pet>();
+    const [showsDetail, setShowsDetail] = useState(false);
+    const [diaryId, setDiaryId] = useState(0);
+    const [color, setColor] = useState<string>("#ffffff");
     const petId = params.petId;
 
     useEffect(() => {
@@ -34,6 +38,25 @@ export const DiaryFeed = () => {
         getPet();
     }, []);
 
+    const handleModal = (item: Diary, isColor?: boolean) => {
+        setDiaryId(item.diaryID);
+        setShowsDetail(!showsDetail);
+        if (isColor) setColor(item.color);
+        else setColor("#ffffff");
+    };
+
+    function getAge(birthDate: any) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        var age = today.getFullYear() - birth.getFullYear();
+        var m = today.getMonth() - birth.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
     return (
         <div className="feed-container">
             <Header />
@@ -44,7 +67,7 @@ export const DiaryFeed = () => {
                         <div className="div-info">
                             <p className="text-name">{pet?.name}</p>
                             <div className="div-details">
-                                <p>{pet?.birthDate}</p>
+                                <p>{getAge(pet?.birthDate)}yrs</p>
                                 <div></div>
                                 <p>
                                     {pet?.gender === "남" ? "male" : "female"}
@@ -55,12 +78,11 @@ export const DiaryFeed = () => {
                             <div className="diary__item">
                                 <Icon
                                     icon="bxs:book-heart"
-                                    style={{ color: "lightsteelblue" }}
+                                    style={{ color: "#aa5b42" }}
                                 />
-                                {diarys.length}
-                            </div>
-                            <div className="diary__item">
-                                <p>2022</p>
+                                <span style={{ color: "#aa5b42" }}>
+                                    Diarys{"   "}
+                                </span>
                                 {diarys.length}
                             </div>
                             <div className="diary__item">
@@ -68,6 +90,9 @@ export const DiaryFeed = () => {
                                     icon="jam:medal-f"
                                     style={{ color: "silver" }}
                                 />
+                                <span style={{ color: "silver" }}>
+                                    Level{"   "}
+                                </span>
                                 {pet?.level}
                             </div>
                         </div>
@@ -82,16 +107,7 @@ export const DiaryFeed = () => {
                             onClick={() => setTab(0)}
                         >
                             <Icon icon="fa6-solid:border-all" />
-                            All
-                        </button>
-                        <button
-                            className={
-                                tab === 1 ? "btn-tab selected" : "btn-tab"
-                            }
-                            onClick={() => setTab(1)}
-                        >
-                            <Icon icon="ic:baseline-photo-camera" />
-                            Photo
+                            Grid
                         </button>
                         <button
                             className={
@@ -100,7 +116,7 @@ export const DiaryFeed = () => {
                             onClick={() => setTab(2)}
                         >
                             <Icon icon="carbon:text-align-justify" />
-                            Texts
+                            List
                         </button>
                         <button
                             className={
@@ -115,7 +131,10 @@ export const DiaryFeed = () => {
                     {tab === 2 ? (
                         <div className="texts-list">
                             {diarys.map((item) => (
-                                <div className="texts__item">
+                                <div
+                                    className="texts__item"
+                                    onClick={() => handleModal(item, false)}
+                                >
                                     <p className="text-title">{item.title}</p>
                                     <p className="text-date">
                                         <Icon icon="ant-design:calendar-twotone" />
@@ -126,19 +145,12 @@ export const DiaryFeed = () => {
                         </div>
                     ) : (
                         <div className="diarys-list">
-                            {/* {tab === 0 &&
-                            Array.from({ length: 10 }).map((item) => (
-                                <figure className="figure-img">
-                                    <img
-                                        className="img-origin"
-                                        src=""
-                                        alt="diary feed"
-                                    />
-                                </figure>
-                            ))} */}
                             {tab === 0 &&
                                 diarys.map((item) => (
-                                    <figure className="figure-img">
+                                    <figure
+                                        className="figure-img"
+                                        onClick={() => handleModal(item, false)}
+                                    >
                                         {item.photo ? (
                                             <img
                                                 className="img-origin"
@@ -168,7 +180,10 @@ export const DiaryFeed = () => {
 
                             {tab === 3 &&
                                 diarys.map((item) => (
-                                    <figure className="figure-img">
+                                    <figure
+                                        className="figure-img"
+                                        onClick={() => handleModal(item, true)}
+                                    >
                                         {item.photo ? (
                                             <ThemeImg
                                                 src={item.photo}
@@ -185,6 +200,14 @@ export const DiaryFeed = () => {
                         </div>
                     )}
                 </div>
+                {showsDetail && (
+                    <DiaryModal
+                        petId={petId}
+                        diaryId={diaryId}
+                        setShowsDetail={setShowsDetail}
+                        color={color}
+                    />
+                )}
             </div>
         </div>
     );

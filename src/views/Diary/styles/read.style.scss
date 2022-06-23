@@ -1,6 +1,17 @@
-@use 'assets/styles/_theme.scss';
-@use 'assets/styles/_common.scss' as common;
-@import url('https://fonts.googleapis.com/css?family=Titan+One');
+@use "assets/styles/_theme.scss";
+@use "assets/styles/_common.scss" as common;
+@import url("https://fonts.googleapis.com/css?family=Titan+One");
+
+@mixin glassmorphism() {
+    @include common.shape(
+        rgba(255, 255, 255, 0.5),
+        1px solid rgba(255, 255, 255, 0.227),
+        20px
+    );
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
 
 .calendar {
     @include common.size(100%, 90%);
@@ -113,7 +124,7 @@
     }
     div:nth-child(1) {
         h1 {
-            @include common.font(#6d3a2ad2, 'Titan One', 1em, 300);
+            @include common.font(#6d3a2ad2, "Titan One", 1em, 300);
             position: absolute;
             text-align: center;
             margin: -3% 0 0 -1%;
@@ -163,7 +174,6 @@
     transition: 0.9s;
     display: block;
 }
-
 @keyframes blobs {
     0% {
         border-radius: 26% 74% 61% 39% / 54% 67% 33% 46%;
@@ -197,5 +207,86 @@
     }
     100% {
         border-radius: 66% 34% 33% 67% / 65% 73% 27% 35%;
+    }
+}
+
+.diary-detail {
+    @include common.size(70%, 90%);
+    @include common.flex-column(flex-start, flex-start);
+    position: fixed;
+    z-index: 10000;
+    padding: 1%;
+    margin-left: 22%;
+    overflow: auto;
+    .modal-header {
+        @include common.size(100%, 2%);
+        @include common.flex-row(flex-start, center);
+        svg {
+            margin-left: 0.5%;
+            &:hover {
+                @include common.hover-event();
+                transform: scale(1.05);
+            }
+        }
+        .btn-close {
+            @include common.size(23px, 23px);
+            color: rgb(162, 162, 162);
+            &:hover {
+                color: dimgray;
+            }
+        }
+        .btn-delete {
+            @include common.size(17px, 17px);
+            @include common.shape(theme.$dark-step-color, none, 50%);
+            color: rgb(249, 252, 203);
+            padding: 2px;
+            &:hover {
+                color: theme.$main-color;
+            }
+        }
+        .btn-select {
+            @include common.size(22px, 22px);
+            &:hover {
+                color: firebrick;
+            }
+        }
+    }
+
+    .modal-main {
+        @include common.size(100%, 80%);
+        @include common.flex-row();
+        margin-top: 2%;
+        .row_left_img {
+            @include common.size(48%, 100%);
+            @include common.flex();
+            img {
+                @include common.size(82%, fit-content);
+            }
+        }
+        .row_right_text {
+            @include common.size(48%, 85%);
+            @include common.flex-column(flex-start, flex-start);
+            font-family: theme.$english-font;
+            .text-title {
+                font-size: 1.8em;
+                margin-bottom: 1%;
+            }
+            .div-date {
+                @include common.size(80%, fit-content);
+                @include common.flex-row(space-between, center);
+
+                svg {
+                    margin-right: 1%;
+                }
+                .text-weather {
+                    @include common.size(40%, fit-content);
+                }
+            }
+
+            .text-content {
+                letter-spacing: 0.05em;
+                font-size: 1.1em;
+            }
+        }
     }
 }

@@ -90,7 +90,7 @@
             @include common.size(28%, 78%);
             @include common.flex-column(space-around, flex-start);
             @include glassmorphism(0.26);
-            margin-left: 5%;
+            margin-left: 2%;
             .main__item {
                 @include common.size(100%, 17%);
                 @include common.flex-column(flex-start, flex-start);
@@ -247,7 +247,7 @@
             }
         }
         .row_img_02 {
-            @include common.size(40%, 100%);
+            @include common.size(38%, 100%);
             @include common.flex-column();
             .img-picture {
                 @include common.size(70%, fit-content);
@@ -288,7 +288,12 @@
             }
         }
         .row_div_03 {
-            @include common.size(30%, 100%);
+            @include common.size(30%, 90%);
+            @include common.flex-column(space-between, center);
+            div {
+                @include common.size(90%, 30%);
+                @include glassmorphism();
+            }
         }
     }
 }

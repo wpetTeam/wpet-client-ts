@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { format, addMonths, subMonths, startOfWeek, addDays } from "date-fns";
 import { endOfWeek, isSameDay, isSameMonth } from "date-fns";
-import { startOfMonth, endOfMonth } from "date-fns";
+import { startOfMonth, endOfMonth, subDays } from "date-fns";
 import uuid from "react-uuid";
 import { Icon } from "@iconify/react";
 import EMPTY_IMAGE from "assets/images/Character/stamp.png";
@@ -38,9 +38,9 @@ const RenderDays = () => {
     return <div className="days row">{days}</div>;
 };
 const RenderCells = ({ currentMonth, selectedDate, diarys }) => {
-    const monthStart = startOfMonth(currentMonth);
+    var monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
-    const startDate = startOfWeek(monthStart);
+    var startDate = startOfWeek(monthStart);
     const endDate = endOfWeek(monthEnd);
 
     const rows: any[] = [];

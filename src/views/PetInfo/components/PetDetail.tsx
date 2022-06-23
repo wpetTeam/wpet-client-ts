@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import uuid from "react-uuid";
+import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import EMPTY_IMAGE from "assets/images/Character/common-character.png";
 import { Pet } from "models";
@@ -94,8 +95,18 @@ export const PetDetail = (props: {
         updatePet(props.petID, updateData, setIsUpdate);
     };
 
+    const variants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
+    };
+
     return (
-        <div className="detail-container">
+        <motion.div
+            className="detail-container"
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+        >
             <button
                 className="detail-eclipse"
                 onClick={() => props.setShowsDetail(false)}
@@ -276,7 +287,11 @@ export const PetDetail = (props: {
                         </button>
                     )}
                 </div>
-                <div className="row_div_03">그 외 정보</div>
+                <div className="row_div_03 col">
+                    <div className="col_shower_01"> Shower Information</div>
+                    <div className="col_grooming_02">Grooming Information</div>
+                    <div className="col_hospital_03">Hospital Information</div>
+                </div>
             </div>
             {showsBreeds && (
                 <BreedsModal
@@ -285,6 +300,6 @@ export const PetDetail = (props: {
                     setShowsBreeds={setShowsBreeds}
                 />
             )}
-        </div>
+        </motion.div>
     );
 };
