@@ -19,8 +19,8 @@ export const PetDetail = (props: {
     const [updateInfo, setUpdateInfo] = useState<any>([]);
     const [isUpdate, setIsUpdate] = useState(false);
     const [isGenderUpdate, setIsGenderUpdate] = useState(false);
-    const [month, setMonth] = useState<string>("");
-    const [date, setDate] = useState<string>("");
+    const [month, setMonth] = useState<number>(0);
+    const [date, setDate] = useState<number>(0);
     const [gender, setGender] = useState<string>();
     const [picture, setPicture] = useState<string>("");
     const [selectBreed, setSelectBreed] = useState<Array<string>>([]);
@@ -44,8 +44,8 @@ export const PetDetail = (props: {
                 date: birth[2],
                 gender: info.gender,
             });
-            setMonth(birth[1]);
-            setDate(birth[2]);
+            setMonth(parseInt(birth[1]));
+            setDate(parseInt(birth[2]));
             setGender(info.gender);
             setSelectBreed(info.breeds);
             if (info.photo === null) setPicture(EMPTY_IMAGE);

@@ -2,7 +2,7 @@ export type PetInfo = {
     name: string;
     gender: string;
     year: string;
-    month: string;
-    date: string;
+    month: number | null;
+    date: number | null;
     breed: Array<string>;
 };

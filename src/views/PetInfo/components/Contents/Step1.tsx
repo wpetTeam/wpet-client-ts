@@ -1,5 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PetInfo } from "views/PetInfo/models";
 import { ProfilePicture } from "views/Signup/components/inputs/profilePicture";
 import { Button, Input } from "views/PetInfo/components";
@@ -13,11 +12,15 @@ export const Step1 = (props: {
     petInfo: PetInfo;
     setPetInfo: Dispatch<SetStateAction<PetInfo>>;
 }) => {
-    const [month, setMonth] = useState("");
-    const [date, setDate] = useState("");
-    const [gender, setGender] = useState("");
+    const [month, setMonth] = useState(null);
+    const [date, setDate] = useState(null);
+    const [gender, setGender] = useState<string>("");
 
-    function handleChange(e: any) {
+    useEffect(() => {
+        if (props.petInfo.gender !== "") setGender(props.petInfo.gender);
+    }, []);
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         props.setPetInfo({
             ...props.petInfo,
             [e.target.name]: e.target.value,
@@ -33,8 +36,6 @@ export const Step1 = (props: {
             gender: gender,
         });
     };
-
-    console.log(props.petInfo);
 
     return (
         <div className="step1-container">
@@ -67,7 +68,6 @@ export const Step1 = (props: {
             </div>
             <div className="step1-footer row">
                 <div></div>
-
                 {props.petInfo.name !== "" &&
                     month !== "" &&
                     date !== "" &&
@@ -137,6 +137,7 @@ function PetBirth({ handleChange, month, setMonth, date, setDate, petInfo }) {
                     type="month"
                     month={month}
                     setMonth={setMonth}
+                    petInfo={petInfo}
                 />
                 <DatePicker
                     text="일"
@@ -144,6 +145,7 @@ function PetBirth({ handleChange, month, setMonth, date, setDate, petInfo }) {
                     month={month}
                     date={date}
                     setDate={setDate}
+                    petInfo={petInfo}
                 />
             </div>
         </React.Fragment>

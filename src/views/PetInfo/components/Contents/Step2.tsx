@@ -1,7 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import uuid from "react-uuid";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { IoPawSharp, IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Button";
 import { PetInfo } from "views/PetInfo/models";

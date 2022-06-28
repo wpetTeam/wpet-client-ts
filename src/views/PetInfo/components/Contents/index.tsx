@@ -15,8 +15,8 @@ export const Content = (props: {
         name: "",
         gender: "",
         year: "",
-        month: "",
-        date: "",
+        month: null,
+        date: null,
         breed: [],
     });
     return (

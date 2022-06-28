@@ -1,4 +1,3 @@
-import { Header } from "components/home/Header";
 import React, { useEffect, useState } from "react";
 import { getBreeds } from "../adapters/getBreeds";
 import { Content } from "../components/Contents";
@@ -21,7 +20,7 @@ export const Registeration = () => {
             </p>
             <div className="register-main row">
                 <div className="step-container">
-                    <Step step={step} />
+                    <Step step={step} setStep={setStep} />
                 </div>
                 <div className="content-container">
                     <Content step={step} setStep={setStep} breeds={breeds} />

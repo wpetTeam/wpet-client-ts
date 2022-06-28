@@ -1,15 +1,30 @@
-import React from 'react';
-import { SelectContainer } from './Container';
-import { DateCalender } from './const/date.const';
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import uuid from "react-uuid";
+import { SelectContainer } from "./Container";
+import { DateCalender } from "./const/date.const";
 
-export const Date = (props) => {
+export const Date = (props: {
+    month?: number;
+    date?: number;
+    setDate?: Dispatch<SetStateAction<number>>;
+    showsDate: boolean;
+    setShowsDate: Dispatch<SetStateAction<boolean>>;
+    isOpen?: boolean;
+    disabled?: boolean;
+    currentDate?: number | null;
+}) => {
+    useEffect(() => {
+        if (props.currentDate !== undefined && props.currentDate !== null) {
+            if (props.setDate !== undefined) props.setDate(props.currentDate);
+        }
+    }, []);
+
     const handleButton = () => {
-        props.setShowDate(!props.showDate);
+        props.setShowsDate(!props.showsDate);
     };
-
-    const handlePicker = (item) => {
-        props.setShowDate(false);
-        props.setDate(item);
+    const handlePicker = (item: number) => {
+        props.setShowsDate(false);
+        if (props.setDate !== undefined) props.setDate(item);
     };
     const dateCalender = DateCalender(props.month);
 
@@ -18,12 +33,12 @@ export const Date = (props) => {
             <SelectContainer disabled={props.disabled} onClick={handleButton}>
                 {props.date}
             </SelectContainer>
-            {props.showDate && (
+            {props.showsDate && (
                 <div className="div-select date">
-                    {dateCalender.map((item, idx) => (
+                    {dateCalender.map((item: number) => (
                         <button
                             className="btn__item"
-                            key={(idx % 31) + 22314}
+                            key={uuid()}
                             onClick={() => handlePicker(item)}
                         >
                             {item}
