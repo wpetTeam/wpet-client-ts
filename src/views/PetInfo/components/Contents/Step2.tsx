@@ -61,9 +61,7 @@ export const Step2 = (props: {
                     />
                 </div>
                 {selectBreed.length >= 1 && (
-                    <Link to="/pet-info/registeration/step-3">
-                        <Button text="다음 단계" onClick={handleButton} />
-                    </Link>
+                    <Button text="다음 단계" onClick={handleButton} />
                 )}
             </div>
             {showsBreeds && (

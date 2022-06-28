@@ -19,10 +19,7 @@ const App = () => {
                 <Route path="diary/:petId" element={<DiaryFeed />} />
                 <Route path="/pet" element={<PetInfo />}>
                     <Route path="info" element={<Checkup />} />
-                    <Route
-                        path="registeration/step-1"
-                        element={<Registeration />}
-                    />
+                    <Route path="registeration" element={<Registeration />} />
                 </Route>
                 <Route path="community" element={<Community />} />
                 <Route path="user" element={<MyAccount />}>

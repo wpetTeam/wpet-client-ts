@@ -288,9 +288,18 @@ export const PetDetail = (props: {
                     )}
                 </div>
                 <div className="row_div_03 col">
-                    <div className="col_shower_01"> Shower Information</div>
-                    <div className="col_grooming_02">Grooming Information</div>
-                    <div className="col_hospital_03">Hospital Information</div>
+                    <div className="col_shower_01">
+                        Shower Information(아이디, 마지막 한날, 주기)
+                    </div>
+                    <div className="col_grooming_02">
+                        Grooming Information(아이디, 마지막 한 날, 주기,
+                        미용실이름)
+                    </div>
+                    <div className="col_hospital_03">
+                        약명, 설명(필수), (투두리스트, 마지막 복용 일, 주기, 약
+                        명, isAlarm(boolean : true (알림), false : (알림X)))
+                    </div>
+                    <button>병원</button>
                 </div>
             </div>
             {showsBreeds && (

@@ -1,21 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import { API } from 'services';
-import './Dropdown.style.scss';
+import { useNavigate } from "react-router-dom";
+import { API } from "services";
+import "./Dropdown.style.scss";
 
 export const Dropdown = () => {
     const navigate = useNavigate();
     const logoutHandler = async () => {
-        await API.post('/logout', {
-            withCredentials: true,
-        })
+        await API.post(
+            "/logout",
+            {},
+            {
+                withCredentials: true,
+            },
+        )
             .then((res) => {
-                console.log('>>> [LOGOUT] ✅ SUCCESS', res);
-                navigate('/');
+                console.log(">>> [LOGOUT] ✅ SUCCESS", res);
+                navigate("/");
             })
-            .catch((err) => console.log('>>> [LOGOUT] ❌ ERROR', err));
+            .catch((err) => console.log(">>> [LOGOUT] ❌ ERROR", err));
     };
     const myAccountHandler = () => {
-        navigate('/my-account');
+        navigate("/my-account");
     };
     return (
         <div className="dropdown-list">

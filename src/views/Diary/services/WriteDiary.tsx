@@ -37,6 +37,7 @@ export const WriteDiary = () => {
             font: "Pretendard",
             hashTags: ["pet"],
         };
+        console.log(diaryData);
         createDiary(diaryData, navigate);
     };
 

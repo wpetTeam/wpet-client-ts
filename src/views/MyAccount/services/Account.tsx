@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import { Icon } from '@iconify/react';
+import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 import {
     ProfileBox,
     PwBox,
     EmailBox,
     DateBox,
     PetBox,
-} from '../components/Account';
-import { getAuth, getPets, getPetPicture } from '../adapters';
-import { UserData } from 'models';
-import '../styles/services.style.scss';
-import '../styles/boxs.style.scss';
+} from "../components/Account";
+import { getAuth, getPets, getPetPicture } from "../adapters";
+import { UserData } from "models";
+import "../styles/services.style.scss";
+import "../styles/boxs.style.scss";
 
 export const Account = () => {
     const [user, setUser] = useState<UserData>();
     // userInfo
     const [updateInfo, setUpdateInfo] = useState({});
-    const [profilePic, setProfilePic] = useState('');
+    const [profilePic, setProfilePic] = useState("");
 
     // PetInfo
     const [userPets, setUserPets] = useState([]);
@@ -37,7 +37,7 @@ export const Account = () => {
         }
         if (userPets !== undefined) {
             for (let i = 0; i < userPets.length; i++) {
-                getPetPicture(userPets[i]['petID'], setPetPics);
+                getPetPicture(userPets[i]["petID"], setPetPics);
             }
         }
     }, [user, userPets]);
@@ -55,8 +55,7 @@ export const Account = () => {
                     setUpdateEmail={setUpdateEmail}
                     handleUpdateInfo={handleUpdateInfo}
                 />
-                <PwBox updatePw={updatePw} setUpdatePw={setUpdatePw} />
-                <DateBox info={updateInfo} />
+                <PetBox userPets={userPets} petPics={petPics} />
             </div>
             <div className="col_02">
                 <ProfileBox
@@ -71,7 +70,7 @@ export const Account = () => {
                 />
             </div>
             <div className="col_03">
-                <PetBox userPets={userPets} petPics={petPics} />
+                <PwBox updatePw={updatePw} setUpdatePw={setUpdatePw} />
                 <div className="community-box">
                     <Icon
                         className="icon no"
@@ -79,10 +78,8 @@ export const Account = () => {
                     />
                     커뮤니티에 가입하지 않았습니다.
                 </div>
+                <DateBox info={updateInfo} />
             </div>
-            {/* {showsUpdatePw && (
-                // <UpdatePwModal setShowsUpdatePw={setShowsUpdatePw} />
-            )} */}
         </div>
     );
 };

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Icon } from '@iconify/react';
+import { useState } from "react";
+import { Icon } from "@iconify/react";
 import {
     updateEmail as handleUpdateEmail,
     sendAuth,
-} from 'views/MyAccount/adapters';
-import { Box } from '.';
-import 'views/MyAccount/styles/boxs.style.scss';
+} from "views/MyAccount/adapters";
+import { Box } from ".";
+import "views/MyAccount/styles/boxs.style.scss";
 
 export const EmailBox = ({
     info,
@@ -14,17 +14,27 @@ export const EmailBox = ({
     handleUpdateInfo,
 }) => {
     const [isSend, setIsSend] = useState(false);
-    const [authCode, setAuthCode] = useState('');
+    const [authCode, setAuthCode] = useState("");
+    const variants = {
+        open: { opacity: 1, x: "105%", y: "-50%", scale: 1.02 },
+        closed: { opacity: 1, x: 0, y: 0 },
+    };
     return (
-        <Box className="email-box col" isUpdate={updateEmail}>
-            {updateEmail && (
-                <Icon
-                    className="icon-close"
-                    icon="fa-solid:window-close"
-                    onClick={() => setUpdateEmail(false)}
-                />
-            )}
+        <Box
+            className="email-box col"
+            isUpdate={updateEmail}
+            animate={updateEmail ? "open" : "closed"}
+            variants={variants}
+            transition={{ duration: 0.8 }}
+        >
             <div className="col_icon_01">
+                {updateEmail && (
+                    <Icon
+                        className="icon-close"
+                        icon="ep:circle-close-filled"
+                        onClick={() => setUpdateEmail(false)}
+                    />
+                )}
                 {updateEmail ? (
                     <div className="div-update row">
                         <Icon className="update" icon="dashicons:email-alt2" />
@@ -42,7 +52,7 @@ export const EmailBox = ({
                     {updateEmail && <label>새로운 이메일</label>}
                     <input
                         className={
-                            updateEmail ? 'input-email update' : 'input-email'
+                            updateEmail ? "input-email update" : "input-email"
                         }
                         name="email"
                         value={info.email !== undefined && info.email}
@@ -53,7 +63,7 @@ export const EmailBox = ({
                 {updateEmail ? (
                     <button
                         className="row_btn_02"
-                        style={{ marginTop: '4%' }}
+                        style={{ marginTop: "4%" }}
                         onClick={() => sendAuth(info.email, setIsSend)}
                     >
                         인증

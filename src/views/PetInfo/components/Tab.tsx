@@ -18,7 +18,7 @@ export const Tab = (props: {
                     onClick={() => props.setTab(0)}
                 />
             </Link>
-            <Link to="registeration/step-1">
+            <Link to="registeration">
                 <Icon
                     icon="fa-solid:plus"
                     className={

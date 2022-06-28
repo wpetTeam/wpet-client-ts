@@ -1,27 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export { EmailBox } from './EmailBox';
-export { PwBox } from './PwBox';
-export { PetBox } from './PetBox';
-export { ProfileBox } from './ProfileBox';
-export { DateBox } from './DateBox';
+export { EmailBox } from "./EmailBox";
+export { PwBox } from "./PwBox";
+export { PetBox } from "./PetBox";
+export { ProfileBox } from "./ProfileBox";
+export { DateBox } from "./DateBox";
 
-export const Box = styled.div<{ isUpdate: boolean }>`
-    position: ${(props) => (props.isUpdate ? 'fixed' : '')};
-    width: ${(props) => (props.isUpdate ? '25%' : '90%')};
-    top: ${(props) => (props.isUpdate ? '15%' : '')};
-    left: ${(props) => (props.isUpdate ? '36.5%' : '')};
-    padding: ${(props) => (props.isUpdate ? '2%' : '5%')};
-    background: ${(props) =>
-        props.isUpdate ? 'whitesmoke' : 'rgba(196, 196, 196, 0.1)'};
-    transition: all 0.5s;
-    box-shadow: ${(props) =>
-        props.isUpdate ? '7px 7px 0px 0px #00000080' : ''};
-    border: ${(props) => (props.isUpdate ? '5px solid #000000' : '')};
+export const Box = styled(motion.div)<{ isUpdate: boolean }>`
+    position: ${(props) => (props.isUpdate ? "fixed" : "")};
+    width: ${(props) => (props.isUpdate ? "25%" : "90%")};
+    padding: ${(props) => (props.isUpdate ? "2%" : "5%")};
 
-    // &:hover {
-    //     transform: scale(1.02);
-    //     transition: 0.4s ease-in-out;
-    //     background: #c4c4c4;
-    // }
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.37);
+    backdrop-filter: ${(props) => (props.isUpdate ? "blur(15px)" : "")};
+    -webkit-backdrop-filter: blur(15px);
 `;

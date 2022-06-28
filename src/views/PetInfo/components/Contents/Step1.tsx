@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { PetInfo } from 'views/PetInfo/models';
-import { ProfilePicture } from 'views/Signup/components/inputs/profilePicture';
-import { Button, Input } from 'views/PetInfo/components';
-import { DatePicker } from '../DatePicker';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Link } from "react-router-dom";
+import { PetInfo } from "views/PetInfo/models";
+import { ProfilePicture } from "views/Signup/components/inputs/profilePicture";
+import { Button, Input } from "views/PetInfo/components";
+import { DatePicker } from "../DatePicker";
 
 export const Step1 = (props: {
     step: number;
@@ -13,9 +13,9 @@ export const Step1 = (props: {
     petInfo: PetInfo;
     setPetInfo: Dispatch<SetStateAction<PetInfo>>;
 }) => {
-    const [month, setMonth] = useState('');
-    const [date, setDate] = useState('');
-    const [gender, setGender] = useState('');
+    const [month, setMonth] = useState("");
+    const [date, setDate] = useState("");
+    const [gender, setGender] = useState("");
 
     function handleChange(e: any) {
         props.setPetInfo({
@@ -67,15 +67,14 @@ export const Step1 = (props: {
             </div>
             <div className="step1-footer row">
                 <div></div>
-                <Link to="/pet-info/registeration/step-2">
-                    {props.petInfo.name !== '' &&
-                        month !== '' &&
-                        date !== '' &&
-                        props.petInfo.year !== '' &&
-                        gender !== '' && (
-                            <Button text="다음 단계" onClick={HandleButton} />
-                        )}
-                </Link>
+
+                {props.petInfo.name !== "" &&
+                    month !== "" &&
+                    date !== "" &&
+                    props.petInfo.year !== "" &&
+                    gender !== "" && (
+                        <Button text="다음 단계" onClick={HandleButton} />
+                    )}
             </div>
         </div>
     );
@@ -120,9 +119,9 @@ function PetBirth({ handleChange, month, setMonth, date, setDate, petInfo }) {
             <label className="label">반려견 출생년월 또는 만난 날(*) </label>
             <div
                 style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                 }}
             >
                 <Input
@@ -157,23 +156,23 @@ function PetGender({ gender, setGender }) {
             <label className="label">반려견 성별(*)</label>
             <div
                 style={{
-                    display: 'flex',
-                    flexDirection: 'row',
+                    display: "flex",
+                    flexDirection: "row",
                 }}
             >
                 <button
                     className={
-                        gender === '남' ? 'btn-gender select' : 'btn-gender'
+                        gender === "남" ? "btn-gender select" : "btn-gender"
                     }
-                    onClick={() => setGender('남')}
+                    onClick={() => setGender("남")}
                 >
                     남
                 </button>
                 <button
                     className={
-                        gender === '여' ? 'btn-gender select' : 'btn-gender'
+                        gender === "여" ? "btn-gender select" : "btn-gender"
                     }
-                    onClick={() => setGender('여')}
+                    onClick={() => setGender("여")}
                 >
                     여
                 </button>

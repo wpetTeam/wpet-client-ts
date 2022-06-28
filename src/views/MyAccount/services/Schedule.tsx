@@ -1,5 +1,10 @@
-import React from 'react';
+import { Calender } from "../components/Schedule/Calender";
+import { AnimatePresence, motion } from "framer-motion";
 
-export function Schedule() {
-    return <div>Schedule</div>;
-}
+export const Schedule = () => {
+    return (
+        <div style={{ width: "100%", height: "100%" }}>
+            <Calender />
+        </div>
+    );
+};

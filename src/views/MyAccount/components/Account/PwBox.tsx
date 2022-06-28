@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Icon } from '@iconify/react';
-import { Box } from '.';
-import { updatePw as handleUpdatePw } from 'views/MyAccount/adapters';
-import 'views/MyAccount/styles/boxs.style.scss';
+import { useState } from "react";
+import { Icon } from "@iconify/react";
+import { Box } from ".";
+import { updatePw as handleUpdatePw } from "views/MyAccount/adapters";
+import "views/MyAccount/styles/boxs.style.scss";
 
 export const PwBox = ({ updatePw, setUpdatePw }) => {
     const [pwData, setPwData] = useState({
-        origin: '',
-        new: '',
-        newConfirm: '',
+        origin: "",
+        new: "",
+        newConfirm: "",
     });
 
     const handleChange = (e: any) => {
@@ -18,17 +18,28 @@ export const PwBox = ({ updatePw, setUpdatePw }) => {
         });
     };
 
+    const variants = {
+        open: { opacity: 1, x: "-113.5%", y: "-20%", scale: 1.01 },
+        closed: { opacity: 1, x: 0 },
+    };
+
     return (
-        <Box className="pw-box col" isUpdate={updatePw}>
-            {updatePw && (
-                <Icon
-                    className="icon-close"
-                    icon="fa-solid:window-close"
-                    onClick={() => setUpdatePw(false)}
-                />
-            )}
+        <Box
+            className="pw-box col"
+            isUpdate={updatePw}
+            animate={updatePw ? "open" : "closed"}
+            variants={variants}
+            transition={{ duration: 1 }}
+        >
             {updatePw ? (
                 <div className="div-update col">
+                    {updatePw && (
+                        <Icon
+                            className="icon-close"
+                            icon="ep:circle-close-filled"
+                            onClick={() => setUpdatePw(false)}
+                        />
+                    )}
                     <div className="col_div_01 title">
                         <Icon
                             className="col_icon_01"

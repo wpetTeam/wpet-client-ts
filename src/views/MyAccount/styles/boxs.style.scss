@@ -1,5 +1,5 @@
-@use 'assets/styles/_theme.scss' as theme;
-@use 'assets/styles/_common.scss' as common;
+@use "assets/styles/_theme.scss" as theme;
+@use "assets/styles/_common.scss" as common;
 
 @mixin box-shape {
     @include common.shape(
@@ -18,23 +18,33 @@
     }
 }
 @mixin close-icon {
-    @include common.size(7%, 7%);
-    margin: -3% 0 0 95%;
+    @include common.size(7%, fit-content);
+    margin: -5% 0 -5% 92%;
     color: theme.$dark-gray-color;
     &:hover {
         @include common.hover-event();
-        transform: scale(1.05);
+        transform: scale(1.02);
         color: black;
     }
+}
+@mixin glassmorphism {
+    @include common.shape(
+        rgba(255, 255, 255, 0.6),
+        1px solid rgba(255, 255, 255, 0.2),
+        4px
+    );
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 .email-box {
     @include box-shape();
     @include common.flex-column(space-between, flex-start);
-    .icon-close {
-        @include close-icon();
-    }
     .col_icon_01 {
         @include common.size(100%, 15%);
+        .icon-close {
+            @include close-icon();
+        }
         svg {
             @include common.size(8%, fit-content);
             padding: 8px;
@@ -50,6 +60,7 @@
             color: theme.$dark-gray-color;
             font-weight: 600;
             .update {
+                @include common.size(7%, fit-content);
                 margin-right: 2%;
                 background: theme.$gray-color;
             }
@@ -77,7 +88,9 @@
                 font-size: 1.05em;
                 padding-left: 2%;
                 margin-right: 2%;
+                margin-bottom: 1%;
                 &:focus {
+                    @include glassmorphism();
                     outline: none;
                 }
             }
@@ -113,7 +126,6 @@
 }
 .pw-box {
     @include box-shape();
-    font-size: 1.1em;
     .icon-close {
         @include close-icon();
     }
@@ -136,7 +148,7 @@
         .col_input_02,
         .col_input_03,
         .col_input_04 {
-            @include common.size(100%, fit-content);
+            @include common.size(110%, fit-content);
             @include common.flex-column(center, flex-start);
             margin: 4% 0 0 12%;
             label {
@@ -150,8 +162,8 @@
                 padding-left: 2%;
                 margin-right: 2%;
                 &:focus {
+                    @include glassmorphism();
                     outline: none;
-                    border: 2px solid theme.$sub-color;
                 }
             }
         }
@@ -181,7 +193,7 @@
         }
     }
 }
-.date-box.col {
+.date-box {
     @include common.flex-column(center, flex-start);
     @include box-shape();
     font-size: 1.2em;
@@ -206,7 +218,6 @@
         }
     }
 }
-
 .profile-box {
     @include common.flex-column(space-between, center);
     @include box-shape();
@@ -243,7 +254,6 @@
         .input {
             @include common.size(240px, 40px);
             @include common.shape(transparent, transparent, 0);
-
             text-align: center;
             font-size: 1.3em;
             color: black;
@@ -252,6 +262,7 @@
             @include common.shape(transparent, 0.8px solid gray, 4px);
             font-size: 1.1em;
             &:focus {
+                @include glassmorphism();
                 outline: none;
             }
         }
@@ -265,27 +276,26 @@
         }
     }
 }
-
 .pet-box {
+    @include common.size(100%, fit-content);
     @include common.flex-column();
     @include box-shape();
     .col_text_01 {
-        @include common.size(100%, 15%);
-        @include common.flex-row(flex-end, flex-end);
-        font-size: 1em;
+        @include common.size(90%, 30%);
+        @include common.flex-row(flex-end, center);
         svg {
-            @include common.size(8%, fit-content);
-            @include common.shape(orange, transparent, 50%);
+            @include common.size(7%, fit-content);
+            @include common.shape(none, 2px solid orange, 50%);
             padding: 8px;
-            margin-left: 3%;
-            color: white;
+            margin-top: 3%;
+            color: orange;
         }
     }
-    .col_text_02 {
+    .col_text_02.empty {
         color: theme.$dark-gray-color;
     }
     .col_list_02.pets {
-        @include common.size(100%, 80%);
+        @include common.size(90%, 70%);
         @include common.flex-row(space-around, center);
         flex-wrap: wrap;
         margin-bottom: 4%;
@@ -305,110 +315,8 @@
     @include box-shape();
     padding: 5%;
     .icon {
-        @include common.size(8%, fit-content);
+        @include common.size(10%, fit-content);
         margin-bottom: 5%;
         color: rgb(255, 209, 5);
-    }
-    &:hover {
-        transform: scale(1.02);
-        transition: 0.4s ease-in-out;
-        background: transparentize(theme.$gray-color, 0.5);
-    }
-}
-
-.update-pw-modal {
-    @include common.size(30%, 50%);
-    @include common.flex-column();
-    top: 15%;
-    left: 36.6%;
-    position: fixed;
-    z-index: 100;
-
-    .eclipse {
-        @include common.flex-row();
-        @include common.shape(
-            theme.$dashboard-color,
-            5px solid theme.$dark-step-color,
-            50%
-        );
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        transform: rotate(-42deg);
-        box-sizing: border-box;
-        svg {
-            @include common.size(23px, fit-content);
-            @include common.hover-event();
-            color: theme.$dark-gray-color;
-            transform: rotate(42.5deg);
-        }
-        svg:nth-child(2) {
-            display: none;
-        }
-    }
-    .eclipse:hover svg:nth-child(1) {
-        display: none;
-    }
-    .eclipse:hover svg:nth-child(2) {
-        display: block;
-        color: black;
-    }
-
-    .frame {
-        @include common.size(90%, 100%);
-        @include common.shape(
-            theme.$dashboard-color,
-            5px solid theme.$dark-step-color,
-            10px
-        );
-        @include common.flex-column();
-        margin-top: -6.6%;
-        .text {
-            margin-top: -3%;
-            margin-bottom: 3%;
-            font-size: 1.1em;
-            z-index: 10;
-        }
-        .pw-container {
-            @include common.size(65%, 20%);
-            @include common.flex-column(center, flex-start);
-            margin-top: -2%;
-            label {
-                font-size: 0.75em;
-                color: theme.$dark-gray-color;
-            }
-            input {
-                @include common.size(100%, 48%);
-                @include common.shape(
-                    transparent,
-                    1px solid theme.$gray-color,
-                    3px
-                );
-                text-align: center;
-                letter-spacing: 0.25em;
-                &:focus {
-                    outline: none;
-                }
-            }
-        }
-        .error-text {
-            margin: -1.8% 0 4% 29%;
-            font-size: 0.75em;
-            color: firebrick;
-        }
-        .error-text.no-text {
-            color: transparent;
-        }
-        .btn {
-            @include common.size(66%, 11%);
-            @include common.shape(theme.$gray-color, transparent, 3px);
-            @include common.shadow(3px, transparent, 0);
-            &:hover {
-                @include common.hover-event();
-                @include common.shadow(1.5px, theme.$dark-gray-color, 0.2);
-                transform: scale(1.01);
-                background: transparentize(theme.$dark-gray-color, 0.5);
-                font-weight: 600;
-            }
-        }
     }
 }

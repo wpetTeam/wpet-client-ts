@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { format, addMonths, subMonths, startOfWeek, addDays } from "date-fns";
 import { endOfWeek, isSameDay, isSameMonth } from "date-fns";
-import { startOfMonth, endOfMonth, subDays } from "date-fns";
+import { startOfMonth, endOfMonth } from "date-fns";
 import uuid from "react-uuid";
 import { Icon } from "@iconify/react";
 import EMPTY_IMAGE from "assets/images/Character/stamp.png";

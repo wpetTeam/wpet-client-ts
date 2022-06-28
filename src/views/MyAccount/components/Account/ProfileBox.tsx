@@ -1,8 +1,8 @@
-import { Icon } from '@iconify/react';
-import IMAGE from 'assets/images/Character/common-character.png';
-import { removePicture, uploadPicture } from 'utils';
-import { updateName, updatePicture } from 'views/MyAccount/adapters';
-import { Box } from '.';
+import { Icon } from "@iconify/react";
+import IMAGE from "assets/images/Character/common-character.png";
+import { removePicture, uploadPicture } from "utils";
+import { updateName, updatePicture } from "views/MyAccount/adapters";
+import { Box } from ".";
 
 export const ProfileBox = ({
     info,
@@ -15,8 +15,8 @@ export const ProfileBox = ({
     handleUpdateInfo,
 }) => {
     const completeProfile = async () => {
-        if (info.nickName === '') {
-            alert('닉네임을 입력해주세요');
+        if (info.nickName === "") {
+            alert("닉네임을 입력해주세요");
             return;
         }
         if (originName !== info.nickName) {
@@ -29,18 +29,17 @@ export const ProfileBox = ({
     var inputRef: any;
     return (
         <Box className="profile-box col" isUpdate={updateProfile}>
-            {updateProfile && (
-                <Icon
-                    className="icon-close"
-                    icon="fa-solid:window-close"
-                    onClick={() => setUpdateProfile(false)}
-                />
-            )}
-
             <div className="col_picture_01">
+                {updateProfile && (
+                    <Icon
+                        className="icon-close"
+                        icon="ep:circle-close-filled"
+                        onClick={() => setUpdateProfile(false)}
+                    />
+                )}
                 <img
-                    className={updateProfile ? 'pic update' : 'pic'}
-                    src={profilePic === '' ? IMAGE : profilePic}
+                    className={updateProfile ? "pic update" : "pic"}
+                    src={profilePic === "" ? IMAGE : profilePic}
                     alt="유저 프로필"
                 />
                 {updateProfile && (
@@ -70,9 +69,9 @@ export const ProfileBox = ({
             </div>
             <div className="col_name_02">
                 <input
-                    className={updateProfile ? 'input update' : 'input'}
+                    className={updateProfile ? "input update" : "input"}
                     name="nickName"
-                    value={info.nickName || ''}
+                    value={info.nickName || ""}
                     onChange={handleUpdateInfo}
                     disabled={updateProfile ? false : true}
                     placeholder="닉네임"

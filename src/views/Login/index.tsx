@@ -1,23 +1,26 @@
-import { useState, useEffect, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'assets/styles/theme';
-import { Header } from 'components/modal/Header';
-import { Frame } from 'assets/styles/shared/modal.style';
-import { Input } from 'components/modal';
-import { handleLogin } from './adapters/handleLogin';
-import { LProps, errMsg } from './models';
-import { User } from 'models';
-import './styles/services.style.scss';
+import React, { useState, useEffect, FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { theme } from "assets/styles/theme";
+import KAKAO_LOGO from "assets/images/Logo/kakao_login.png";
+import { Header } from "components/modal/Header";
+import { Frame } from "assets/styles/shared/modal.style";
+import { Input } from "components/modal";
+import { handleLogin } from "./adapters/handleLogin";
+import { LProps, errMsg } from "./models";
+import { User } from "models";
+import "./styles/services.style.scss";
+
+const CLIENT_ID = process.env.REACT_APP_KAKAO_KEY;
+const REDIRECT_URI = "http://localhost:3000/kakao-login";
+const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
 
 export const Login: FC<LProps> = (props: LProps) => {
     let navigate = useNavigate();
-    const [user, setUser] = useState<User>({ email: '', pw: '' });
-    const [errorMsg, setErrorMsg] = useState<errMsg>({ email: '', pw: '' });
+    const [user, setUser] = useState<User>({ email: "", pw: "" });
+    const [errorMsg, setErrorMsg] = useState<errMsg>({ email: "", pw: "" });
 
-    console.log(typeof navigate);
-
-    function handleChange(e) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
         setUser({
             ...user,
@@ -26,10 +29,11 @@ export const Login: FC<LProps> = (props: LProps) => {
     }
     useEffect(() => {
         setErrorMsg({
-            email: '',
-            pw: '',
+            email: "",
+            pw: "",
         });
     }, [user.email, user.pw]);
+
     const handleLoginBtn = () => {
         const userData: User = {
             email: user.email,
@@ -56,7 +60,7 @@ export const Login: FC<LProps> = (props: LProps) => {
     const handleCloseBtn = () => {
         props.setShowsLogin(false);
         props.setIsBlur(false);
-        props.setAuthEmail('');
+        props.setAuthEmail("");
     };
     return (
         <ThemeProvider theme={theme}>
@@ -77,9 +81,9 @@ export const Login: FC<LProps> = (props: LProps) => {
                             value={user.email}
                             onChange={handleChange}
                             placeholder="이메일"
-                            isError={errorMsg.email !== '' ? true : false}
+                            isError={errorMsg.email !== "" ? true : false}
                         />
-                        {errorMsg.email !== '' && (
+                        {errorMsg.email !== "" && (
                             <p className="text-error">{errorMsg.email}</p>
                         )}
                         <Input
@@ -88,9 +92,9 @@ export const Login: FC<LProps> = (props: LProps) => {
                             onChange={handleChange}
                             placeholder="비밀번호"
                             password
-                            isError={errorMsg.pw !== '' ? true : false}
+                            isError={errorMsg.pw !== "" ? true : false}
                         />
-                        {errorMsg.pw !== '' && (
+                        {errorMsg.pw !== "" && (
                             <p className="text-error">{errorMsg.pw}</p>
                         )}
 
@@ -104,9 +108,14 @@ export const Login: FC<LProps> = (props: LProps) => {
                             비밀번호를 잊어버렸나요?
                         </p>
                         <p className="text-or">or</p>
-                        <button className="btn_kakao_02">
-                            카카오로 간편 로그인하기
-                        </button>
+
+                        <a href={KAKAO_URI}>
+                            <img
+                                src={KAKAO_LOGO}
+                                alt="카카오 로그인"
+                                width={250}
+                            />
+                        </a>
                     </div>
                     <div className="login-footer">
                         계정이 없다면,

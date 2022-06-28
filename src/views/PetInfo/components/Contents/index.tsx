@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import { Step1 } from "./Step1";
 import { Step2 } from "./Step2";
 import { Step3 } from "./Step3";
@@ -20,46 +19,28 @@ export const Content = (props: {
         date: "",
         breed: [],
     });
-
     return (
         <div className="content-container">
-            <Routes>
-                {props.step === 1 && (
-                    <Route
-                        path="registeration/step-1"
-                        element={
-                            <Step1
-                                step={props.step}
-                                setStep={props.setStep}
-                                picture={picture}
-                                setPicture={setPicture}
-                                petInfo={petInfo}
-                                setPetInfo={setPetInfo}
-                            />
-                        }
-                    />
-                )}
-                {props.step === 2 && (
-                    <Route
-                        path="registeration/step-2"
-                        element={
-                            <Step2
-                                breeds={props.breeds}
-                                step={props.step}
-                                setStep={props.setStep}
-                                petInfo={petInfo}
-                                setPetInfo={setPetInfo}
-                            />
-                        }
-                    />
-                )}
-                {props.step === 3 && (
-                    <Route
-                        path="registeration/step-3"
-                        element={<Step3 petInfo={petInfo} picture={picture} />}
-                    />
-                )}
-            </Routes>
+            {props.step === 1 && (
+                <Step1
+                    step={props.step}
+                    setStep={props.setStep}
+                    picture={picture}
+                    setPicture={setPicture}
+                    petInfo={petInfo}
+                    setPetInfo={setPetInfo}
+                />
+            )}
+            {props.step === 2 && (
+                <Step2
+                    breeds={props.breeds}
+                    step={props.step}
+                    setStep={props.setStep}
+                    petInfo={petInfo}
+                    setPetInfo={setPetInfo}
+                />
+            )}
+            {props.step === 3 && <Step3 petInfo={petInfo} picture={picture} />}
         </div>
     );
 };
