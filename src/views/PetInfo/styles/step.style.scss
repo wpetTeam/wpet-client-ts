@@ -1,5 +1,5 @@
-@use 'assets/styles/_theme.scss';
-@use 'assets/styles/_common.scss' as common;
+@use "assets/styles/_theme.scss";
+@use "assets/styles/_common.scss" as common;
 
 .row_text_01 {
     @include common.size(70%, 100%);
@@ -20,6 +20,11 @@
             color: theme.$main-color;
             font-weight: 700;
         }
+    }
+    .text-container.enable-hover:hover {
+        @include common.hover-event();
+        transform: scale(1.01);
+        text-shadow: 2px 2px 2px theme.$sub-color;
     }
 }
 .row_bar_02 {

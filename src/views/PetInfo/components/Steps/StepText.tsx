@@ -10,19 +10,27 @@ export const StepText = (props: {
         { id: 2, step: "step 2", description: "반려견 종 선택" },
         { id: 3, step: "step 3", description: "완료" },
     ];
+
+    for (let i = 0; i <= 2; i++) {
+        if (props.step > StepText[i].id) {
+            document
+                .querySelector(".text-container")
+                ?.classList.add("enable-hover");
+        }
+    }
+
     const moveBackStep = (idx: number) => {
-        console.log("current : ", props.step, "click : ", StepText[idx]["id"]);
-        if (props.step >= StepText[idx].id) {
+        if (props.step > StepText[idx].id) {
             props.setStep(StepText[idx].id);
         }
     };
+
     return (
         <>
             {StepText.map((item, idx: number) => (
                 <div
                     className="text-container"
                     key={StepText[idx]["id"]}
-                    style={{ border: "1px solid lightblue" }}
                     onClick={() => moveBackStep(idx)}
                 >
                     <p
