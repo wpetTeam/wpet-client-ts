@@ -3,13 +3,15 @@ import uuid from "react-uuid";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import EMPTY_IMAGE from "assets/images/Character/common-character.png";
+
 import { Pet } from "models";
 import { removePicture, uploadPicture } from "utils";
-import { DatePicker } from "./DatePicker";
-import { Input } from "./Input";
-import { updatePet, deletePet, getPet } from "../adapters";
-import { BreedsModal, handleDeleteBreed } from "./BreedPicker";
-import "../styles/components.style.scss";
+import { DatePicker } from "../DatePicker";
+import { Input } from "../Input";
+import { updatePet, deletePet, getPet } from "../../adapters";
+import { BreedsModal, handleDeleteBreed } from "../BreedPicker";
+import { PetExtraInfo } from "./PetExtraInfo";
+import "views/PetInfo/styles/components.style.scss";
 
 export const PetDetail = (props: {
     petID: number;
@@ -288,18 +290,7 @@ export const PetDetail = (props: {
                     )}
                 </div>
                 <div className="row_div_03 col">
-                    <div className="col_shower_01">
-                        Shower Information(아이디, 마지막 한날, 주기)
-                    </div>
-                    <div className="col_grooming_02">
-                        Grooming Information(아이디, 마지막 한 날, 주기,
-                        미용실이름)
-                    </div>
-                    <div className="col_hospital_03">
-                        약명, 설명(필수), (투두리스트, 마지막 복용 일, 주기, 약
-                        명, isAlarm(boolean : true (알림), false : (알림X)))
-                    </div>
-                    <button>병원</button>
+                    <PetExtraInfo petID={props.petID} isUpdate={isUpdate} />
                 </div>
             </div>
             {showsBreeds && (

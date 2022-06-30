@@ -27,7 +27,6 @@ export const Month = (props: {
         }
     }, []);
 
-    console.log("month", props.month, "current", props.currentMonth);
     //useEffect(() => {}, [props.isOpen]);
 
     return (

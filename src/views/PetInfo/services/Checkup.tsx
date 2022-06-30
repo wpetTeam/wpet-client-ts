@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import IMAGE from "assets/images/Character/yello-img.png";
 import { getUserPets } from "adapters";
 import { petID } from "models";
-import { PetCard } from "../components/PetCard";
+import { PetCard } from "../components/PetCheck/PetCard";
 import "../styles/services.style.scss";
 
 export const Checkup = () => {

@@ -64,7 +64,7 @@
     }
 }
 .detail-container {
-    @include common.size(80%, 85%);
+    @include common.size(85%, 88%);
     @include common.flex-column();
     position: fixed;
     transition: 150ms ease-in-out;
@@ -85,9 +85,9 @@
     .detail-frame {
         @include common.size(100%, 90%);
         @include common.flex-row();
-        @include common.shape(theme.$step-color, none, 6px);
+        @include glassmorphism();
         .row_div_01.info {
-            @include common.size(28%, 78%);
+            @include common.size(25%, 78%);
             @include common.flex-column(space-around, flex-start);
             @include glassmorphism(0.26);
             margin-left: 2%;
@@ -247,16 +247,11 @@
             }
         }
         .row_img_02 {
-            @include common.size(38%, 100%);
+            @include common.size(33%, 100%);
             @include common.flex-column();
             .img-picture {
                 @include common.size(70%, fit-content);
-                @include common.shape(
-                    theme.$dashboard-color,
-                    5px solid theme.$dashboard-color,
-                    40%
-                );
-                padding: 5px;
+                @include common.shape(none, none, 50%);
             }
             .btn-container {
                 @include common.size(100%, 5%);
@@ -288,11 +283,209 @@
             }
         }
         .row_div_03 {
-            @include common.size(30%, 90%);
+            @include common.size(30%, 86%);
             @include common.flex-column(space-between, center);
-            div {
+            .col_shower_01,
+            .col_grooming_02 {
                 @include common.size(90%, 30%);
+                @include common.flex-column(flex-start, center);
                 @include glassmorphism();
+                padding: 4%;
+                margin-bottom: 2%;
+                font-size: 0.9em;
+                .div-info {
+                    @include common.size(100%, 80%);
+                    @include common.flex-row();
+                    .div-container {
+                        @include common.size(100%, 50%);
+                        @include common.flex-column();
+                        label {
+                            font-size: 0.75em;
+                            margin-bottom: 2%;
+                        }
+                        .div-input {
+                            @include common.size(100%, 100%);
+                            @include common.flex-row(center, flex-end);
+                            input {
+                                @include common.size(20%, 79%);
+                                @include common.shape(
+                                    none,
+                                    0.5px solid rgba(150, 150, 150, 0.9),
+                                    2px
+                                );
+                                margin-right: 3%;
+                                text-align: center;
+                                font-family: theme.$english-font;
+                                font-size: 1em;
+                                &:focus {
+                                    outline: none;
+                                    @include glassmorphism();
+                                }
+                            }
+                        }
+                    }
+                }
+                .btn-enter {
+                    @include common.size(20%, 25%);
+                    @include glassmorphism();
+                    margin-top: -5%;
+                    &:hover {
+                        @include common.hover-event();
+                        background: rgba(235, 235, 235, 0.8);
+                        border: 0.8px solid rgba(207, 207, 207, 0.7);
+                        transform: scale(1.02);
+                    }
+                }
+            }
+            .col_health_03 {
+                height: 15%;
+            }
+            .col_health_03.modal {
+                width: 50%;
+                height: 70%;
+            }
+            .div-empty {
+                @include common.size(100%, 100%);
+                @include common.flex-column();
+                .btn-register {
+                    @include common.size(40%, 30%);
+                    @include glassmorphism();
+                    margin-top: 4%;
+                }
+                .btn-register.health {
+                    @include common.size(40%, 58%);
+                }
+                .btn-register.active:hover {
+                    @include common.hover-event();
+                    background: rgba(235, 235, 235, 0.8);
+                    border: 0.8px solid rgba(207, 207, 207, 0.7);
+                    transform: scale(1.02);
+                }
+            }
+            .div-empty::before {
+                content: "";
+                background-size: 220px;
+                background-repeat: no-repeat;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                opacity: 0.2;
+                z-index: -100;
+            }
+            .div-empty.shower::before {
+                background-image: url("../../../assets/images/Character/shower.png");
+                background-position: 130%;
+            }
+            .div-empty.grooming::before {
+                background-image: url("../../../assets/images/Character/grooming.png");
+                background-position: -30%;
+            }
+            .modal-container {
+                @include common.size(100%, 100%);
+                @include common.flex-column(flex-start, center);
+                header {
+                    @include common.size(100%, fit-content);
+                    @include common.flex-row();
+                    button {
+                        @include glassmorphism();
+                        padding: 4px 10px;
+                        margin-right: 1%;
+                        margin-bottom: 2%;
+                        &:hover {
+                            @include common.hover-event();
+                            transform: scale(1.02);
+                        }
+                    }
+                    .tab-pill.selected,
+                    .tab-pill:hover {
+                        background: linear-gradient(
+                            rgb(198, 198, 0),
+                            lightcoral
+                        );
+                    }
+                }
+                .pill-list {
+                    @include common.size(100%, 90%);
+                    @include common.flex-row();
+                    flex-wrap: wrap;
+                    overflow: auto;
+                    background: linear-gradient(lightcoral, rgb(198, 198, 0));
+                    border-radius: 2px;
+                    .pill__item {
+                        @include common.size(28%, 50%);
+                        @include glassmorphism();
+                        margin: 2%;
+                    }
+                    .pill__item.info {
+                        @include common.flex-column();
+                        font-size: 0.8em;
+
+                        span {
+                            font-size: 4.2em;
+                        }
+                        .text-pill-name {
+                            margin-top: -3%;
+                            font-size: 1.4em;
+                        }
+                        .text-pill-desc {
+                            margin-top: -6%;
+                        }
+                    }
+                    .pill__item.info.alarm {
+                    }
+                    .pill__item.btn {
+                        span {
+                            font-size: 4em;
+                        }
+                        &:hover {
+                            @include common.hover-event();
+                            transform: scale(1.04);
+                        }
+                    }
+                    .pill__item.add-info {
+                        @include common.size(50%, 65%);
+                        @include common.flex-column();
+                        input {
+                            @include common.size(88%, 15%);
+                            @include glassmorphism();
+                            margin-bottom: 2%;
+                            padding-left: 2%;
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                        .input-checkbox {
+                            @include common.size(100%, 15%);
+                            @include common.flex-row();
+                            font-size: 0.75em;
+                            margin-bottom: -2%;
+                            input[type="checkbox"] {
+                                @include common.size(5%, fit-content);
+                            }
+                        }
+                        .pill__alarm {
+                            @include common.size(100%, 20%);
+                            @include common.flex-row();
+                            input {
+                                @include common.size(25%, 60%);
+                                margin-right: 2%;
+                                text-align: center;
+                            }
+                        }
+                        .btn-container {
+                            @include common.size(100%, 15%);
+                            @include common.flex-row();
+                            margin-top: 1%;
+                            button {
+                                @include glassmorphism();
+                                padding: 4px 10px;
+                                margin-right: 2%;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

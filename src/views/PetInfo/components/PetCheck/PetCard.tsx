@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import EMPTY_IMAGE from 'assets/images/Character/common-character.png';
-import { Pet } from 'models';
-import { getPet } from '../adapters/getPet';
-import '../styles/components.style.scss';
-import { PetDetail } from './PetDetail';
+import { useEffect, useState } from "react";
+import EMPTY_IMAGE from "assets/images/Character/common-character.png";
+import { Pet } from "models";
+import { getPet } from "views/PetInfo/adapters/getPet";
+import { PetDetail } from "views/PetInfo/components";
+import "views/PetInfo/styles/components.style.scss";
 
 export const PetCard = (props: { petID: number }) => {
     const [info, setInfo] = useState<Pet>();
