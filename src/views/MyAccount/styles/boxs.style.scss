@@ -197,6 +197,19 @@
     @include common.flex-column(center, flex-start);
     @include box-shape();
     font-size: 1.2em;
+    .delete-header {
+        @include common.size(90%, 5%);
+        @include common.flex-row(flex-start, center);
+        margin-top: -2%;
+        font-size: 0.85em;
+        svg {
+            @include common.size(7%, fit-content);
+            @include common.shape(rgb(26, 100, 129), transparent, 50%);
+            padding: 8px;
+            margin-right: 3%;
+            color: white;
+        }
+    }
     .col_icon_01 {
         @include common.size(7%, fit-content);
         @include common.shape(lightblue, transparent, 50%);
@@ -215,6 +228,45 @@
             cursor: pointer;
             text-decoration: 1px rgb(26, 100, 129) underline;
             color: rgb(33, 117, 150);
+        }
+    }
+    .delete-main {
+        @include common.size(100%, 90%);
+        @include common.flex-column();
+        font-size: 0.7em;
+        margin-top: 4%;
+        p {
+            line-height: 1.4em;
+            text-align: center;
+            span {
+                color: rgb(33, 117, 150);
+                font-size: 1.1em;
+                font-weight: 700;
+            }
+        }
+        .btn-container {
+            @include common.size(100%, 20%);
+            @include common.flex-row();
+            margin-top: 4%;
+            button {
+                @include common.size(fit-content, fit-content);
+                @include glassmorphism();
+                margin-left: 2%;
+                padding: 5px 10px;
+                &:hover {
+                    @include common.hover-event();
+                    transform: scale(1.02);
+                }
+            }
+            input {
+                @include common.size(55%, 25px);
+                @include glassmorphism();
+                padding-left: 4px;
+                letter-spacing: 0.1em;
+                &:focus {
+                    outline: none;
+                }
+            }
         }
     }
 }

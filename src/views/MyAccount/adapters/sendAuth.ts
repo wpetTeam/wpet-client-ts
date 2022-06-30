@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from 'react';
-import { API } from 'services';
+import { Dispatch, SetStateAction } from "react";
+import { API } from "services";
 
 export const sendAuth = async (
     email: string,
     setIsSend: Dispatch<SetStateAction<boolean>>,
 ) => {
     await API.post(
-        '/update-mails',
+        "/update-mails",
         {
             newEmail: email,
         },
@@ -15,8 +15,8 @@ export const sendAuth = async (
         },
     )
         .then((res) => {
-            console.log('>>> [UPDATE EMAIL SEND CODE] ✅ SUCCESS');
+            console.log(">>> [UPDATE EMAIL SEND CODE] ✅ SUCCESS");
             setIsSend(true);
         })
-        .catch((err) => console.log('>>> [UPDATE EMAIL SEND CODE] ❌ ERRPR'));
+        .catch((err) => console.log(">>> [UPDATE EMAIL SEND CODE] ❌ ERRPR"));
 };
