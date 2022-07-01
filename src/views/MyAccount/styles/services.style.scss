@@ -1,5 +1,5 @@
-@use 'assets/styles/_theme.scss';
-@use 'assets/styles/_common.scss' as common;
+@use "assets/styles/_theme.scss";
+@use "assets/styles/_common.scss" as common;
 
 .account-container {
     @include common.size(100%, 93%);
@@ -18,4 +18,8 @@
         @include common.size(33%, 100%);
         @include common.flex-column(space-around, flex-start);
     }
+}
+.schedule-container {
+    @include common.size(100%, 100%);
+    @include common.flex-row(flex-start, center);
 }

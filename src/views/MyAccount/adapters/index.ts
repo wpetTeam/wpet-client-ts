@@ -1,8 +1,8 @@
-export { getAuth } from './getAuth';
-export { getPets } from './getPets';
-export { getPetPicture } from './getPetPicture';
-export { sendAuth } from './sendAuth';
-export { updateEmail } from './updateEmail';
-export { updateName } from './updateName';
-export { updatePicture } from './updatePicture';
-export { updatePw } from './updatePw';
+export { getAuth } from "./user/getAuth";
+export { getPets } from "./pet/getPets";
+export { getPetPicture } from "./pet/getPetPicture";
+export { sendAuth } from "./user/sendAuth";
+export { updateEmail } from "./user/updateEmail";
+export { updateName } from "./user/updateName";
+export { updatePicture } from "./user/updatePicture";
+export { updatePw } from "./user/updatePw";

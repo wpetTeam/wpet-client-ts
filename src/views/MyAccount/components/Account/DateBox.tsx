@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { Box } from ".";
 import "views/MyAccount/styles/boxs.style.scss";
-import { deleteUser } from "views/MyAccount/adapters/deleteUser";
+import { deleteUser } from "views/MyAccount/adapters/user/deleteUser";
 
 export const DateBox = ({ info }) => {
     let navigate = useNavigate();

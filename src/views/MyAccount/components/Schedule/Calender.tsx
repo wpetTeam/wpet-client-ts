@@ -1,18 +1,16 @@
 import { useEffect, useRef } from "react";
 import uuid from "react-uuid";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 import { format, addMonths, startOfWeek, addDays } from "date-fns";
 import { endOfWeek, isSameDay, isSameMonth } from "date-fns";
 import { startOfMonth, endOfMonth } from "date-fns";
+import { schedule_list } from "./schedule.const";
 import "../../styles/components-schedule.style.scss";
 
 const RenderHeader = ({ currentMonth }) => {
     return (
         <div className="header row">
-            {/* {format(currentMonth, "M")}월*/}
-
             {currentMonth.toLocaleString("en-US", { month: "long" })}
         </div>
     );
@@ -30,9 +28,27 @@ const RenderDays = () => {
     return <div className="days row">{days}</div>;
 };
 
-const isSchedule = (schedule, day, schedules) => {
+const keyword_color = {
+    Shower: "#00D2FC",
+    Bath: "#00D2FC",
+    Grooming: "#FF6F91",
+    Pill: "#FFC75F",
+    Hospital: "firebrick",
+    Others: "#DCB0FF",
+};
+
+const isSchedule = (
+    schedule: any[],
+    day: Date,
+    schedules: any[],
+    setIsClicked,
+) => {
     const date = format(day, "yyyy-MM-dd");
+
     for (let i = 0; i < schedule.length; i++) {
+        let color = keyword_color[schedule[i].keyword];
+        if (color === undefined) color = "#DCB0FF";
+
         if (
             schedule[i].startTime === schedule[i].endTime &&
             schedule[i].startTime === date
@@ -40,8 +56,8 @@ const isSchedule = (schedule, day, schedules) => {
             schedules.push(
                 <Schedule
                     className="start-end"
-                    color={schedule[i].color}
-                    onClick={() => alert(schedule[i].todo)}
+                    color={color}
+                    onClick={() => setIsClicked(schedule[i])}
                 ></Schedule>,
             );
             continue;
@@ -50,19 +66,35 @@ const isSchedule = (schedule, day, schedules) => {
             schedules.push(
                 <Schedule
                     className="start"
-                    color={schedule[i].color}
+                    color={color}
+                    onClick={() => setIsClicked(schedule[i])}
                 ></Schedule>,
             );
         } else if (schedule[i].endTime === date) {
             schedules.push(
-                <Schedule className="end" color={schedule[i].color}></Schedule>,
+                <Schedule
+                    className="end"
+                    color={color}
+                    onClick={() => setIsClicked(schedule[i])}
+                ></Schedule>,
             );
         } else if (date > schedule[i].startTime && date < schedule[i].endTime) {
-            schedules.push(<Schedule color={schedule[i].color}></Schedule>);
+            schedules.push(
+                <Schedule
+                    color={color}
+                    onClick={() => setIsClicked(schedule[i])}
+                ></Schedule>,
+            );
         }
     }
 };
-const RenderCells = ({ currentMonth, selectedDate, schedule }) => {
+
+const RenderCells = ({
+    currentMonth,
+    selectedDate,
+    schedule,
+    setIsClicked,
+}) => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
     const startDate = startOfWeek(monthStart);
@@ -72,14 +104,13 @@ const RenderCells = ({ currentMonth, selectedDate, schedule }) => {
     let days: any[] = [];
     let day = startDate;
     let formattedDate = "";
-
     let schedules: any[] = [];
 
     while (day <= endDate) {
         for (let i = 0; i < 7; i++) {
             formattedDate = format(day, "d");
             if (format(currentMonth, "M") === format(day, "M"))
-                isSchedule(schedule, day, schedules);
+                isSchedule(schedule, day, schedules, setIsClicked);
             days.push(
                 <div
                     className={`col cell ${
@@ -119,12 +150,7 @@ const RenderCells = ({ currentMonth, selectedDate, schedule }) => {
     return <div className="body">{rows}</div>;
 };
 
-const squareVariants = {
-    visible: { opacity: 1, scale: 4, transition: { duration: 1 } },
-    hidden: { opacity: 0, scale: 0 },
-};
-
-export const Calender = () => {
+export const Calender = ({ isClicked, setIsClicked }) => {
     const currentDate = new Date();
     const selectedDate = new Date();
 
@@ -132,55 +158,24 @@ export const Calender = () => {
     let months: any[] = [];
     const monthRef = useRef<HTMLDivElement>(null);
 
-    let schedule_list = [
-        {
-            startTime: "2022-06-03",
-            endTime: "2022-06-03",
-            color: "orange",
-            todo: "wash",
-        },
-        {
-            startTime: "2022-07-07",
-            endTime: "2022-07-09",
-            color: "lightblue",
-            todo: "wash",
-        },
-        {
-            startTime: "2022-06-10",
-            endTime: "2022-06-12",
-            color: "green",
-            todo: "wash",
-        },
-        {
-            startTime: "2022-06-17",
-            endTime: "2022-06-24",
-            color: "lightcoral",
-            todo: "wash",
-        },
-        {
-            startTime: "2022-06-20",
-            endTime: "2022-06-24",
-            color: "lavender",
-            todo: "wash",
-        },
-    ];
-
     for (let i = 0; i < 12; i++) {
+        const isCurrent =
+            format(currentMonth, "MM") === format(selectedDate, "MM");
+
         months.push(
             <motion.div
-                className="calendar__item"
-                key={uuid()}
-                ref={
-                    format(currentMonth, "MM") === format(selectedDate, "MM")
-                        ? monthRef
-                        : null
+                className={
+                    isCurrent ? "calendar__item current" : "calendar__item"
                 }
+                key={uuid()}
+                ref={isCurrent ? monthRef : null}
             >
                 <RenderHeader currentMonth={currentMonth} />
                 <RenderCells
                     currentMonth={currentMonth}
                     selectedDate={selectedDate}
                     schedule={schedule_list}
+                    setIsClicked={setIsClicked}
                 />
             </motion.div>,
         );
@@ -206,7 +201,7 @@ export const Calender = () => {
                     {currentDate.toLocaleString("en-US", { month: "long" })}
                     {format(currentDate, " dd")}
                 </p>
-                <p className="text-year">{format(currentDate, " yyyy")}</p>
+                <p className="text-year">{format(currentDate, "yyyy")}</p>
             </div>
             <RenderDays />
             <div className="calendar-list">{months}</div>

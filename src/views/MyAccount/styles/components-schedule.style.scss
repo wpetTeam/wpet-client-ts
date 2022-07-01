@@ -1,8 +1,19 @@
 @use "assets/styles/_theme.scss";
 @use "assets/styles/_common.scss" as common;
 
+@mixin glassmorphism($color: white) {
+    @include common.shape(
+        transparentize($color, 0.4),
+        1px solid transparentize($color, 0.8),
+        4px
+    );
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
 .schedule-calendar {
-    @include common.size(35%, 94%);
+    @include common.size(38%, 93%);
     @include common.flex-column(flex-start, center);
     font-family: theme.$english-font;
     .text-today {
@@ -44,10 +55,10 @@
         overflow-y: scroll;
         flex-wrap: wrap;
         .calendar__item {
-            @include common.size(90%, 50%);
+            @include common.size(90%, 60%);
             padding: 2%;
             padding-top: 8%;
-            margin-bottom: 5%;
+            margin-bottom: 10%;
             .header {
                 @include common.size(100%, 10%);
                 text-align: center;
@@ -96,4 +107,110 @@
     .calendar-list::-webkit-scrollbar {
         display: none;
     }
+}
+.schedule-management {
+    @include common.size(65%, 100%);
+    @include common.flex-row(flex-start, flex-start);
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    font-family: theme.$english-font;
+    section {
+        padding: 1.5%;
+        margin: 1%;
+    }
+    .desc-schedule {
+        @include common.size(95%, 5%);
+        @include common.flex-row(space-around, center);
+        @include glassmorphism(rgb(242, 242, 242));
+        .desc__item {
+            @include common.size(18%, 100%);
+            @include common.flex-row();
+            flex-wrap: wrap;
+            font-size: 0.85em;
+        }
+    }
+    .grid.row {
+        @include common.size(43%, fit-content);
+        header {
+            @include common.size(100%, 30px);
+            @include common.flex-row(flex-start, center);
+            svg {
+                @include common.size(7%, fit-content);
+                margin-right: 2%;
+            }
+        }
+    }
+    .grid.col {
+        @include common.size(24%, 25%);
+        margin-right: 4%;
+        font-size: 1.2em;
+        header {
+            @include common.size(100%, 100%);
+            @include common.flex-column();
+            svg {
+                @include common.size(37%, fit-content);
+                margin-bottom: 5%;
+            }
+        }
+    }
+    .clicked-schedule {
+        @include glassmorphism(theme.$step-color);
+        header {
+            color: theme.$main-color;
+        }
+    }
+    .not-finish-schedule {
+        @include glassmorphism(rgb(255, 240, 240));
+        header {
+            @include common.size(100%, 10%);
+            color: firebrick;
+            .tab-pets {
+                @include common.size(60%, 100%);
+                @include common.flex-row(flex-end, center);
+                button {
+                    @include common.size(fit-content, 10%);
+                    @include glassmorphism();
+                    padding: 4px 10px;
+                    margin-left: 2%;
+                    &:hover {
+                        cursor: pointer;
+                        background: whitesmoke;
+                    }
+                }
+            }
+        }
+        main {
+            .missed__item {
+                @include common.size(40%, 80%);
+                @include common.flex-column();
+                @include glassmorphism(rgb(255, 194, 194));
+                font-size: 0.9em;
+                padding: 1%;
+                margin: 3% 1% 1% 1%;
+
+                p {
+                    text-align: center;
+                    line-height: 1.4em;
+                    span {
+                        font-size: 0.8em;
+                    }
+                }
+            }
+        }
+    }
+    .new-schedule {
+        @include glassmorphism(lavender);
+        color: rgb(86, 66, 86);
+    }
+    .upcoming-schedule {
+        @include glassmorphism(rgb(228, 255, 184));
+        color: rgb(17, 96, 17);
+    }
+    .search-schedule {
+        @include glassmorphism(rgb(250, 243, 225));
+        color: rgb(255, 200, 60);
+    }
+}
+.schedule-management::-webkit-scrollbar {
+    display: none;
 }
