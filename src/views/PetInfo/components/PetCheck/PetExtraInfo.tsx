@@ -1,18 +1,14 @@
 import React, { useState } from "react";
-import { ExtraInfo } from "views/PetInfo/models/types/info.type";
 import { Box } from "views/MyAccount/components/Account";
 import { ExtraHealthModal } from "./ExtraHealthModal";
-import { format } from "date-fns";
 
 export const PetExtraInfo = (props: { petID: number; isUpdate: boolean }) => {
     const [editsShower, setEditsShower] = useState(false);
     const [editsGrooming, setEditsGrooming] = useState(false);
     const [editsHealth, setEditsHealth] = useState(false);
 
-    const today = new Date();
-
-    const [extraInfo, setExtraInfo] = useState<ExtraInfo>({
-        latestShowerDate: 0,
+    const [extraInfo, setExtraInfo] = useState({
+        latestShowerDate: "",
         showerCycle: 0,
         latestGroomingDate: 0,
         groomingCycle: 0,
@@ -31,10 +27,6 @@ export const PetExtraInfo = (props: { petID: number; isUpdate: boolean }) => {
     };
 
     const updateShowerBtn = () => {
-        today.setDate(today.getDate() - extraInfo.latestShowerDate);
-        const latest_date = format(today, "yyyy-MM-dd");
-        console.log(latest_date);
-
         setEditsShower(false);
     };
     return (
@@ -44,17 +36,6 @@ export const PetExtraInfo = (props: { petID: number; isUpdate: boolean }) => {
                     <>
                         목욕 정보 등록하기
                         <div className="div-info shower">
-                            <div className="div-container date">
-                                <label>마지막 목용/샤워 날짜</label>
-                                <div className="div-input">
-                                    <input
-                                        name="latestShowerDate"
-                                        value={extraInfo.latestShowerDate}
-                                        onChange={handleInputChange}
-                                    />
-                                    <label>일 전</label>
-                                </div>
-                            </div>
                             <div className="div-container cycle">
                                 <label>목욕/샤워 주기</label>
                                 <div className="div-input">
@@ -92,17 +73,6 @@ export const PetExtraInfo = (props: { petID: number; isUpdate: boolean }) => {
                     <>
                         미용 정보 등록하기
                         <div className="div-info grooming">
-                            <div className="div-container date">
-                                <label>마지막 미용 날짜</label>
-                                <div className="div-input">
-                                    <input
-                                        name="latestGroomingDate"
-                                        value={extraInfo.latestGroomingDate}
-                                        onChange={handleInputChange}
-                                    />
-                                    <label>일 전</label>
-                                </div>
-                            </div>
                             <div className="div-container cycle">
                                 <label>미용 주기</label>
                                 <div className="div-input">

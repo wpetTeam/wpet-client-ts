@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
+import React, { useState } from "react";
 
 export function ExtraHealthModal({ setEditsHealth }) {
     const [tab, setTab] = useState(0);
@@ -49,7 +48,6 @@ export function ExtraHealthModal({ setEditsHealth }) {
                                 </label>
                                 {needsAlarm && (
                                     <div className="pill__alarm">
-                                        <input placeholder="마지막 복용일" />
                                         <input placeholder="복용 주기" />
                                     </div>
                                 )}

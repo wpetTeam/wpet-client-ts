@@ -3,7 +3,7 @@
 
 @mixin glassmorphism($color: white) {
     @include common.shape(
-        transparentize($color, 0.4),
+        transparentize($color, 0.3),
         1px solid transparentize($color, 0.8),
         4px
     );
@@ -11,7 +11,6 @@
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
 }
-
 .schedule-calendar {
     @include common.size(38%, 93%);
     @include common.flex-column(flex-start, center);
@@ -110,7 +109,7 @@
 }
 .schedule-management {
     @include common.size(65%, 100%);
-    @include common.flex-row(flex-start, flex-start);
+    @include common.flex-row(center, flex-start);
     flex-wrap: wrap;
     overflow-x: scroll;
     font-family: theme.$english-font;
@@ -141,7 +140,7 @@
         }
     }
     .grid.col {
-        @include common.size(24%, 25%);
+        @include common.size(23%, 23%);
         margin-right: 4%;
         font-size: 1.2em;
         header {
@@ -151,6 +150,10 @@
                 @include common.size(37%, fit-content);
                 margin-bottom: 5%;
             }
+        }
+        &:hover {
+            @include common.hover-event();
+            transform: scale(1.03);
         }
     }
     .clicked-schedule {
@@ -206,11 +209,136 @@
         @include glassmorphism(rgb(228, 255, 184));
         color: rgb(17, 96, 17);
     }
-    .search-schedule {
+    .empty-date-schedule {
         @include glassmorphism(rgb(250, 243, 225));
         color: rgb(255, 200, 60);
     }
 }
 .schedule-management::-webkit-scrollbar {
     display: none;
+}
+@mixin modal-glassmorphsm {
+    @include common.shape(
+        rgba(200, 157, 255, 0.1),
+        1px solid rgba(255, 255, 255, 0.2),
+        4px
+    );
+
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+.modal-new-schedule {
+    @include common.size(25%, 35%);
+    position: fixed;
+    margin: 8% 0 0 -5%;
+    .header-new-schedule {
+        @include common.size(100%, 12%);
+        @include common.flex-row(space-between, center);
+        @include modal-glassmorphsm();
+        padding: 1% 1% 1% 4%;
+    }
+    .main-new-schdule {
+        @include common.size(100%, 85%);
+        @include common.flex-column();
+        @include modal-glassmorphsm();
+        padding: 1% 1% 1% 4%;
+        .div-new-pet,
+        .div-new-date,
+        .div-new-desc,
+        .div-new-tag {
+            @include common.size(100%, 25%);
+            @include common.flex-row(flex-start, center);
+            p {
+                width: 20%;
+                margin-right: 2%;
+            }
+            svg {
+                width: 6%;
+                height: fit-content;
+                margin-right: 3%;
+                color: rgb(86, 66, 86);
+            }
+        }
+        .pet__item {
+            padding: 1% 2%;
+            margin-right: 2%;
+            @include glassmorphism();
+            &:hover {
+                @include common.hover-event();
+                transform: scale(1.02);
+            }
+        }
+        .pet__item.selected {
+            background: rgb(228, 228, 228);
+            transform: scale(1.05);
+            font-weight: 600;
+        }
+        .div-new-date select {
+            @include common.size(15%, 28px);
+            @include common.shape(white, 0.8px solid rgb(186, 186, 186), 4px);
+            margin-left: 2%;
+            &:focus {
+                outline: none;
+            }
+        }
+        .input-desc {
+            @include common.size(75%, 28px);
+            @include common.shape(white, 0.8px solid rgb(186, 186, 186), 4px);
+            &:focus {
+                outline: none;
+            }
+        }
+        .btn-new-schedule {
+            @include glassmorphism();
+            padding: 1% 2%;
+            margin-top: -1%;
+            z-index: -100;
+        }
+    }
+}
+.account-datepicker {
+    .btn-open {
+        @include common.size(100px, 28px);
+        @include common.shape(white, 0.8px solid rgb(186, 186, 186), 4px);
+
+        &:hover {
+            @include common.hover-event();
+        }
+    }
+    .datepicker-calendar {
+        @include common.size(200px, 200px);
+        position: fixed;
+        background: whitesmoke;
+        .header-datepicker-calendar {
+            @include common.size(100%, 15%);
+            @include common.flex-row(space-between, center);
+            button {
+                @include glassmorphism();
+                &:hover {
+                    @include common.hover-event();
+                }
+            }
+        }
+        .main-datepicker-calendar {
+            @include common.size(100%, 85%);
+            @include common.flex-column();
+            font-size: 0.7em;
+            .row {
+                @include common.size(98%, 15%);
+                @include common.flex-row(space-around, center);
+                .col {
+                    @include common.size(15%, 100%);
+                    @include common.flex-column();
+                }
+                .col.active:hover {
+                    cursor: pointer;
+                    background: theme.$step-color;
+                }
+                .col.disabled {
+                    color: lightgray;
+                }
+            }
+        }
+    }
 }

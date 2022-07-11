@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { getPets } from "views/MyAccount/adapters";
+import { NewSchedule } from "./AddSchedule";
 
 const RenderKeyword = ({ keyword, color }) => {
     return (
@@ -13,6 +14,7 @@ const RenderKeyword = ({ keyword, color }) => {
 };
 
 const RenderDetails = ({ isClicked }) => {
+    // 선택된 날짜 또는 선택된 스케쥴
     return (
         <section className="grid col clicked-schedule">
             <header>
@@ -58,9 +60,12 @@ const NotFinishedSchedule = ({ pets }) => {
     );
 };
 
-const AddSchedule = () => {
+const AddSchedule = ({ setAddsNew }) => {
     return (
-        <section className="grid col new-schedule">
+        <section
+            className="grid col new-schedule"
+            onClick={() => setAddsNew(true)}
+        >
             <header>
                 <Icon icon="carbon:calendar-add-alt" />
                 Add new Schedule
@@ -81,12 +86,13 @@ const UpcomingSchedule = () => {
     );
 };
 
-const SearchSchedule = () => {
+const EmptyDateSchedule = () => {
     return (
-        <section className="grid col search-schedule">
+        // 만약 입력이 안된 항목이 있을 경우만 보여주기
+        <section className="grid col empty-date-schedule">
             <header>
-                <Icon icon="fluent:calendar-question-mark-20-filled" />
-                Find Pet's Schedule
+                <Icon icon="fluent:calendar-error-20-filled" />
+                Enter schedule date
             </header>
         </section>
     );
@@ -94,6 +100,7 @@ const SearchSchedule = () => {
 
 export const Management = ({ isClicked, setIsClicked }) => {
     const [pets, setPets] = useState({});
+    const [addsNew, setAddsNew] = useState(false);
 
     useEffect(() => {
         getPets(setPets);
@@ -109,10 +116,17 @@ export const Management = ({ isClicked, setIsClicked }) => {
                 <RenderKeyword keyword="Others" color="#DCB0FF" />
             </section>
             <RenderDetails isClicked={isClicked} />
-            <AddSchedule />
-            <SearchSchedule />
+            <EmptyDateSchedule />
+            <AddSchedule setAddsNew={setAddsNew} />
             <NotFinishedSchedule pets={pets} />
             <UpcomingSchedule />
+            {addsNew && (
+                <NewSchedule
+                    addsNew={addsNew}
+                    setAddsNew={setAddsNew}
+                    pets={pets}
+                />
+            )}
         </div>
     );
 };
