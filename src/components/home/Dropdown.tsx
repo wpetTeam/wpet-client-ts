@@ -19,7 +19,7 @@ export const Dropdown = () => {
             .catch((err) => console.log(">>> [LOGOUT] ❌ ERROR", err));
     };
     const myAccountHandler = () => {
-        navigate("/my-account");
+        navigate("/user");
     };
     return (
         <div className="dropdown-list">
