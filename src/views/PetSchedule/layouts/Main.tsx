@@ -1,12 +1,12 @@
 import { Container, Nav, Article } from "assets/styles/shared/tab.style";
-import { Account } from "../services";
+import { Schedule } from "../services";
 
 export const Main = () => {
     return (
-        <Container className="myaccount-main">
+        <Container className="petschedule-main">
             <Nav></Nav>
             <Article style={{ marginLeft: "-0.5%" }}>
-                <Account />
+                <Schedule />
             </Article>
         </Container>
     );

@@ -2,9 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ReadDiary, WriteDiary } from "views/Diary/services";
 import { DiaryFeed } from "views/Diary/services/DiaryFeed";
-import { Schedule } from "views/MyAccount/services";
 import { Checkup, Registeration } from "views/PetInfo/services";
-import { About, Home, PetInfo, Community, MyAccount, Diary } from "./views";
+import { About, Home, PetInfo, PetSchedule, MyAccount, Diary } from "./views";
 
 const App = () => {
     return (
@@ -21,10 +20,8 @@ const App = () => {
                     <Route path="info" element={<Checkup />} />
                     <Route path="registeration" element={<Registeration />} />
                 </Route>
-                <Route path="community" element={<Community />} />
-                <Route path="user" element={<MyAccount />}>
-                    <Route path="schedule" element={<Schedule />} />
-                </Route>
+                <Route path="pet-schedule" element={<PetSchedule />} />
+                <Route path="user" element={<MyAccount />}></Route>
             </Routes>
         </React.Fragment>
     );

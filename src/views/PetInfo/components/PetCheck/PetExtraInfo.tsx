@@ -118,7 +118,10 @@ export const PetExtraInfo = (props: { petID: number; isUpdate: boolean }) => {
                 }
             >
                 {editsHealth ? (
-                    <ExtraHealthModal setEditsHealth={setEditsHealth} />
+                    <ExtraHealthModal
+                        setEditsHealth={setEditsHealth}
+                        petID={props.petID}
+                    />
                 ) : (
                     <div className="div-empty health">
                         <button

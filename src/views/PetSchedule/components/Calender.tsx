@@ -6,7 +6,7 @@ import { format, addMonths, startOfWeek, addDays } from "date-fns";
 import { endOfWeek, isSameDay, isSameMonth } from "date-fns";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { schedule_list } from "./schedule.const";
-import "../../styles/components-schedule.style.scss";
+import "../styles/components-schedule.style.scss";
 
 const RenderHeader = ({ currentMonth }) => {
     return (

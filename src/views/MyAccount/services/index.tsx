@@ -1,2 +1,1 @@
-export { Schedule } from './Schedule';
-export { Account } from './Account';
+export { Account } from "./Account";

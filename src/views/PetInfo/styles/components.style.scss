@@ -432,8 +432,20 @@
                         .text-pill-desc {
                             margin-top: -6%;
                         }
-                    }
-                    .pill__item.info.alarm {
+                        .btn-pill-delete {
+                            font-size: 0.9em;
+                            color: rgb(84, 84, 84);
+                            background: transparent;
+                            border: none;
+                            margin-top: -4%;
+                            &:hover {
+                                cursor: pointer;
+                                transform: scale(1.01);
+                                background: rgb(180, 0, 0);
+                                border-radius: 10px;
+                                color: white;
+                            }
+                        }
                     }
                     .pill__item.btn {
                         span {

@@ -42,10 +42,10 @@ export const Header = () => {
                 </nav>
                 <nav>
                     <Link
-                        to="/community"
+                        to="/pet-schedule"
                         style={{ textDecoration: "none", color: "gray" }}
                     >
-                        커뮤니티
+                        반려견 일정
                     </Link>
                 </nav>
                 <nav>
