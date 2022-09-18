@@ -7,7 +7,6 @@ export const createPill = async (pillData: PillInfo) => {
     })
         .then((res) => {
             console.log(">>> [CREATE PILL] ✅ SUCCESS", res.data);
-            //window.location.reload(false);
         })
         .catch((err) => {
             console.log(">>> [CREATE PILL] ❌ ERROR", err.response);

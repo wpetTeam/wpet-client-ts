@@ -5,6 +5,5 @@ export const deletePill = async (petId: number, medicineId: number) => {
         withCredentials: true,
     }).then((res) => {
         console.log(">>> [DELETE PILL] ✅ SUCCESS");
-        window.location.reload();
     });
 };

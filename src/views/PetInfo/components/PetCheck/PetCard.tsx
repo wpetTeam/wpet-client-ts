@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EMPTY_IMAGE from "assets/images/Character/common-character.png";
 import { Pet } from "models";
-import { getPet } from "views/PetInfo/adapters/getPet";
+import { getPet } from "views/PetInfo/adapters";
 import { PetDetail } from "views/PetInfo/components";
 import "views/PetInfo/styles/components.style.scss";
 

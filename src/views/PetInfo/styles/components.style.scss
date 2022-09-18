@@ -362,6 +362,22 @@
                     transform: scale(1.02);
                 }
             }
+            .div-not-empty {
+                @include common.size(100%, 100%);
+                @include common.flex-column();
+                .p-delete {
+                    padding: 3px 10px;
+                    font-size: 0.8em;
+                    color: gray;
+                }
+                .p-delete:hover {
+                    cursor: pointer;
+                    transform: scale(1.01);
+                    background: rgba(180, 0, 0, 0.801);
+                    border-radius: 10px;
+                    color: white;
+                }
+            }
             .div-empty::before {
                 content: "";
                 background-size: 220px;

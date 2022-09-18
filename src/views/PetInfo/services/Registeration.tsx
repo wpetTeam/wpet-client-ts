@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBreeds } from "../adapters/getBreeds";
+import { getBreeds } from "../adapters";
 import { Content } from "../components/Contents";
 import { Step } from "../components/Steps";
 import "../styles/layouts.style.scss";

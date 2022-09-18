@@ -1,17 +1,17 @@
-import logo from 'assets/images/Character/conflict-img.png';
-import uuid from 'react-uuid';
-import { Button } from '../Button';
-import { PetInfo } from 'views/PetInfo/models/index.js';
-import { newPet } from 'models';
-import { createPet } from 'views/PetInfo/adapters/createPet';
+import logo from "assets/images/Character/conflict-img.png";
+import uuid from "react-uuid";
+import { Button } from "../Button";
+import { PetInfo } from "views/PetInfo/models/index.js";
+import { newPet } from "models";
+import { createPet } from "views/PetInfo/adapters";
 
 export const Step3 = (props: { petInfo: PetInfo; picture: string }) => {
     const birthDate =
         props.petInfo.year +
-        '-' +
-        ('00' + props.petInfo.month).slice(-2) +
-        '-' +
-        ('00' + props.petInfo.date).slice(-2);
+        "-" +
+        ("00" + props.petInfo.month).slice(-2) +
+        "-" +
+        ("00" + props.petInfo.date).slice(-2);
 
     const handleCreatePet = async () => {
         const petData: newPet = {
@@ -31,9 +31,9 @@ export const Step3 = (props: { petInfo: PetInfo; picture: string }) => {
                 <div className="row_picture_01">
                     <img
                         className={
-                            props.picture === '' ? 'img-pet empty' : 'img-pet'
+                            props.picture === "" ? "img-pet empty" : "img-pet"
                         }
-                        src={props.picture === '' ? logo : props.picture}
+                        src={props.picture === "" ? logo : props.picture}
                         alt="pictureSection"
                     />
                 </div>
@@ -63,10 +63,10 @@ function Info({ petInfo }) {
                 </div>
             </div>
             <div className="col_div_02 info__item birth">
-                <p>반려견 출생년월 / 만난 날</p>{' '}
+                <p>반려견 출생년월 / 만난 날</p>{" "}
                 <span>
-                    {petInfo.year}. {('00' + petInfo.month).slice(-2)}.{' '}
-                    {('00' + petInfo.date).slice(-2)}
+                    {petInfo.year}. {("00" + petInfo.month).slice(-2)}.{" "}
+                    {("00" + petInfo.date).slice(-2)}
                 </span>
             </div>
             <div className="info__item breed">
