@@ -1,6 +1,6 @@
-import { petID } from 'models';
-import { Dispatch, SetStateAction } from 'react';
-import { API } from 'services';
+import { petID } from "models";
+import { Dispatch, SetStateAction } from "react";
+import { API } from "services";
 
 export const getWritablePets = async (
     setUserPets: Dispatch<SetStateAction<Array<petID>>>,
@@ -9,8 +9,8 @@ export const getWritablePets = async (
         withCredentials: true,
     })
         .then((res) => {
-            console.log('>>> [WRITABLE PET GET] ✅ SUCCESS');
+            console.log(">>> [WRITABLE PET GET] ✅ SUCCESS");
             setUserPets(res.data.result);
         })
-        .catch((err) => console.log('>>> [WRITABLE PET GET] ❌ ERROR', err));
+        .catch((err) => console.log(">>> [WRITABLE PET GET] ❌ ERROR", err));
 };

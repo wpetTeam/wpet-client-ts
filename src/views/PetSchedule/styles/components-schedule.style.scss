@@ -1,4 +1,4 @@
-@use "assets/styles/_theme.scss";
+@use "assets/styles/_theme.scss" as theme;
 @use "assets/styles/_common.scss" as common;
 
 @mixin glassmorphism($color: white) {
@@ -202,8 +202,8 @@
         }
     }
     .new-schedule {
-        @include glassmorphism(lavender);
-        color: rgb(86, 66, 86);
+        @include glassmorphism(theme.$dark-step-color);
+        color: rgba(0, 0, 0, 0.708);
     }
     .upcoming-schedule {
         @include glassmorphism(rgb(228, 255, 184));
@@ -229,25 +229,44 @@
     -webkit-backdrop-filter: blur(15px);
 }
 .modal-new-schedule {
-    @include common.size(25%, 35%);
+    @include common.size(25%, 40%);
     position: fixed;
-    margin: 8% 0 0 -5%;
+    margin: 6% 0 0 -3%;
+    background-color: theme.$dashboard-color;
+    border: 3px solid theme.$dark-step-color;
+    border-radius: 20px;
+
     .header-new-schedule {
-        @include common.size(100%, 12%);
+        @include common.size(96%, 12%);
         @include common.flex-row(space-between, center);
-        @include modal-glassmorphsm();
+
+        color: theme.$dashboard-color;
+        font-weight: bold;
+
+        background-color: theme.$dark-step-color;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+
         padding: 1% 1% 1% 4%;
+
+        svg {
+            @include common.size(20px, 20px);
+            margin-right: 10px;
+
+            &:hover {
+                @include common.hover-event();
+            }
+        }
     }
     .main-new-schdule {
         @include common.size(100%, 85%);
         @include common.flex-column();
-        @include modal-glassmorphsm();
         padding: 1% 1% 1% 4%;
         .div-new-pet,
         .div-new-date,
         .div-new-desc,
         .div-new-tag {
-            @include common.size(100%, 25%);
+            @include common.size(100%, 24%);
             @include common.flex-row(flex-start, center);
             p {
                 width: 20%;
@@ -257,22 +276,24 @@
                 width: 6%;
                 height: fit-content;
                 margin-right: 3%;
-                color: rgb(86, 66, 86);
+                color: theme.$main-color;
             }
         }
         .pet__item {
             padding: 1% 2%;
             margin-right: 2%;
             @include glassmorphism();
+            border: 1px solid rgb(224, 224, 224);
             &:hover {
                 @include common.hover-event();
                 transform: scale(1.02);
             }
         }
         .pet__item.selected {
-            background: rgb(228, 228, 228);
-            transform: scale(1.05);
+            border: 1px solid theme.$dark-step-color;
+            color: theme.$main-color;
             font-weight: 600;
+            transform: scale(1.05);
         }
         .div-new-date select {
             @include common.size(15%, 28px);
@@ -289,15 +310,36 @@
                 outline: none;
             }
         }
-        .btn-new-schedule {
+        .tags__item {
             @include glassmorphism();
             padding: 1% 2%;
-            margin-top: -1%;
-            z-index: -100;
+            margin-right: 10px;
+            font-size: 0.83em;
+            border: 1px solid rgba(128, 128, 128, 0.195);
+            border-radius: 4px;
+            color: rgba(128, 128, 128, 0.855);
+        }
+        .tags__item:hover,
+        .tags__item.selected {
+            @include common.hover-event();
+            border: 1px solid theme.$dark-step-color;
+            color: theme.$main-color;
+            font-size: 600;
+        }
+        .btn-new-schedule {
+            padding: 2% 4%;
+            border: none;
+            border-radius: 2px;
+            margin: 0 0 3% -4%;
+            &:hover {
+                @include common.hover-event();
+                background-color: theme.$dark-step-color;
+            }
         }
     }
 }
 .account-datepicker {
+    z-index: 100;
     .btn-open {
         @include common.size(100px, 28px);
         @include common.shape(white, 0.8px solid rgb(186, 186, 186), 4px);

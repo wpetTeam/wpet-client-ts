@@ -11,11 +11,15 @@ import "../styles/write.style.scss";
 export const WriteDiary = () => {
     let navigate = useNavigate();
     const [selectColor, setSelectColor] = useState(false);
-    const [userPets, setUserPets] = useState<Array<petID>>([]);
+    const [writablePets, setWritablePets] = useState<Array<petID>>([]);
 
     useEffect(() => {
-        getWritablePets(setUserPets);
+        getWritablePets(setWritablePets);
     }, []);
+
+    useEffect(() => {
+        console.log(writablePets);
+    }, [writablePets]);
 
     const [weather, setWeather] = useState("");
     const [title, setTitle] = useState("");
@@ -26,7 +30,8 @@ export const WriteDiary = () => {
 
     const handlePostBtn = async () => {
         const diaryData: newDiary = {
-            petIDs: userPets.length === 1 ? [userPets[0].petID] : petIDs,
+            petIDs:
+                writablePets.length === 1 ? [writablePets[0].petID] : petIDs,
             title: title,
             photo: picture,
             texts: content,
@@ -37,12 +42,12 @@ export const WriteDiary = () => {
             font: "Pretendard",
             hashTags: ["pet"],
         };
-        console.log(diaryData);
         createDiary(diaryData, navigate);
     };
 
     return (
         <React.Fragment>
+            {/* {writablePets.length !== 0 && ( */}
             <div className="write-container">
                 <div className="write-main row">
                     <div className="row_picture_01">
@@ -84,7 +89,7 @@ export const WriteDiary = () => {
                     </div>
                 </div>
                 <Footer
-                    userPets={userPets}
+                    writablePets={writablePets}
                     handlePostBtn={handlePostBtn}
                     petIDs={petIDs}
                     setPetIDs={setPetIDs}
@@ -110,7 +115,7 @@ function Title({ title, setTitle, color }) {
     );
 }
 
-function Footer({ userPets, handlePostBtn, petIDs, setPetIDs }) {
+function Footer({ writablePets, handlePostBtn, petIDs, setPetIDs }) {
     const handlePetIDs = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedId = parseInt(e.target.value);
         if (petIDs.includes(selectedId)) {
@@ -125,11 +130,11 @@ function Footer({ userPets, handlePostBtn, petIDs, setPetIDs }) {
 
     return (
         <div className="write-footer row">
-            {userPets.length > 1 && (
+            {writablePets.length !== 0 && (
                 <div className="row_pets_01">
                     <label className="label-title">누구의 일기인가요?</label>
                     <div className="pet-list">
-                        {userPets.map((item: petID) => (
+                        {writablePets.map((item: petID) => (
                             <label key={uuid()}>
                                 <input
                                     className="input-checkbox"

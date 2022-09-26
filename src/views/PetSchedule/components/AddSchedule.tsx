@@ -1,13 +1,21 @@
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker } from "./DatePicker";
+import { getKeywords } from "../adapters/getKeywords";
+import { createTodo } from "../adapters/createTodo";
 
 export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
     const [petId, setPetId] = useState<number>();
     const [description, setDescription] = useState("");
-    const [time, setTime] = useState("");
+    const [time, setTime] = useState<String>("");
     const [date, setDate] = useState("");
+    const [keyword, setKeyword] = useState("");
+    const [keywords, setKeywords] = useState([]);
+
+    useEffect(() => {
+        getKeywords(setKeywords);
+    }, []);
 
     const variants = {
         hidden: { opacity: 0 },
@@ -21,7 +29,13 @@ export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
     };
 
     const handleCreateBtn = () => {
-        console.log(petId, description, time, date);
+        if (petId === undefined) alert("일정을 추가할 반려견을 선택해주세요.");
+        else if (date.trim().length === 0) alert("일정 날짜를 선택해주세요.");
+        else if (description.trim().length === 0) alert("일정을 작성해주세요.");
+        else if (keyword.trim().length === 0) alert("키워드를 선택해주세요.");
+        else {
+            createTodo(petId, date, Number(time), description, keyword);
+        }
     };
 
     return (
@@ -33,7 +47,10 @@ export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
         >
             <header className="header-new-schedule">
                 <p>새로운 일정 추가하기</p>
-                <button onClick={() => setAddsNew(false)}>X</button>
+                <Icon
+                    icon="ep:circle-close-filled"
+                    onClick={() => setAddsNew(false)}
+                />
             </header>
             <main className="main-new-schdule">
                 <div className="div-new-pet">
@@ -56,7 +73,7 @@ export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
                     <select onChange={handleTimeChange}>
                         {Array.from({ length: 24 }).map((item, idx) =>
                             idx === 0 ? (
-                                <option value={idx}>없음</option>
+                                <option value={idx}>시간</option>
                             ) : (
                                 <option value={idx}>{idx}시</option>
                             ),
@@ -73,10 +90,21 @@ export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
                     />
                 </div>
                 <div className="div-new-tag">
-                    <p>Tag</p>
+                    {keywords.map((item) => (
+                        <button
+                            onClick={() => setKeyword(item)}
+                            className={
+                                keyword === item
+                                    ? "tags__item selected"
+                                    : "tags__item"
+                            }
+                        >
+                            {item}
+                        </button>
+                    ))}
                 </div>
                 <button className="btn-new-schedule" onClick={handleCreateBtn}>
-                    추가
+                    일정 추가
                 </button>
             </main>
         </motion.div>
