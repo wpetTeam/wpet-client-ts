@@ -29,13 +29,23 @@ export const NewSchedule = ({ addsNew, setAddsNew, pets }) => {
     };
 
     const handleCreateBtn = () => {
+        let isCreate = false;
         if (petId === undefined) alert("일정을 추가할 반려견을 선택해주세요.");
         else if (date.trim().length === 0) alert("일정 날짜를 선택해주세요.");
         else if (description.trim().length === 0) alert("일정을 작성해주세요.");
         else if (keyword.trim().length === 0) alert("키워드를 선택해주세요.");
         else {
             createTodo(petId, date, Number(time), description, keyword);
+            isCreate = true;
         }
+
+        if (isCreate) {
+            alert("일정 등록이 완료되었습니다.");
+        } else {
+            alert("일정 등록에 실패하였습니다.");
+        }
+
+        setAddsNew(false);
     };
 
     return (

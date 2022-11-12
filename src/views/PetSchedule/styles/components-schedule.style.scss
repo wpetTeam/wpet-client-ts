@@ -207,7 +207,9 @@
     }
     .upcoming-schedule {
         @include glassmorphism(rgb(228, 255, 184));
-        color: rgb(17, 96, 17);
+        border: 2px solid theme.$main-color;
+        background: white;
+        color: theme.$main-color;
     }
     .empty-date-schedule {
         @include glassmorphism(rgb(250, 243, 225));

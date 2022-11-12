@@ -3,6 +3,12 @@ import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
 import { getPets } from "views/MyAccount/adapters";
 import { NewSchedule } from "./AddSchedule";
+import { getUpcomingTodo } from "../adapters/getUpcomingTodo";
+import {
+    selecteUpcomingTodo,
+    todoDetail,
+    upcomingTodo,
+} from "../models/Todo.type";
 
 const RenderKeyword = ({ keyword, color }) => {
     return (
@@ -75,13 +81,53 @@ const AddSchedule = ({ setAddsNew }) => {
 };
 
 const UpcomingSchedule = () => {
+    const [allUpcomingTodo, setAllUpcomingTodo] = useState<upcomingTodo[]>([]);
+    const upcomingTodos: selecteUpcomingTodo[] = [];
+
+    useEffect(() => {
+        getUpcomingTodo(setAllUpcomingTodo);
+    }, []);
+
+    useEffect(() => {
+        // 정렬 진행 - todays 중 더 빠른 날
+        // todays, tomorrow 에 없는 정보는 제거
+        for (let index = 0; index < allUpcomingTodo.length; index++) {
+            const element = allUpcomingTodo[index];
+            console.log(element);
+
+            const todayTodo: todoDetail[] = element.todays;
+            const tomorrowTodo: todoDetail[] = element.tomorrows;
+
+            if (element.todays.length !== 0) {
+                // const todo: selecteUpcomingTodo = {
+                //     todoListID: todayTodo.todoListID;
+                //     petID: number;
+                //     name: string;
+                //     date: string;
+                //     content: string;
+                //     time: number;
+                //     isCheck: number;
+                //     keyword: string;
+                //   };
+                // upcomingTodos.push(todo);
+            }
+        }
+    }, [allUpcomingTodo]);
+
+    console.log(allUpcomingTodo);
+
     return (
         <section className="grid row upcoming-schedule">
             <header>
                 <Icon icon="fluent:calendar-arrow-right-20-filled" />
                 Upcoming
             </header>
-            <main>Pet 이름 /D-4/Hospital/ Bc of his legs</main>
+            <main>
+                {/* 가장 빠른 날짜 순으로 정렬
+                {upcomingTodo.map((item) => (
+                    <p>{item.name}</p>
+                ))} */}
+            </main>
         </section>
     );
 };
